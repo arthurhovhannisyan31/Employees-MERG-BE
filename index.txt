@@ -1,0 +1,10 @@
+// todo
+
+1. list of departments (crud)
+department {
+
+}
+2. list of titles  (crud)
+3. list of employees (filters to group by dep, manager, title, ) (crud)
+4. list of salaries (date range, value, title) (crud)
+
