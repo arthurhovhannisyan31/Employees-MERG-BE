@@ -1,8 +1,9 @@
-// global imports
+// deps
 import { Request } from 'express'
-// local imports
+// local
 import { BookingModel as Booking } from '../../models/booking'
 import { EventModel as Event } from '../../models/events'
+// helpers
 import { transformBooking, transformEvent } from './helpers'
 
 export const bookEvent = async (

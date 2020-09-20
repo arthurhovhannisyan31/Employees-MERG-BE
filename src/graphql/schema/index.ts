@@ -1,4 +1,7 @@
+// deps
 import { buildSchema } from 'graphql'
+// local
+// helpers
 
 export const schema = buildSchema(`
   # entities event-booking -----------------------------------------------------
@@ -88,6 +91,9 @@ export const schema = buildSchema(`
   input TitleInput {
     name: String!
   }
+  input GenderInput {
+    name: String!
+  }
   input EmployeeInput {
     birth_date: String!
     first_name: String!
@@ -136,6 +142,7 @@ export const schema = buildSchema(`
     # employees-root
     createDepartment(input: DepartmentInput!):Department!
     createTitle(input: TitleInput!): Title!
+    createGender(input: GenderInput!): Gender!
     createEmployee(input: EmployeeInput!): Employee!
     createEmployment(input: EmploymentInput!): Employment!
     createEmployeeTitle(input: EmployeeTitleInput!): EmployeeTitle!

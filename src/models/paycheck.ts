@@ -1,4 +1,8 @@
+// deps
 import mongoose, { Schema } from 'mongoose'
+// local
+// helpers
+import { IPaycheck } from '../types'
 
 const PaycheckSchema = new Schema({
   employee: {
@@ -12,14 +16,16 @@ const PaycheckSchema = new Schema({
   start_date: {
     type: String,
     required: true,
+    trim: true,
   },
   end_date: {
     type: String,
     required: true,
+    trim: true,
   },
 })
 
-export const PaycheckModel = mongoose.model(
+export const PaycheckModel = mongoose.model<IPaycheck>(
   'Paycheck',
   PaycheckSchema,
   'paychecks'

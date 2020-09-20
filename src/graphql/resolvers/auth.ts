@@ -1,10 +1,11 @@
-// global imports
+// deps
 import { hash, compare } from 'bcryptjs'
-// local imports
-import { IUserInput } from '../../types'
-import { UserModel as User } from '../../models/user'
-import { ILogin } from '../../types'
 import jwt from 'jsonwebtoken'
+// local
+import { UserModel as User } from '../../models/user'
+// helpers
+import { IUserInput } from '../../types'
+import { ILogin } from '../../types'
 
 // @ts-ignore
 export const createUser = async ({

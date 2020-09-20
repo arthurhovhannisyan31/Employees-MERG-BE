@@ -4,10 +4,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.login = exports.createUser = void 0;
-// global imports
+// deps
 const bcryptjs_1 = require("bcryptjs");
-const user_1 = require("../../models/user");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+// local
+const user_1 = require("../../models/user");
 // @ts-ignore
 exports.createUser = async ({ userInput: { email, password }, }) => {
     try {

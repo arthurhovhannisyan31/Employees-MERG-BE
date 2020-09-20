@@ -1,4 +1,8 @@
+// deps
 import mongoose, { Schema } from 'mongoose'
+// local
+// helpers
+import { IEmployment } from '../types'
 
 const EmploymentSchema = new Schema({
   employee: {
@@ -12,14 +16,16 @@ const EmploymentSchema = new Schema({
   start_date: {
     type: String,
     required: true,
+    trim: true,
   },
   end_date: {
     type: String,
     required: true,
+    trim: true,
   },
 })
 
-export const EmploymentModel = mongoose.model(
+export const EmploymentModel = mongoose.model<IEmployment>(
   'Employment',
   EmploymentSchema,
   'employment_history'

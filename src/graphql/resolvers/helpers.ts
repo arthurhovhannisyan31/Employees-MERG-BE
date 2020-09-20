@@ -1,22 +1,49 @@
-// global imports
-// local imports
-import { IEvent, IUser, IBooking } from '../../types'
-import { EventModel as Event } from '../../models/events'
-import { UserModel as User } from '../../models/user'
-import { dateToISOString } from '../helpers/date'
+// deps
 import DataLoader from 'dataloader'
+// local
+import {
+  Event,
+  User,
+  Employee,
+  Gender,
+  Employment,
+  Department,
+  EmployeeTitle,
+  Title,
+} from '../../models'
+// helpers
+import { dateToISOString } from '../helpers/date'
+import {
+  IEvent,
+  IBooking,
+  IDepartment,
+  ITitle,
+  IGender,
+  IEmployee,
+  IEmployment,
+  IEmployeeTitle,
+} from '../../types'
 
 // @ts-ignore
-const eventLoader = new DataLoader((eventIds: string[]) => {
-  return getEvents(eventIds)
-})
-
+const eventLoader = new DataLoader((eventIds: string[]) => getEvents(eventIds))
 // @ts-ignore
-const userLoader = new DataLoader((userIds: string[]) => {
-  return getUsers(userIds)
-})
-
-export const getEvents = async (eventIds: string[]): Promise<IEvent[]> => {
+const userLoader = new DataLoader((userIds: string[]) => getUsers(userIds))
+// @ts-ignore
+const employeeLoader = new DataLoader((ids: string[]) => getEmployees(ids))
+// @ts-ignore
+const genderLoader = new DataLoader((ids: string[]) => getGenders(ids))
+// @ts-ignore
+const employmentLoader = new DataLoader((ids: string[]) => getEmployments(ids))
+// @ts-ignore
+const departmentLoader = new DataLoader((ids: string[]) => getDepartments(ids))
+// @ts-ignore
+const titleLoader = new DataLoader((ids: string[]) => getTitles(ids))
+// @ts-ignore
+const employeeTitleLoader = new DataLoader((ids: string) =>
+  getEmployeeTitles(ids)
+)
+// Event -----------------------------------------------------------------------
+const getEvents = async (eventIds: string[]): Promise<IEvent[]> => {
   try {
     const events = await Event.find({ _id: { $in: eventIds } })
     // @ts-ignore
@@ -31,8 +58,7 @@ export const getEvents = async (eventIds: string[]): Promise<IEvent[]> => {
     throw err
   }
 }
-
-export const getSingleEvent = async (eventId: string): Promise<IEvent> => {
+const getSingleEvent = async (eventId: string): Promise<IEvent> => {
   try {
     const event = await eventLoader.load(eventId.toString())
     if (!event) {
@@ -44,37 +70,6 @@ export const getSingleEvent = async (eventId: string): Promise<IEvent> => {
     throw err
   }
 }
-
-export const getUsers = async (userIds: string[]): Promise<IUser[]> => {
-  try {
-    // @ts-ignore
-    return await User.find({ _id: { $in: userIds } })
-  } catch (err) {
-    throw err
-  }
-}
-
-export const getSingleUser = async (userId: string): Promise<IUser> => {
-  try {
-    const user = await userLoader.load(userId.toString())
-    if (!user) throw new Error('User not found')
-    const createdEventsIds = user.createdEvents.map((event) => event.toString())
-    return {
-      ...user,
-      // @ts-ignore
-      _id: user?._id,
-      // @ts-ignore
-      email: user?.email,
-      // @ts-ignore
-      password: '',
-      // @ts-ignore
-      createdEvents: () => eventLoader.loadMany(createdEventsIds),
-    }
-  } catch (err) {
-    throw err
-  }
-}
-
 export const transformEvent = (event: IEvent): IEvent => {
   return {
     ...event,
@@ -88,19 +83,249 @@ export const transformEvent = (event: IEvent): IEvent => {
   }
 }
 
-export const transformBooking = (booking: IBooking): IBooking => ({
-  ...booking,
-  _id: booking.id,
-  // @ts-ignore
-  user: getSingleUser(booking.user),
-  // @ts-ignore
-  event: getSingleEvent(booking.event),
-  // @ts-ignore
-  createdAt: dateToISOString(booking.createdAt),
-  // @ts-ignore
-  updatedAt: dateToISOString(booking.updatedAt),
+// User ------------------------------------------------------------------------
+const getUsers = async (userIds: string[]) => {
+  try {
+    // @ts-ignore
+    return await User.find({ _id: { $in: userIds } })
+  } catch (err) {
+    throw err
+  }
+}
+const getSingleUser = async (userId: string) => {
+  try {
+    const user = await userLoader.load(userId.toString())
+    if (!user) throw new Error('User not found')
+    return {
+      ...user,
+      // @ts-ignore
+      _id: user?._id,
+      // @ts-ignore
+      email: user?.email,
+      // @ts-ignore
+      password: '',
+      // @ts-ignore
+      createdEvents: () => eventLoader.loadMany(user.createdEvents),
+    }
+  } catch (err) {
+    throw err
+  }
+}
+
+// todo add sorting like in events
+// todo add transforming like in events
+
+// Gender ----------------------------------------------------------------------
+const getGenders = async (ids: string[]) => {
+  try {
+    const genders = await Gender.find({ _id: { $in: ids } })
+    genders.sort(
+      (a: IGender, b: IGender) =>
+        ids.indexOf(a._id.toString()) - ids.indexOf(b._id.toString())
+    )
+    return genders.map(transformGender)
+  } catch (err) {
+    throw err
+  }
+}
+const getSingleGender = async (id: string) => {
+  try {
+    const gender = await genderLoader.load(id.toString())
+    if (!gender) throw new Error(`Gender ${id} was not found`)
+    return gender
+  } catch (err) {
+    throw err
+  }
+}
+export const transformGender = ({ _id, name }: IGender) => ({
+  _id,
+  name,
 })
 
-export const transformDepartment = (department: any) => {
-  return department
+// Employee --------------------------------------------------------------------
+const getEmployees = async (ids: string[]) => {
+  try {
+    const employees = await Employee.find({ _id: { $in: ids } })
+    employees.sort(
+      (a: IEmployee, b: IEmployee) =>
+        ids.indexOf(a._id.toString()) - ids.indexOf(b._id.toString())
+    )
+    return employees.map(transformEmployee)
+  } catch (err) {
+    throw err
+  }
 }
+const getSingleEmployee = async (id: string) => {
+  try {
+    const employee = await employeeLoader.load(id.toString())
+    if (!employee) throw new Error('Employee not found')
+    return employee
+  } catch (err) {
+    throw err
+  }
+}
+export const transformEmployee = ({
+  _id,
+  last_name,
+  gender,
+  first_name,
+  birth_date,
+}: IEmployee) => {
+  return {
+    _id,
+    birth_date,
+    first_name,
+    last_name,
+    gender: getSingleGender((gender as never) as string),
+  }
+}
+
+// function handleSort<T>(arr: T[]):T[]{// @ts-ignore
+//   return arr.sort((a, b) => arr.indexOf(a._id.toString()) - arr.indexOf(b._id.toString()))}
+// Employment ------------------------------------------------------------------
+const getEmployments = async (ids: string[]) => {
+  try {
+    const employments = await Employment.find({ _id: { $in: ids } })
+    employments.sort(
+      (a: IEmployment, b: IEmployment) =>
+        ids.indexOf(a._id.toString()) - ids.indexOf(b._id.toString())
+    )
+    return employments.map(transformEmployment)
+  } catch (err) {
+    throw err
+  }
+}
+// const getSingleEmployment = async (id:string) => {
+//   try {
+//     const employment = await employeeLoader.load(id.toString())
+//     if (!employment) throw new Error(`Employment record were not found`)
+//     return employment
+//   } catch (err){
+//    throw err
+//   }
+// }
+
+export const transformEmployment = ({
+  _id,
+  employee,
+  department,
+  start_date,
+  end_date,
+}: IEmployment) => {
+  return {
+    _id,
+    employee: getSingleEmployee((employee as never) as string),
+    department: getSingleDepartment((department as never) as string),
+    start_date,
+    end_date,
+  }
+}
+
+// Department ------------------------------------------------------------------
+const getDepartments = async (ids: string[]) => {
+  try {
+    const departments = await Department.find({ _id: { $in: ids } })
+    departments.sort(
+      (a: IDepartment, b: IDepartment) =>
+        ids.indexOf(a._id.toString()) - ids.indexOf(b._id.toString())
+    )
+    return departments.map(transformDepartment)
+  } catch (err) {
+    throw err
+  }
+}
+
+const getSingleDepartment = async (id: string) => {
+  try {
+    const department = await departmentLoader.load(id.toString())
+    if (!department) throw new Error(`Department not found`)
+    return department
+  } catch (err) {
+    throw err
+  }
+}
+
+export const transformDepartment = ({ _id, name }: IDepartment) => ({
+  _id,
+  name,
+})
+
+// Title -----------------------------------------------------------------------
+const getTitles = async (ids: string[]) => {
+  try {
+    const titles = await Title.find({ _id: { $in: ids } })
+    titles.sort(
+      (a: ITitle, b: ITitle) =>
+        ids.indexOf(a._id.toString()) - ids.indexOf(b._id.toString())
+    )
+    return titles.map(transformTitle)
+  } catch (err) {
+    throw err
+  }
+}
+
+const getSingleTitle = async (id: string) => {
+  try {
+    const title = await titleLoader.load(id.toString())
+    if (!title) throw new Error(`Title ${id} not found`)
+    return title
+  } catch (err) {
+    throw err
+  }
+}
+
+export const transformTitle = ({ _id, name }: ITitle) => ({
+  _id,
+  name,
+})
+
+// EmployeeTitle----------------------------------------------------------------
+const getEmployeeTitles = async (ids: string) => {
+  try {
+    const employeesTitles = await EmployeeTitle.find({ _id: { $in: ids } })
+    employeesTitles.sort(
+      (a: IEmployeeTitle, b: IEmployeeTitle) =>
+        ids.indexOf(a._id.toString()) - ids.indexOf(b._id.toString())
+    )
+    return employeesTitles.map(transformEmployeeTitle)
+  } catch (err) {
+    throw err
+  }
+}
+
+// const getSingleEmployeeTitle = async (id: string) => {
+//   try {
+//     const employeeTitle = await employeeTitleLoader.load(id.toString())
+//     if (!employeeTitle)
+//       throw new Error(`Employee ${id} title record does not exist `)
+//     return employeeTitle
+//   } catch (err) {
+//     throw err
+//   }
+// }
+
+export const transformEmployeeTitle = ({
+  _id,
+  employee,
+  title,
+  start_date,
+  end_date,
+}: IEmployeeTitle) => {
+  return {
+    _id,
+    employee: getSingleEmployee((employee as never) as string),
+    title: getSingleTitle((title as never) as string),
+    start_date,
+    end_date,
+  }
+}
+
+// Booking--- ------------------------------------------------------------------
+export const transformBooking = (booking: IBooking) => ({
+  ...booking,
+  _id: booking.id,
+  user: getSingleUser(booking.user),
+  event: getSingleEvent(booking.event),
+  createdAt: dateToISOString(booking.createdAt),
+  updatedAt: dateToISOString(booking.updatedAt),
+})

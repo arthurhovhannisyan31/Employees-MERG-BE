@@ -1,7 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.schema = void 0;
+// deps
 const graphql_1 = require("graphql");
+// local
+// helpers
 exports.schema = graphql_1.buildSchema(`
   # entities event-booking -----------------------------------------------------
   type Event {
@@ -90,6 +93,9 @@ exports.schema = graphql_1.buildSchema(`
   input TitleInput {
     name: String!
   }
+  input GenderInput {
+    name: String!
+  }
   input EmployeeInput {
     birth_date: String!
     first_name: String!
@@ -138,6 +144,7 @@ exports.schema = graphql_1.buildSchema(`
     # employees-root
     createDepartment(input: DepartmentInput!):Department!
     createTitle(input: TitleInput!): Title!
+    createGender(input: GenderInput!): Gender!
     createEmployee(input: EmployeeInput!): Employee!
     createEmployment(input: EmploymentInput!): Employment!
     createEmployeeTitle(input: EmployeeTitleInput!): EmployeeTitle!

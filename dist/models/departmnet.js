@@ -20,12 +20,15 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DepartmentModel = void 0;
+// deps
 const mongoose_1 = __importStar(require("mongoose"));
 const DepartmentSchema = new mongoose_1.Schema({
     name: {
         type: String,
         required: true,
+        lowercase: true,
+        trim: true,
     },
 });
-exports.DepartmentModel = mongoose_1.default.model('Title', DepartmentSchema, 'departments');
+exports.DepartmentModel = mongoose_1.default.model('Department', DepartmentSchema, 'departments');
 //# sourceMappingURL=departmnet.js.map

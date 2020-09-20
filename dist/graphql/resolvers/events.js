@@ -1,10 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createEvent = exports.events = void 0;
-// local imports
+// local
 const events_1 = require("../../models/events");
-const helpers_1 = require("./helpers");
 const user_1 = require("../../models/user");
+// helpers
+const helpers_1 = require("./helpers");
 exports.events = async () => {
     try {
         const result = await events_1.EventModel.find();

@@ -1,6 +1,7 @@
-// global imports
+// deps
 import { Document } from 'mongoose'
-// local imports
+// local
+// helpers
 
 // entities
 // events ----------------------------------------------------------------------
@@ -41,34 +42,34 @@ export interface IAuthData {
   tokenExpiration: number
 }
 // employees -------------------------------------------------------------------
-export interface IDepartment {
+export interface IDepartment extends Document {
   name: string
 }
-export interface ITitle {
+export interface ITitle extends Document {
   name: string
 }
-export interface IGender {
+export interface IGender extends Document {
   name: string
 }
-export interface IEmployee {
+export interface IEmployee extends Document {
   birth_date: string
   first_name: string
   last_name: string
   gender: IGender
 }
-export interface IEmployment {
+export interface IEmployment extends Document {
   employee: IEmployee
   department: IDepartment
   start_date: string
   end_date: string
 }
-export interface IEmployeeTitle {
+export interface IEmployeeTitle extends Document {
   employee: IEmployee
   title: ITitle
   start_date: string
   end_date: string
 }
-export interface IPaycheck {
+export interface IPaycheck extends Document {
   employee: IEmployee
   salary: number
   start_date: string

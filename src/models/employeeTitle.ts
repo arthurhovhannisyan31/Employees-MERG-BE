@@ -1,4 +1,8 @@
+// deps
 import mongoose, { Schema } from 'mongoose'
+// local
+// helpers
+import { IEmployeeTitle } from '../types'
 
 const EmployeeTitleSchema = new Schema({
   employee: {
@@ -12,14 +16,16 @@ const EmployeeTitleSchema = new Schema({
   start_date: {
     type: String,
     required: true,
+    trim: true,
   },
   end_date: {
     type: String,
     required: true,
+    trim: true,
   },
 })
 
-export const EmployeeTitleModel = mongoose.model(
+export const EmployeeTitleModel = mongoose.model<IEmployeeTitle>(
   'EmployeeTitle',
   EmployeeTitleSchema,
   'employees_title_history'

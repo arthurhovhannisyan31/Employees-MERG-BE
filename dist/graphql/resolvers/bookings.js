@@ -1,9 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.cancelBooking = exports.bookings = exports.bookEvent = void 0;
-// local imports
+// local
 const booking_1 = require("../../models/booking");
 const events_1 = require("../../models/events");
+// helpers
 const helpers_1 = require("./helpers");
 exports.bookEvent = async ({ eventId }, req) => {
     // @ts-ignore

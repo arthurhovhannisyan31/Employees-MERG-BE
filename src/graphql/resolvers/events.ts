@@ -1,10 +1,11 @@
-// global imports
+// deps
 import { Request } from 'express'
-// local imports
+// local
 import { EventModel as Event } from '../../models/events'
+import { UserModel as User } from '../../models/user'
+// helpers
 import { transformEvent } from './helpers'
 import { IEventInput } from '../../types'
-import { UserModel as User } from '../../models/user'
 
 export const events = async () => {
   try {

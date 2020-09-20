@@ -20,11 +20,14 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.GenderModel = void 0;
+// deps
 const mongoose_1 = __importStar(require("mongoose"));
 const GenderSchema = new mongoose_1.Schema({
     name: {
         type: String,
         required: true,
+        lowercase: true,
+        trim: true,
     },
 });
 exports.GenderModel = mongoose_1.default.model('Gender', GenderSchema, 'genders');

@@ -20,6 +20,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PaycheckModel = void 0;
+// deps
 const mongoose_1 = __importStar(require("mongoose"));
 const PaycheckSchema = new mongoose_1.Schema({
     employee: {
@@ -33,10 +34,12 @@ const PaycheckSchema = new mongoose_1.Schema({
     start_date: {
         type: String,
         required: true,
+        trim: true,
     },
     end_date: {
         type: String,
         required: true,
+        trim: true,
     },
 });
 exports.PaycheckModel = mongoose_1.default.model('Paycheck', PaycheckSchema, 'paychecks');

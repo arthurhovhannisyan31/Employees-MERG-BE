@@ -20,19 +20,25 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.EmployeeModel = void 0;
+// deps
 const mongoose_1 = __importStar(require("mongoose"));
 const EmployeeSchema = new mongoose_1.Schema({
     birth_date: {
         type: String,
         required: true,
+        trim: true,
     },
     first_name: {
         type: String,
         required: true,
+        lowercase: true,
+        trim: true,
     },
     last_name: {
         type: String,
         required: true,
+        lowercase: true,
+        trim: true,
     },
     gender: {
         type: mongoose_1.Schema.Types.ObjectId,
