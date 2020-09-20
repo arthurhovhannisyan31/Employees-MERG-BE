@@ -1,0 +1,7 @@
+{
+  "env": {
+    "PORT": 4000,
+    "MONGO_DB": "employees",
+    "AUTH_SECRET_KEY": "secretKey"
+  }
+}

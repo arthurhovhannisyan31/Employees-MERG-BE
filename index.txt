@@ -1,10 +1,59 @@
-// todo
+// todo add dump examples to root dir
 
 1. list of departments (crud)
 department {
-
+  _id ID!
+  name String!
 }
 2. list of titles  (crud)
-3. list of employees (filters to group by dep, manager, title, ) (crud)
-4. list of salaries (date range, value, title) (crud)
+title {
+  _id ID!
+  name String!
+}
+titles {
+  _id ID!
+  employee{
+    _id
+  }
+  title {
+    _id
+  }
+  start_date String!
+  end_date String!
+}
 
+3. list of employees (filters to group by dep, manager, title, ) (crud)
+gender {
+  _id ID!
+  name String!
+}
+
+employee{
+  _id ID!
+  birth_date String!
+  first_name String!
+  last_name String!
+  gender {
+    _id
+  }
+}
+employments {
+  employee {
+    _id
+  }
+  department{
+    _id
+  }
+  start_date String!
+  end_date String!
+}
+4. list of salaries (date range, value, title) (crud)
+salaries {
+  _id ID!
+  employee{
+    _id
+  }
+  salary Float!
+  start_date String!
+  end_date String!
+}
