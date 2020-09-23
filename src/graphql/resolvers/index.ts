@@ -13,13 +13,15 @@ import { createPaycheck, paycheckHistory } from './paycheck'
 // helpers
 
 export const resolvers = {
-  // events
+  // Events
   events,
-  bookings,
   createEvent,
-  createUser,
+  // Booking
+  bookings,
   bookEvent,
   cancelBooking,
+  // User
+  createUser,
   login,
   // Department
   departments,
@@ -27,6 +29,7 @@ export const resolvers = {
   // Employee
   employees,
   createEmployee,
+  // Title
   titles,
   createTitle,
   // Gender
