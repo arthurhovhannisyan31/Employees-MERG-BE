@@ -1,7 +1,6 @@
 // deps
 // local
-import { BookingModel as Booking } from '../../models/booking'
-import { EventModel as Event } from '../../models/events'
+import { Booking, Event } from '../../models'
 // helpers
 import { transformBooking, transformEvent } from './helpers'
 import { IAuthRequest } from '../../types'
