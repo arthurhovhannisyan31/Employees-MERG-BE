@@ -12,6 +12,7 @@ const title_1 = require("./title");
 const gender_1 = require("./gender");
 const employments_1 = require("./employments");
 const employeeTitle_1 = require("./employeeTitle");
+const paycheck_1 = require("./paycheck");
 // helpers
 exports.resolvers = {
     // events
@@ -39,5 +40,8 @@ exports.resolvers = {
     // EmployeeTitle
     employeesTitles: employeeTitle_1.employeesTitles,
     createEmployeeTitle: employeeTitle_1.createEmployeeTitle,
+    // Paycheck
+    paycheckHistory: paycheck_1.paycheckHistory,
+    createPaycheck: paycheck_1.createPaycheck,
 };
 //# sourceMappingURL=index.js.map

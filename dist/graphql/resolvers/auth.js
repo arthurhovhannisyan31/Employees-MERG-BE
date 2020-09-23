@@ -9,7 +9,6 @@ const bcryptjs_1 = require("bcryptjs");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 // local
 const user_1 = require("../../models/user");
-// @ts-ignore
 exports.createUser = async ({ userInput: { email, password }, }) => {
     try {
         const existingUser = await user_1.UserModel.findOne({ email });
@@ -24,7 +23,6 @@ exports.createUser = async ({ userInput: { email, password }, }) => {
         const result = await user.save();
         return {
             _id: result._id,
-            // @ts-ignore
             email: result.email,
             password: null,
         };
@@ -38,19 +36,15 @@ exports.login = async ({ email, password }) => {
     if (!user) {
         throw new Error('User does not exist');
     }
-    // @ts-ignore
     const isEqual = await bcryptjs_1.compare(password, user.password);
     if (!isEqual) {
         throw new Error('Password is incorrect');
     }
     const secretKey = process.env.AUTH_SECRET_KEY || '';
-    const token = jsonwebtoken_1.default.sign(
-    // @ts-ignore
-    { userId: user.id, email: user.email }, secretKey, {
+    const token = jsonwebtoken_1.default.sign({ userId: user.id, email: user.email }, secretKey, {
         expiresIn: '1h',
     });
     return {
-        // @ts-ignore
         userId: user.id,
         token,
         tokenExpiration: 1,

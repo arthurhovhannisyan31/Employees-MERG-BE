@@ -13,13 +13,16 @@ const EmployeeSchema = new Schema({
   first_name: {
     type: String,
     required: true,
-    lowercase: true,
     trim: true,
   },
   last_name: {
     type: String,
     required: true,
-    lowercase: true,
+    trim: true,
+  },
+  hire_date: {
+    type: String,
+    required: true,
     trim: true,
   },
   gender: {

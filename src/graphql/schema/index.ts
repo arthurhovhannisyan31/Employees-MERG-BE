@@ -49,6 +49,7 @@ export const schema = buildSchema(`
     birth_date: String!
     first_name: String!
     last_name: String!
+    hire_date: String!
     gender: Gender!
   }
   type Employment {
@@ -98,6 +99,7 @@ export const schema = buildSchema(`
     birth_date: String!
     first_name: String!
     last_name: String!
+    hire_date: String!
     gender: ID!
   }
   input EmploymentInput {

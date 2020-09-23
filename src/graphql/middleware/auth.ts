@@ -1,5 +1,8 @@
+// deps
 import { Request, Response, NextFunction } from 'express'
 import jwt from 'jsonwebtoken'
+// local
+// helpers
 
 interface IAuthCheck extends Request {
   isAuth: boolean

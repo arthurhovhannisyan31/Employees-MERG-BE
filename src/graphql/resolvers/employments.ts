@@ -3,7 +3,8 @@ import { Employment } from '../../models'
 // local
 // helpers
 import { transformEmployment } from './helpers'
-import { IEmploymentInput } from '../../types'
+import { IAuthRequest, IEmploymentInput } from '../../types'
+import { authCheck } from '../utils/helpers'
 
 export const employments = async () => {
   try {
@@ -14,13 +15,12 @@ export const employments = async () => {
   }
 }
 
-export const createEmployment = async ({
-  input: { employee, department, start_date, end_date },
-}: IEmploymentInput) => {
+export const createEmployment = async (
+  { input: { employee, department, start_date, end_date } }: IEmploymentInput,
+  req: IAuthRequest
+) => {
   try {
-    // if (!req.isAuth) {
-    //   throw new Error('Unauthenticated request')
-    // }
+    authCheck(req)
     const duplicate = await Employment.findOne({
       employee,
       department,

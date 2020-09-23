@@ -9,6 +9,7 @@ import { titles, createTitle } from './title'
 import { genders, createGender } from './gender'
 import { employments, createEmployment } from './employments'
 import { employeesTitles, createEmployeeTitle } from './employeeTitle'
+import { createPaycheck, paycheckHistory } from './paycheck'
 // helpers
 
 export const resolvers = {
@@ -37,4 +38,7 @@ export const resolvers = {
   // EmployeeTitle
   employeesTitles,
   createEmployeeTitle,
+  // Paycheck
+  paycheckHistory,
+  createPaycheck,
 }

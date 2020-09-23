@@ -3,7 +3,8 @@ import { Department } from '../../models'
 // local
 // helpers
 import { transformDepartment } from './helpers'
-import { IDepartmentInput } from '../../types'
+import { IAuthRequest, IDepartmentInput } from '../../types'
+import { authCheck } from '../utils/helpers'
 
 export const departments = async () => {
   try {
@@ -14,12 +15,11 @@ export const departments = async () => {
   }
 }
 
-export const createDepartment = async ({
-  input: { name },
-}: IDepartmentInput) => {
-  // if (!req.isAuth) {
-  //   throw new Error('Unauthenticated request')
-  // }
+export const createDepartment = async (
+  { input: { name } }: IDepartmentInput,
+  req: IAuthRequest
+) => {
+  authCheck(req)
   try {
     const duplicate = await Department.findOne({ name })
     if (duplicate) {

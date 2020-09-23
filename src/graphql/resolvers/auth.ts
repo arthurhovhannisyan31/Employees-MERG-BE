@@ -7,7 +7,6 @@ import { UserModel as User } from '../../models/user'
 import { IUserInput } from '../../types'
 import { ILogin } from '../../types'
 
-// @ts-ignore
 export const createUser = async ({
   userInput: { email, password },
 }: IUserInput) => {
@@ -24,7 +23,6 @@ export const createUser = async ({
     const result = await user.save()
     return {
       _id: result._id,
-      // @ts-ignore
       email: result.email,
       password: null,
     }
@@ -38,22 +36,15 @@ export const login = async ({ email, password }: ILogin) => {
   if (!user) {
     throw new Error('User does not exist')
   }
-  // @ts-ignore
   const isEqual = await compare(password, user.password)
   if (!isEqual) {
     throw new Error('Password is incorrect')
   }
   const secretKey = process.env.AUTH_SECRET_KEY || ''
-  const token = jwt.sign(
-    // @ts-ignore
-    { userId: user.id, email: user.email },
-    secretKey,
-    {
-      expiresIn: '1h',
-    }
-  )
+  const token = jwt.sign({ userId: user.id, email: user.email }, secretKey, {
+    expiresIn: '1h',
+  })
   return {
-    // @ts-ignore
     userId: user.id,
     token,
     tokenExpiration: 1,

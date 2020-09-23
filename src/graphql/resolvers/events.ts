@@ -1,11 +1,11 @@
 // deps
-import { Request } from 'express'
 // local
 import { EventModel as Event } from '../../models/events'
 import { UserModel as User } from '../../models/user'
 // helpers
 import { transformEvent } from './helpers'
-import { IEventInput } from '../../types'
+import { IAuthRequest, IEventInput } from '../../types'
+import { authCheck } from '../utils/helpers'
 
 export const events = async () => {
   try {
@@ -19,12 +19,9 @@ export const events = async () => {
 
 export const createEvent = async (
   { eventInput: { date, description, price, title } }: IEventInput,
-  req: Request
+  req: IAuthRequest
 ) => {
-  // @ts-ignore
-  if (!req.isAuth) {
-    throw new Error('Unauthenticated request')
-  }
+  authCheck(req)
   try {
     const event = new Event({
       title,
@@ -34,7 +31,6 @@ export const createEvent = async (
       // @ts-ignore
       creator: req.userId,
     })
-    // @ts-ignore
     const result = await event.save()
     // @ts-ignore
     const user = await User.findById(req.userId)

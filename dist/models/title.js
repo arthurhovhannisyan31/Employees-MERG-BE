@@ -26,7 +26,6 @@ const TitleSchema = new mongoose_1.Schema({
     name: {
         type: String,
         required: true,
-        lowercase: true,
         trim: true,
     },
 });

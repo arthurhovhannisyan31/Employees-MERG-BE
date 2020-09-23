@@ -1,5 +1,6 @@
 // deps
 import { Document } from 'mongoose'
+import { Request } from 'express'
 // local
 // helpers
 
@@ -16,7 +17,7 @@ export interface IEvent extends Document {
 export interface IUser extends Document {
   _id: string
   email: string
-  password: string | null
+  password: string
   createdEvents: IEvent[]
 }
 export interface IBooking extends Document {
@@ -41,6 +42,11 @@ export interface IAuthData {
   token: string
   tokenExpiration: number
 }
+export interface IAuthRequest extends Request {
+  isAuth: boolean
+  userId: string
+}
+
 // employees -------------------------------------------------------------------
 export interface IDepartment extends Document {
   name: string
@@ -56,6 +62,7 @@ export interface IEmployee extends Document {
   first_name: string
   last_name: string
   gender: IGender
+  hire_date: string
 }
 export interface IEmployment extends Document {
   employee: IEmployee

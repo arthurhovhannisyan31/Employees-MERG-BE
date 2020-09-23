@@ -51,6 +51,7 @@ exports.schema = graphql_1.buildSchema(`
     birth_date: String!
     first_name: String!
     last_name: String!
+    hire_date: String!
     gender: Gender!
   }
   type Employment {
@@ -100,6 +101,7 @@ exports.schema = graphql_1.buildSchema(`
     birth_date: String!
     first_name: String!
     last_name: String!
+    hire_date: String!
     gender: ID!
   }
   input EmploymentInput {

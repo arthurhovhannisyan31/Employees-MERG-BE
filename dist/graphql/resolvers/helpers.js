@@ -3,13 +3,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.transformBooking = exports.transformEmployeeTitle = exports.transformTitle = exports.transformDepartment = exports.transformEmployment = exports.transformEmployee = exports.transformGender = exports.transformEvent = void 0;
+exports.transformBooking = exports.transformPaycheck = exports.transformEmployeeTitle = exports.transformTitle = exports.transformDepartment = exports.transformEmployment = exports.transformEmployee = exports.transformGender = exports.transformEvent = void 0;
 // deps
 const dataloader_1 = __importDefault(require("dataloader"));
 // local
 const models_1 = require("../../models");
 // helpers
-const date_1 = require("../helpers/date");
+const helpers_1 = require("../utils/helpers");
+// todo split apart
+// todo remove unused parts
 // @ts-ignore
 const eventLoader = new dataloader_1.default((eventIds) => getEvents(eventIds));
 // @ts-ignore
@@ -26,14 +28,18 @@ const departmentLoader = new dataloader_1.default((ids) => getDepartments(ids));
 const titleLoader = new dataloader_1.default((ids) => getTitles(ids));
 // @ts-ignore
 const employeeTitleLoader = new dataloader_1.default((ids) => getEmployeeTitles(ids));
+// @ts-ignore
+const paycheckLoader = new dataloader_1.default((ids) => getPaycheckHistory(ids));
 // Event -----------------------------------------------------------------------
 const getEvents = async (eventIds) => {
     try {
         const events = await models_1.Event.find({ _id: { $in: eventIds } });
         // @ts-ignore
-        events.sort((a, b) => {
-            return (eventIds.indexOf(a._id.toString()) - eventIds.indexOf(b._id.toString()));
-        });
+        // events.sort((a: IEvent, b: IEvent) => {
+        //   return (
+        //     eventIds.indexOf(a._id.toString()) - eventIds.indexOf(b._id.toString())
+        //   )
+        // })
         // @ts-ignore
         return events.map(exports.transformEvent);
     }
@@ -61,7 +67,7 @@ exports.transformEvent = (event) => {
         title: event.title,
         description: event.description,
         price: event.price,
-        date: date_1.dateToISOString(event.date),
+        date: helpers_1.dateToISOString(event.date),
         // @ts-ignore
         creator: getSingleUser(event.creator),
     };
@@ -103,7 +109,10 @@ const getSingleUser = async (userId) => {
 const getGenders = async (ids) => {
     try {
         const genders = await models_1.Gender.find({ _id: { $in: ids } });
-        genders.sort((a, b) => ids.indexOf(a._id.toString()) - ids.indexOf(b._id.toString()));
+        // genders.sort(
+        //   (a: IGender, b: IGender) =>
+        //     ids.indexOf(a._id.toString()) - ids.indexOf(b._id.toString())
+        // )
         return genders.map(exports.transformGender);
     }
     catch (err) {
@@ -129,7 +138,10 @@ exports.transformGender = ({ _id, name }) => ({
 const getEmployees = async (ids) => {
     try {
         const employees = await models_1.Employee.find({ _id: { $in: ids } });
-        employees.sort((a, b) => ids.indexOf(a._id.toString()) - ids.indexOf(b._id.toString()));
+        // employees.sort(
+        //   (a: IEmployee, b: IEmployee) =>
+        //     ids.indexOf(a._id.toString()) - ids.indexOf(b._id.toString())
+        // )
         return employees.map(exports.transformEmployee);
     }
     catch (err) {
@@ -147,13 +159,14 @@ const getSingleEmployee = async (id) => {
         throw err;
     }
 };
-exports.transformEmployee = ({ _id, last_name, gender, first_name, birth_date, }) => {
+exports.transformEmployee = ({ _id, last_name, gender, first_name, birth_date, hire_date, }) => {
     return {
         _id,
         birth_date,
         first_name,
         last_name,
         gender: getSingleGender(gender),
+        hire_date,
     };
 };
 // function handleSort<T>(arr: T[]):T[]{// @ts-ignore
@@ -162,7 +175,10 @@ exports.transformEmployee = ({ _id, last_name, gender, first_name, birth_date, }
 const getEmployments = async (ids) => {
     try {
         const employments = await models_1.Employment.find({ _id: { $in: ids } });
-        employments.sort((a, b) => ids.indexOf(a._id.toString()) - ids.indexOf(b._id.toString()));
+        // employments.sort(
+        //   (a: IEmployment, b: IEmployment) =>
+        //     ids.indexOf(a._id.toString()) - ids.indexOf(b._id.toString())
+        // )
         return employments.map(exports.transformEmployment);
     }
     catch (err) {
@@ -191,7 +207,10 @@ exports.transformEmployment = ({ _id, employee, department, start_date, end_date
 const getDepartments = async (ids) => {
     try {
         const departments = await models_1.Department.find({ _id: { $in: ids } });
-        departments.sort((a, b) => ids.indexOf(a._id.toString()) - ids.indexOf(b._id.toString()));
+        // departments.sort(
+        //   (a: IDepartment, b: IDepartment) =>
+        //     ids.indexOf(a._id.toString()) - ids.indexOf(b._id.toString())
+        // )
         return departments.map(exports.transformDepartment);
     }
     catch (err) {
@@ -217,7 +236,10 @@ exports.transformDepartment = ({ _id, name }) => ({
 const getTitles = async (ids) => {
     try {
         const titles = await models_1.Title.find({ _id: { $in: ids } });
-        titles.sort((a, b) => ids.indexOf(a._id.toString()) - ids.indexOf(b._id.toString()));
+        // titles.sort(
+        //   (a: ITitle, b: ITitle) =>
+        //     ids.indexOf(a._id.toString()) - ids.indexOf(b._id.toString())
+        // )
         return titles.map(exports.transformTitle);
     }
     catch (err) {
@@ -243,7 +265,10 @@ exports.transformTitle = ({ _id, name }) => ({
 const getEmployeeTitles = async (ids) => {
     try {
         const employeesTitles = await models_1.EmployeeTitle.find({ _id: { $in: ids } });
-        employeesTitles.sort((a, b) => ids.indexOf(a._id.toString()) - ids.indexOf(b._id.toString()));
+        // employeesTitles.sort(
+        //   (a: IEmployeeTitle, b: IEmployeeTitle) =>
+        //     ids.indexOf(a._id.toString()) - ids.indexOf(b._id.toString())
+        // )
         return employeesTitles.map(exports.transformEmployeeTitle);
     }
     catch (err) {
@@ -260,22 +285,52 @@ const getEmployeeTitles = async (ids) => {
 //     throw err
 //   }
 // }
-exports.transformEmployeeTitle = ({ _id, employee, title, start_date, end_date, }) => {
-    return {
-        _id,
-        employee: getSingleEmployee(employee),
-        title: getSingleTitle(title),
-        start_date,
-        end_date,
-    };
+exports.transformEmployeeTitle = ({ _id, employee, title, start_date, end_date, }) => ({
+    _id,
+    employee: getSingleEmployee(employee),
+    title: getSingleTitle(title),
+    start_date,
+    end_date,
+});
+// PaycheckHistory -------------------------------------------------------------
+const getPaycheckHistory = async (ids) => {
+    try {
+        const paycheckHistory = await models_1.Paycheck.find({ _id: { $in: ids } });
+        // paycheckHistory.sort(
+        //   (a: IPaycheck, b: IPaycheck) =>
+        //     ids.indexOf(a._id.toString()) - ids.indexOf(b._id.toString())
+        // )
+        return paycheckHistory.map(exports.transformPaycheck);
+    }
+    catch (err) {
+        throw err;
+    }
 };
-// Booking--- ------------------------------------------------------------------
+// const getSinglePaycheck = async (id: string) => {
+//   try {
+//     const paycheck = await paycheckLoader.load(id.toString())
+//     if (!paycheck) {
+//       throw new Error('Paycheck not found')
+//     }
+//     return paycheck
+//   } catch (err) {
+//     throw err
+//   }
+// }
+exports.transformPaycheck = ({ _id, employee, salary, start_date, end_date, }) => ({
+    _id,
+    employee: getSingleEmployee(employee),
+    salary,
+    start_date,
+    end_date,
+});
+// Booking----------------------------------------------------------------------
 exports.transformBooking = (booking) => ({
     ...booking,
     _id: booking.id,
     user: getSingleUser(booking.user),
     event: getSingleEvent(booking.event),
-    createdAt: date_1.dateToISOString(booking.createdAt),
-    updatedAt: date_1.dateToISOString(booking.updatedAt),
+    createdAt: helpers_1.dateToISOString(booking.createdAt),
+    updatedAt: helpers_1.dateToISOString(booking.updatedAt),
 });
 //# sourceMappingURL=helpers.js.map

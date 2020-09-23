@@ -3,7 +3,8 @@ import { EmployeeTitle } from '../../models'
 // local
 // helpers
 import { transformEmployeeTitle } from './helpers'
-import { IEmployeeTitleInput } from '../../types'
+import { IEmployeeTitleInput, IAuthRequest } from '../../types'
+import { authCheck } from '../utils/helpers'
 
 export const employeesTitles = async () => {
   try {
@@ -14,12 +15,11 @@ export const employeesTitles = async () => {
   }
 }
 
-export const createEmployeeTitle = async ({
-  input: { employee, title, start_date, end_date },
-}: IEmployeeTitleInput) => {
-  // if (!req.isAuth) {
-  //   throw new Error('Unauthenticated request')
-  // }
+export const createEmployeeTitle = async (
+  { input: { employee, title, start_date, end_date } }: IEmployeeTitleInput,
+  req: IAuthRequest
+) => {
+  authCheck(req)
   try {
     const duplicate = await EmployeeTitle.findOne({
       employee,

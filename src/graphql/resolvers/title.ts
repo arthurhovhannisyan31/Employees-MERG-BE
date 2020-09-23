@@ -3,7 +3,7 @@ import { TitleModel as Title } from '../../models/title'
 // local
 // helpers
 import { transformTitle } from './helpers'
-import { ITitleInput } from '../../types'
+import { IAuthRequest, ITitleInput } from '../../types'
 
 export const titles = async () => {
   try {
@@ -14,10 +14,13 @@ export const titles = async () => {
   }
 }
 
-export const createTitle = async ({ input: { name } }: ITitleInput) => {
-  // if (!req.isAuth) {
-  //   throw new Error('Unauthenticated request')
-  // }
+export const createTitle = async (
+  { input: { name } }: ITitleInput,
+  req: IAuthRequest
+) => {
+  if (!req.isAuth) {
+    throw new Error('Unauthenticated request')
+  }
   try {
     const duplicate = await Title.findOne({ name })
     if (duplicate) {

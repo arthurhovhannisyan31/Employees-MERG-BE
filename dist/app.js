@@ -3,20 +3,20 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-// global imports
+// deps
 const express_1 = __importDefault(require("express"));
 const body_parser_1 = __importDefault(require("body-parser"));
 const express_graphql_1 = require("express-graphql");
 const mongoose_1 = __importDefault(require("mongoose"));
-// local imports
+// local
 const schema_1 = require("./graphql/schema");
 const resolvers_1 = require("./graphql/resolvers");
-// todo enable auth check
-// import { isAuth } from './graphql/middleware/auth'
+const auth_1 = require("./graphql/middleware/auth");
+// helpers
 const app = express_1.default();
 app.use(body_parser_1.default.json());
 // @ts-ignore
-// app.use(isAuth)
+app.use(auth_1.isAuth);
 // @ts-ignore
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');

@@ -1,4 +1,8 @@
+// deps
 import mongoose, { Schema } from 'mongoose'
+// local
+// helpers
+import { IUser } from '../types'
 
 const userSchema = new Schema({
   email: {
@@ -17,4 +21,4 @@ const userSchema = new Schema({
   ],
 })
 
-export const UserModel = mongoose.model('User', userSchema, 'users')
+export const UserModel = mongoose.model<IUser>('User', userSchema, 'users')

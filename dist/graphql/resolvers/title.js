@@ -15,10 +15,10 @@ exports.titles = async () => {
         throw err;
     }
 };
-exports.createTitle = async ({ input: { name } }) => {
-    // if (!req.isAuth) {
-    //   throw new Error('Unauthenticated request')
-    // }
+exports.createTitle = async ({ input: { name } }, req) => {
+    if (!req.isAuth) {
+        throw new Error('Unauthenticated request');
+    }
     try {
         const duplicate = await title_1.TitleModel.findOne({ name });
         if (duplicate) {

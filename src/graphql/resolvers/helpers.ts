@@ -10,9 +10,10 @@ import {
   Department,
   EmployeeTitle,
   Title,
+  Paycheck,
 } from '../../models'
 // helpers
-import { dateToISOString } from '../helpers/date'
+import { dateToISOString } from '../utils/helpers'
 import {
   IEvent,
   IBooking,
@@ -22,7 +23,11 @@ import {
   IEmployee,
   IEmployment,
   IEmployeeTitle,
+  IPaycheck,
 } from '../../types'
+
+// todo split apart
+// todo remove unused parts
 
 // @ts-ignore
 const eventLoader = new DataLoader((eventIds: string[]) => getEvents(eventIds))
@@ -42,16 +47,20 @@ const titleLoader = new DataLoader((ids: string[]) => getTitles(ids))
 const employeeTitleLoader = new DataLoader((ids: string) =>
   getEmployeeTitles(ids)
 )
+// @ts-ignore
+const paycheckLoader = new DataLoader((ids: string[]) =>
+  getPaycheckHistory(ids)
+)
 // Event -----------------------------------------------------------------------
 const getEvents = async (eventIds: string[]): Promise<IEvent[]> => {
   try {
     const events = await Event.find({ _id: { $in: eventIds } })
     // @ts-ignore
-    events.sort((a: IEvent, b: IEvent) => {
-      return (
-        eventIds.indexOf(a._id.toString()) - eventIds.indexOf(b._id.toString())
-      )
-    })
+    // events.sort((a: IEvent, b: IEvent) => {
+    //   return (
+    //     eventIds.indexOf(a._id.toString()) - eventIds.indexOf(b._id.toString())
+    //   )
+    // })
     // @ts-ignore
     return events.map(transformEvent)
   } catch (err) {
@@ -119,10 +128,10 @@ const getSingleUser = async (userId: string) => {
 const getGenders = async (ids: string[]) => {
   try {
     const genders = await Gender.find({ _id: { $in: ids } })
-    genders.sort(
-      (a: IGender, b: IGender) =>
-        ids.indexOf(a._id.toString()) - ids.indexOf(b._id.toString())
-    )
+    // genders.sort(
+    //   (a: IGender, b: IGender) =>
+    //     ids.indexOf(a._id.toString()) - ids.indexOf(b._id.toString())
+    // )
     return genders.map(transformGender)
   } catch (err) {
     throw err
@@ -146,10 +155,10 @@ export const transformGender = ({ _id, name }: IGender) => ({
 const getEmployees = async (ids: string[]) => {
   try {
     const employees = await Employee.find({ _id: { $in: ids } })
-    employees.sort(
-      (a: IEmployee, b: IEmployee) =>
-        ids.indexOf(a._id.toString()) - ids.indexOf(b._id.toString())
-    )
+    // employees.sort(
+    //   (a: IEmployee, b: IEmployee) =>
+    //     ids.indexOf(a._id.toString()) - ids.indexOf(b._id.toString())
+    // )
     return employees.map(transformEmployee)
   } catch (err) {
     throw err
@@ -170,6 +179,7 @@ export const transformEmployee = ({
   gender,
   first_name,
   birth_date,
+  hire_date,
 }: IEmployee) => {
   return {
     _id,
@@ -177,6 +187,7 @@ export const transformEmployee = ({
     first_name,
     last_name,
     gender: getSingleGender((gender as never) as string),
+    hire_date,
   }
 }
 
@@ -186,10 +197,10 @@ export const transformEmployee = ({
 const getEmployments = async (ids: string[]) => {
   try {
     const employments = await Employment.find({ _id: { $in: ids } })
-    employments.sort(
-      (a: IEmployment, b: IEmployment) =>
-        ids.indexOf(a._id.toString()) - ids.indexOf(b._id.toString())
-    )
+    // employments.sort(
+    //   (a: IEmployment, b: IEmployment) =>
+    //     ids.indexOf(a._id.toString()) - ids.indexOf(b._id.toString())
+    // )
     return employments.map(transformEmployment)
   } catch (err) {
     throw err
@@ -225,10 +236,10 @@ export const transformEmployment = ({
 const getDepartments = async (ids: string[]) => {
   try {
     const departments = await Department.find({ _id: { $in: ids } })
-    departments.sort(
-      (a: IDepartment, b: IDepartment) =>
-        ids.indexOf(a._id.toString()) - ids.indexOf(b._id.toString())
-    )
+    // departments.sort(
+    //   (a: IDepartment, b: IDepartment) =>
+    //     ids.indexOf(a._id.toString()) - ids.indexOf(b._id.toString())
+    // )
     return departments.map(transformDepartment)
   } catch (err) {
     throw err
@@ -254,10 +265,10 @@ export const transformDepartment = ({ _id, name }: IDepartment) => ({
 const getTitles = async (ids: string[]) => {
   try {
     const titles = await Title.find({ _id: { $in: ids } })
-    titles.sort(
-      (a: ITitle, b: ITitle) =>
-        ids.indexOf(a._id.toString()) - ids.indexOf(b._id.toString())
-    )
+    // titles.sort(
+    //   (a: ITitle, b: ITitle) =>
+    //     ids.indexOf(a._id.toString()) - ids.indexOf(b._id.toString())
+    // )
     return titles.map(transformTitle)
   } catch (err) {
     throw err
@@ -283,10 +294,10 @@ export const transformTitle = ({ _id, name }: ITitle) => ({
 const getEmployeeTitles = async (ids: string) => {
   try {
     const employeesTitles = await EmployeeTitle.find({ _id: { $in: ids } })
-    employeesTitles.sort(
-      (a: IEmployeeTitle, b: IEmployeeTitle) =>
-        ids.indexOf(a._id.toString()) - ids.indexOf(b._id.toString())
-    )
+    // employeesTitles.sort(
+    //   (a: IEmployeeTitle, b: IEmployeeTitle) =>
+    //     ids.indexOf(a._id.toString()) - ids.indexOf(b._id.toString())
+    // )
     return employeesTitles.map(transformEmployeeTitle)
   } catch (err) {
     throw err
@@ -310,17 +321,56 @@ export const transformEmployeeTitle = ({
   title,
   start_date,
   end_date,
-}: IEmployeeTitle) => {
-  return {
-    _id,
-    employee: getSingleEmployee((employee as never) as string),
-    title: getSingleTitle((title as never) as string),
-    start_date,
-    end_date,
+}: IEmployeeTitle) => ({
+  _id,
+  employee: getSingleEmployee((employee as never) as string),
+  title: getSingleTitle((title as never) as string),
+  start_date,
+  end_date,
+})
+
+// PaycheckHistory -------------------------------------------------------------
+
+const getPaycheckHistory = async (ids: string[]) => {
+  try {
+    const paycheckHistory = await Paycheck.find({ _id: { $in: ids } })
+    // paycheckHistory.sort(
+    //   (a: IPaycheck, b: IPaycheck) =>
+    //     ids.indexOf(a._id.toString()) - ids.indexOf(b._id.toString())
+    // )
+    return paycheckHistory.map(transformPaycheck)
+  } catch (err) {
+    throw err
   }
 }
 
-// Booking--- ------------------------------------------------------------------
+// const getSinglePaycheck = async (id: string) => {
+//   try {
+//     const paycheck = await paycheckLoader.load(id.toString())
+//     if (!paycheck) {
+//       throw new Error('Paycheck not found')
+//     }
+//     return paycheck
+//   } catch (err) {
+//     throw err
+//   }
+// }
+
+export const transformPaycheck = ({
+  _id,
+  employee,
+  salary,
+  start_date,
+  end_date,
+}: IPaycheck) => ({
+  _id,
+  employee: getSingleEmployee((employee as never) as string),
+  salary,
+  start_date,
+  end_date,
+})
+
+// Booking----------------------------------------------------------------------
 export const transformBooking = (booking: IBooking) => ({
   ...booking,
   _id: booking.id,

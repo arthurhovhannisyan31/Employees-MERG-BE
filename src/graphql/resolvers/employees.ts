@@ -1,9 +1,11 @@
 // deps
+import {} from 'mongoose'
 import { Employee } from '../../models'
 // local
 // helpers
 import { transformEmployee } from './helpers'
-import { IEmployeeInput } from '../../types'
+import { IAuthRequest, IEmployeeInput } from '../../types'
+import { authCheck } from '../utils/helpers'
 
 export const employees = async () => {
   try {
@@ -14,18 +16,20 @@ export const employees = async () => {
   }
 }
 
-export const createEmployee = async ({
-  input: { birth_date, first_name, last_name, gender },
-}: IEmployeeInput) => {
-  // if (!req.isAuth) {
-  //   throw new Error('Unauthenticated request')
-  // }
+export const createEmployee = async (
+  {
+    input: { birth_date, first_name, last_name, gender, hire_date },
+  }: IEmployeeInput,
+  req: IAuthRequest
+) => {
+  authCheck(req)
   try {
     const duplicate = await Employee.findOne({
       birth_date,
-      first_name: first_name.toLowerCase(),
-      last_name: last_name.toLowerCase(),
+      first_name,
+      last_name,
       gender,
+      hire_date,
     })
     if (duplicate) {
       throw new Error(
@@ -37,6 +41,7 @@ export const createEmployee = async ({
       first_name,
       last_name,
       gender,
+      hire_date,
     })
     const result = await employee.save()
     return transformEmployee(result)

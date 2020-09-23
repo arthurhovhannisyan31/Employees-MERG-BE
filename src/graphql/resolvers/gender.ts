@@ -1,9 +1,10 @@
 // deps
-import { GenderModel as Gender } from '../../models/gender'
 // local
+import { Gender } from '../../models'
 // helpers
 import { transformGender } from './helpers'
-import { IGenderInput } from '../../types'
+import { IAuthRequest, IGenderInput } from '../../types'
+import { authCheck } from '../utils/helpers'
 
 export const genders = async () => {
   try {
@@ -14,10 +15,11 @@ export const genders = async () => {
   }
 }
 
-export const createGender = async ({ input: { name } }: IGenderInput) => {
-  // if (!req.isAuth) {
-  //   throw new Error('Unauthenticated request')
-  // }
+export const createGender = async (
+  { input: { name } }: IGenderInput,
+  req: IAuthRequest
+) => {
+  authCheck(req)
   try {
     const duplicate = await Gender.findOne({ name })
     if (duplicate) {

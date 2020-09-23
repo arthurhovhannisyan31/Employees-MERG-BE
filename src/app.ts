@@ -1,19 +1,19 @@
-// global imports
+// deps
 import express, { Request, Response, NextFunction } from 'express'
 import bodyParser from 'body-parser'
 import { graphqlHTTP } from 'express-graphql'
 import mongoose from 'mongoose'
-// local imports
+// local
 import { schema } from './graphql/schema'
 import { resolvers } from './graphql/resolvers'
-// todo enable auth check
-// import { isAuth } from './graphql/middleware/auth'
+import { isAuth } from './graphql/middleware/auth'
+// helpers
 
 const app = express()
 
 app.use(bodyParser.json())
 // @ts-ignore
-// app.use(isAuth)
+app.use(isAuth)
 // @ts-ignore
 app.use((req: Request, res: Response, next: NextFunction) => {
   res.setHeader('Access-Control-Allow-Origin', '*')

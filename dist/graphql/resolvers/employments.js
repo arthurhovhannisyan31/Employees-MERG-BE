@@ -6,6 +6,7 @@ const models_1 = require("../../models");
 // local
 // helpers
 const helpers_1 = require("./helpers");
+const helpers_2 = require("../utils/helpers");
 exports.employments = async () => {
     try {
         const result = await models_1.Employment.find();
@@ -15,11 +16,9 @@ exports.employments = async () => {
         throw err;
     }
 };
-exports.createEmployment = async ({ input: { employee, department, start_date, end_date }, }) => {
+exports.createEmployment = async ({ input: { employee, department, start_date, end_date } }, req) => {
     try {
-        // if (!req.isAuth) {
-        //   throw new Error('Unauthenticated request')
-        // }
+        helpers_2.authCheck(req);
         const duplicate = await models_1.Employment.findOne({
             employee,
             department,
