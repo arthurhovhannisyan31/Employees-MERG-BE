@@ -27,6 +27,7 @@ export const getSingleUser = async (userId: string) => {
       _id: user?._id,
       email: user?.email,
       password: '',
+      // @ts-ignore
       createdEvents: () => eventLoader.loadMany(user.createdEvents),
     }
   } catch (err) {

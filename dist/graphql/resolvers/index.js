@@ -14,14 +14,17 @@ const employments_1 = require("./employments");
 const employeeTitle_1 = require("./employeeTitle");
 const paycheck_1 = require("./paycheck");
 // helpers
+// todo split folders redux-duck style
 exports.resolvers = {
-    // events
+    // Events
     events: events_1.events,
-    bookings: bookings_1.bookings,
     createEvent: events_1.createEvent,
-    createUser: auth_1.createUser,
+    // Booking
+    bookings: bookings_1.bookings,
     bookEvent: bookings_1.bookEvent,
     cancelBooking: bookings_1.cancelBooking,
+    // User
+    createUser: auth_1.createUser,
     login: auth_1.login,
     // Department
     departments: departments_1.departments,
@@ -29,6 +32,7 @@ exports.resolvers = {
     // Employee
     employees: employees_1.employees,
     createEmployee: employees_1.createEmployee,
+    // Title
     titles: title_1.titles,
     createTitle: title_1.createTitle,
     // Gender

@@ -31,6 +31,7 @@ exports.getSingleUser = async (userId) => {
             _id: user?._id,
             email: user?.email,
             password: '',
+            // @ts-ignore
             createdEvents: () => _1.eventLoader.loadMany(user.createdEvents),
         };
     }
