@@ -4,12 +4,12 @@ import jwt from 'jsonwebtoken'
 // local
 import { UserModel as User } from '../../models/user'
 // helpers
-import { IUserInput } from '../../types'
+import { ICreateUserInput } from '../../types'
 import { ILogin } from '../../types'
 
 export const createUser = async ({
   userInput: { email, password },
-}: IUserInput) => {
+}: ICreateUserInput) => {
   try {
     const existingUser = await User.findOne({ email })
     if (existingUser) {

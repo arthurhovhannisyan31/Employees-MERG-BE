@@ -31,6 +31,7 @@ exports.resolvers = {
     createDepartment: departments_1.createDepartment,
     // Employee
     employees: employees_1.employees,
+    employee: employees_1.employee,
     createEmployee: employees_1.createEmployee,
     // Title
     titles: title_1.titles,

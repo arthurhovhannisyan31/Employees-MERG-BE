@@ -3,7 +3,7 @@
 import { Paycheck } from '../../models'
 // helpers
 import { transformPaycheck } from './helpers'
-import { IAuthRequest, IPaycheckInput } from '../../types'
+import { IAuthRequest, ICreatePaycheckInput } from '../../types'
 import { authCheck } from '../utils/helpers'
 
 export const paycheckHistory = async () => {
@@ -16,7 +16,7 @@ export const paycheckHistory = async () => {
 }
 
 export const createPaycheck = async (
-  { input: { employee, salary, start_date, end_date } }: IPaycheckInput,
+  { input: { employee, salary, start_date, end_date } }: ICreatePaycheckInput,
   req: IAuthRequest
 ) => {
   authCheck(req)

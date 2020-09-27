@@ -3,7 +3,7 @@ import { Employment } from '../../models'
 // local
 // helpers
 import { transformEmployment } from './helpers'
-import { IAuthRequest, IEmploymentInput } from '../../types'
+import { IAuthRequest, ICreateEmploymentInput } from '../../types'
 import { authCheck } from '../utils/helpers'
 
 export const employments = async () => {
@@ -16,7 +16,9 @@ export const employments = async () => {
 }
 
 export const createEmployment = async (
-  { input: { employee, department, start_date, end_date } }: IEmploymentInput,
+  {
+    input: { employee, department, start_date, end_date },
+  }: ICreateEmploymentInput,
   req: IAuthRequest
 ) => {
   try {

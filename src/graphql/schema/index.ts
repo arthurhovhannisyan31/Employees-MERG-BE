@@ -86,35 +86,38 @@ export const schema = buildSchema(`
     password: String!
   }
   # inputs employees -----------------------------------------------------------
-  input DepartmentInput {
+  input CreateDepartmentInput {
     name: String!
   }
-  input TitleInput {
+  input CreateTitleInput {
     name: String!
   }
-  input GenderInput {
+  input createGenderInput {
     name: String!
   }
-  input EmployeeInput {
+  input CreateEmployeeInput {
     birth_date: String!
     first_name: String!
     last_name: String!
     hire_date: String!
     gender: ID!
   }
-  input EmploymentInput {
+  input GetEmployeeInput {
+    id: ID!
+  }
+  input CreateEmploymentInput {
     employee: ID!
     department: ID!
     start_date: String!
     end_date: String!
   }
-  input EmployeeTitleInput {
+  input CreateEmployeeTitleInput {
     employee: ID!
     title: ID!
     start_date: String!
     end_date: String!
   }
-  input PaycheckInput {
+  input CreatePaycheckInput {
     employee: ID!
     salary: Float!
     start_date: String!
@@ -131,6 +134,7 @@ export const schema = buildSchema(`
     titles: [Title!]!
     genders: [Gender!]!
     employees: [Employee!]!
+    employee(input: GetEmployeeInput!): Employee!
     employments: [Employment!]!
     employeesTitles: [EmployeeTitle!]!
     paycheckHistory: [Paycheck!]!
@@ -142,13 +146,13 @@ export const schema = buildSchema(`
     bookEvent(eventId: ID!): Booking!
     cancelBooking(bookingId: ID!): Event!
     # employees-root
-    createDepartment(input: DepartmentInput!):Department!
-    createTitle(input: TitleInput!): Title!
-    createGender(input: GenderInput!): Gender!
-    createEmployee(input: EmployeeInput!): Employee!
-    createEmployment(input: EmploymentInput!): Employment!
-    createEmployeeTitle(input: EmployeeTitleInput!): EmployeeTitle!
-    createPaycheck(input: PaycheckInput!): Paycheck!  
+    createDepartment(input: CreateDepartmentInput!):Department!
+    createTitle(input: CreateTitleInput!): Title!
+    createGender(input: createGenderInput!): Gender!
+    createEmployee(input: CreateEmployeeInput!): Employee!
+    createEmployment(input: CreateEmploymentInput!): Employment!
+    createEmployeeTitle(input: CreateEmployeeTitleInput!): EmployeeTitle!
+    createPaycheck(input: CreatePaycheckInput!): Paycheck!  
   }
   schema {
     query: RootQuery

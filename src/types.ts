@@ -85,7 +85,7 @@ export interface IPaycheck extends Document {
 
 // inputs
 // events ----------------------------------------------------------------------
-export interface IEventInput {
+export interface ICreateEventInput {
   eventInput: {
     title: string
     description: string
@@ -93,31 +93,36 @@ export interface IEventInput {
     date: string
   }
 }
-export interface IUserInput {
+export interface ICreateUserInput {
   userInput: {
     email: string
     password: string
   }
 }
 // employees -------------------------------------------------------------------
-export interface IDepartmentInput {
+export interface ICreateDepartmentInput {
   input: IDepartment
 }
 export interface ITitleInput {
   input: ITitle
 }
-export interface IGenderInput {
+export interface ICreateGenderInput {
   input: IGender
 }
-export interface IEmployeeInput {
+export interface ICreateEmployeeInput {
   input: IEmployee
 }
-export interface IEmploymentInput {
+export interface IGetEmployeeInput {
+  input: {
+    id: string
+  }
+}
+export interface ICreateEmploymentInput {
   input: IEmployment
 }
-export interface IEmployeeTitleInput {
+export interface ICreateEmployeeTitleInput {
   input: IEmployeeTitle
 }
-export interface IPaycheckInput {
+export interface ICreatePaycheckInput {
   input: IPaycheck
 }

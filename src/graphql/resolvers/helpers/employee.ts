@@ -23,6 +23,7 @@ export const getEmployees = async (ids: string[]) => {
     throw err
   }
 }
+
 export const getSingleEmployee = async (id: string) => {
   try {
     const employee = await employeeLoader.load(id.toString())

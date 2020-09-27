@@ -16,7 +16,7 @@ exports.employeesTitles = async () => {
         throw err;
     }
 };
-exports.createEmployeeTitle = async ({ input: { employee, title, start_date, end_date } }, req) => {
+exports.createEmployeeTitle = async ({ input: { employee, title, start_date, end_date }, }, req) => {
     helpers_2.authCheck(req);
     try {
         const duplicate = await models_1.EmployeeTitle.findOne({

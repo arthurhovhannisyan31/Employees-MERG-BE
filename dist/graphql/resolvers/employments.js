@@ -16,7 +16,7 @@ exports.employments = async () => {
         throw err;
     }
 };
-exports.createEmployment = async ({ input: { employee, department, start_date, end_date } }, req) => {
+exports.createEmployment = async ({ input: { employee, department, start_date, end_date }, }, req) => {
     try {
         helpers_2.authCheck(req);
         const duplicate = await models_1.Employment.findOne({

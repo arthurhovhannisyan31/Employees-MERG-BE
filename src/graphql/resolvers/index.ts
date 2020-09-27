@@ -4,7 +4,7 @@ import { createUser, login } from './auth'
 import { events, createEvent } from './events'
 import { bookings, bookEvent, cancelBooking } from './bookings'
 import { departments, createDepartment } from './departments'
-import { employees, createEmployee } from './employees'
+import { employees, createEmployee, employee } from './employees'
 import { titles, createTitle } from './title'
 import { genders, createGender } from './gender'
 import { employments, createEmployment } from './employments'
@@ -30,6 +30,7 @@ export const resolvers = {
   createDepartment,
   // Employee
   employees,
+  employee,
   createEmployee,
   // Title
   titles,

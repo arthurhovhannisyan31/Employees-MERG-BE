@@ -3,7 +3,7 @@ import { Department } from '../../models'
 // local
 // helpers
 import { transformDepartment } from './helpers'
-import { IAuthRequest, IDepartmentInput } from '../../types'
+import { IAuthRequest, ICreateDepartmentInput } from '../../types'
 import { authCheck } from '../utils/helpers'
 
 export const departments = async () => {
@@ -16,7 +16,7 @@ export const departments = async () => {
 }
 
 export const createDepartment = async (
-  { input: { name } }: IDepartmentInput,
+  { input: { name } }: ICreateDepartmentInput,
   req: IAuthRequest
 ) => {
   authCheck(req)

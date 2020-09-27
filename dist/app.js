@@ -52,4 +52,5 @@ mongoose_1.default
     .catch((err) => {
     console.log(err);
 });
+// todo replace gender with enum Gender
 //# sourceMappingURL=app.js.map

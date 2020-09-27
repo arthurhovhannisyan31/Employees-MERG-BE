@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createEmployee = exports.employees = void 0;
+exports.createEmployee = exports.employee = exports.employees = void 0;
+// deps
 const models_1 = require("../../models");
 // local
 // helpers
@@ -10,6 +11,19 @@ exports.employees = async () => {
     try {
         const result = await models_1.Employee.find();
         return result.map(helpers_1.transformEmployee);
+    }
+    catch (err) {
+        throw err;
+    }
+};
+exports.employee = async ({ input: { id } }, req) => {
+    helpers_2.authCheck(req);
+    try {
+        const result = await models_1.Employee.findOne({ _id: id });
+        if (!result) {
+            throw new Error(`Employee ${id} was not found`);
+        }
+        return helpers_1.transformEmployee(result);
     }
     catch (err) {
         throw err;
