@@ -1,6 +1,6 @@
 // deps
-import { Employee } from '../../models'
 // local
+import { Employee } from '../../models'
 // helpers
 import { transformEmployee } from './helpers'
 import {
@@ -10,7 +10,8 @@ import {
 } from '../../types'
 import { authCheck } from '../utils/helpers'
 
-export const employees = async () => {
+export const employees = async (_: never, req: IAuthRequest) => {
+  authCheck(req)
   try {
     const result = await Employee.find()
     return result.map(transformEmployee)

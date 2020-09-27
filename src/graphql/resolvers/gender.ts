@@ -6,7 +6,8 @@ import { transformGender } from './helpers'
 import { IAuthRequest, ICreateGenderInput } from '../../types'
 import { authCheck } from '../utils/helpers'
 
-export const genders = async () => {
+export const genders = async (_: never, req: IAuthRequest) => {
+  authCheck(req)
   try {
     const result = await Gender.find()
     return result.map(transformGender)

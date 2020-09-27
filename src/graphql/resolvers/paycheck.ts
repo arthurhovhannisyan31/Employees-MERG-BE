@@ -6,7 +6,8 @@ import { transformPaycheck } from './helpers'
 import { IAuthRequest, ICreatePaycheckInput } from '../../types'
 import { authCheck } from '../utils/helpers'
 
-export const paycheckHistory = async () => {
+export const paycheckHistory = async (_: never, req: IAuthRequest) => {
+  authCheck(req)
   try {
     const result = await Paycheck.find()
     return result.map(transformPaycheck)

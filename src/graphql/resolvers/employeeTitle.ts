@@ -1,12 +1,13 @@
 // deps
-import { EmployeeTitle } from '../../models'
 // local
+import { EmployeeTitle } from '../../models'
 // helpers
 import { transformEmployeeTitle } from './helpers'
 import { ICreateEmployeeTitleInput, IAuthRequest } from '../../types'
 import { authCheck } from '../utils/helpers'
 
-export const employeesTitles = async () => {
+export const employeesTitles = async (_: never, req: IAuthRequest) => {
+  authCheck(req)
   try {
     const result = await EmployeeTitle.find()
     return result.map(transformEmployeeTitle)

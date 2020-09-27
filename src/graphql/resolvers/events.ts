@@ -7,7 +7,8 @@ import { transformEvent } from './helpers'
 import { IAuthRequest, ICreateEventInput } from '../../types'
 import { authCheck } from '../utils/helpers'
 
-export const events = async () => {
+export const events = async (_: never, req: IAuthRequest) => {
+  authCheck(req)
   try {
     const result = await Event.find()
     // @ts-ignore

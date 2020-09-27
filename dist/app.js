@@ -53,4 +53,5 @@ mongoose_1.default
     console.log(err);
 });
 // todo replace gender with enum Gender
+// todo add fragments
 //# sourceMappingURL=app.js.map

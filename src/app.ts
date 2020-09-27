@@ -60,3 +60,4 @@ mongoose
   })
 
 // todo replace gender with enum Gender
+// todo add fragments

@@ -1,11 +1,13 @@
 // deps
-import { TitleModel as Title } from '../../models/title'
 // local
+import { TitleModel as Title } from '../../models/title'
 // helpers
 import { transformTitle } from './helpers'
 import { IAuthRequest, ITitleInput } from '../../types'
+import { authCheck } from '../utils/helpers'
 
-export const titles = async () => {
+export const titles = async (_: never, req: IAuthRequest) => {
+  authCheck(req)
   try {
     const result = await Title.find()
     return result.map(transformTitle)

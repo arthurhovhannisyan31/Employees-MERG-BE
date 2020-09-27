@@ -1,12 +1,13 @@
 // deps
-import { Department } from '../../models'
 // local
+import { Department } from '../../models'
 // helpers
 import { transformDepartment } from './helpers'
 import { IAuthRequest, ICreateDepartmentInput } from '../../types'
 import { authCheck } from '../utils/helpers'
 
-export const departments = async () => {
+export const departments = async (_: never, req: IAuthRequest) => {
+  authCheck(req)
   try {
     const result = await Department.find()
     return result.map(transformDepartment)

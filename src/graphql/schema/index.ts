@@ -1,158 +1,112 @@
 // deps
 import { buildSchema } from 'graphql'
 // local
+import {
+  type as departmentType,
+  input as departmentInput,
+  mutation as departmentMutation,
+  query as departmentQuery,
+} from './department'
+import {
+  type as authType,
+  input as authInput,
+  mutation as authMutation,
+  query as authQuery,
+} from './auth'
+import {
+  type as genderType,
+  input as genderInput,
+  mutation as genderMutation,
+  query as genderQuery,
+} from './gender'
+import {
+  type as titleType,
+  input as titleInput,
+  mutation as titleMutation,
+  query as titleQuery,
+} from './title'
+import {
+  type as employmentType,
+  input as employmentInput,
+  mutation as employmentMutation,
+  query as employmentQuery,
+} from './employment'
+import {
+  type as employeeType,
+  input as employeeInput,
+  mutation as employeeMutation,
+  query as employeeQuery,
+} from './employee'
+import {
+  type as employeeTitleType,
+  input as employeeTitleInput,
+  mutation as employeeTitleMutation,
+  query as employeeTitleQuery,
+} from './employeeTitle'
+import {
+  type as paycheckType,
+  input as paycheckInput,
+  mutation as paycheckMutation,
+  query as paycheckQuery,
+} from './paycheck'
+import {
+  type as bookingType,
+  input as bookingInput,
+  mutation as bookingMutation,
+  query as bookingQuery,
+} from './booking'
+import {
+  type as eventType,
+  input as eventInput,
+  mutation as eventMutation,
+  query as eventQuery,
+} from './event'
 // helpers
 
 export const schema = buildSchema(`
-  # entities event-booking -----------------------------------------------------
-  type Event {
-    _id: ID!
-    title: String!
-    description: String!
-    price: Float!
-    date: String!
-    creator: User!
-  }
-  type User {
-    _id: ID!
-    email: String!
-    password: String
-    createdEvents: [Event!]
-  }
-  type Booking {
-    _id: ID!
-    event: Event!
-    user: User!
-    createdAt: String!
-    updatedAt: String!
-  }
-  type AuthData {
-    userId: ID!
-    token: String!
-    tokenExpiration: Int!
-  }
-  # entities employees ---------------------------------------------------------
-  type Department {
-    _id: ID!
-    name: String!
-  }
-  type Title {
-    _id: ID!
-    name: String!
-  }
-  type Gender {
-    _id: ID!
-    name: String!
-  }
-  type Employee {
-    _id: ID!
-    birth_date: String!
-    first_name: String!
-    last_name: String!
-    hire_date: String!
-    gender: Gender!
-  }
-  type Employment {
-    _id: ID!
-    employee: Employee!
-    department: Department!
-    start_date: String!
-    end_date: String!
-  }
-  type EmployeeTitle {
-    _id: ID!
-    employee: Employee!
-    title: Title!
-    start_date: String!
-    end_date: String!
-  }
-  type Paycheck {
-    _id: ID!
-    employee: Employee!
-    salary: Float!
-    start_date: String!
-    end_date: String!
-  }
-  
-  # inputs event-booking -------------------------------------------------------
-  input EventInput {
-    title: String!
-    description: String!
-    price: Float!
-    date: String!
-  }
-  input UserInput {
-    email: String!
-    password: String!
-  }
-  # inputs employees -----------------------------------------------------------
-  input CreateDepartmentInput {
-    name: String!
-  }
-  input CreateTitleInput {
-    name: String!
-  }
-  input createGenderInput {
-    name: String!
-  }
-  input CreateEmployeeInput {
-    birth_date: String!
-    first_name: String!
-    last_name: String!
-    hire_date: String!
-    gender: ID!
-  }
-  input GetEmployeeInput {
-    id: ID!
-  }
-  input CreateEmploymentInput {
-    employee: ID!
-    department: ID!
-    start_date: String!
-    end_date: String!
-  }
-  input CreateEmployeeTitleInput {
-    employee: ID!
-    title: ID!
-    start_date: String!
-    end_date: String!
-  }
-  input CreatePaycheckInput {
-    employee: ID!
-    salary: Float!
-    start_date: String!
-    end_date: String!
-  }
-  # root -----------------------------------------------------------------------
+  ${departmentType}
+  ${departmentInput}
+  ${authType}
+  ${authInput}
+  ${genderType}
+  ${genderInput}
+  ${titleType}
+  ${titleInput}
+  ${employmentType}
+  ${employmentInput}
+  ${employeeType}
+  ${employeeInput}
+  ${employeeTitleType}
+  ${employeeTitleInput}
+  ${paycheckType}
+  ${paycheckInput}
+  ${bookingType}
+  ${bookingInput}
+  ${eventType}
+  ${eventInput}
   type RootQuery {
-    # event-booking-root
-    events: [Event!]!
-    bookings: [Booking!]!
-    login(email: String!, password: String!):AuthData!
-    # employees-root
-    departments: [Department!]!
-    titles: [Title!]!
-    genders: [Gender!]!
-    employees: [Employee!]!
-    employee(input: GetEmployeeInput!): Employee!
-    employments: [Employment!]!
-    employeesTitles: [EmployeeTitle!]!
-    paycheckHistory: [Paycheck!]!
+    ${departmentQuery}
+    ${authQuery}
+    ${genderQuery}
+    ${titleQuery}
+    ${employmentQuery}
+    ${employeeQuery}
+    ${employeeTitleQuery}
+    ${paycheckQuery}
+    ${bookingQuery}
+    ${eventMutation}
   }
   type RootMutation {
-    # event-booking-root
-    createEvent(eventInput: EventInput!): Event
-    createUser(userInput: UserInput!): User
-    bookEvent(eventId: ID!): Booking!
-    cancelBooking(bookingId: ID!): Event!
-    # employees-root
-    createDepartment(input: CreateDepartmentInput!):Department!
-    createTitle(input: CreateTitleInput!): Title!
-    createGender(input: createGenderInput!): Gender!
-    createEmployee(input: CreateEmployeeInput!): Employee!
-    createEmployment(input: CreateEmploymentInput!): Employment!
-    createEmployeeTitle(input: CreateEmployeeTitleInput!): EmployeeTitle!
-    createPaycheck(input: CreatePaycheckInput!): Paycheck!  
+    ${departmentMutation}
+    ${authMutation}
+    ${genderMutation}
+    ${titleMutation}
+    ${employmentMutation}
+    ${employeeMutation}
+    ${employeeTitleMutation}
+    ${paycheckMutation}
+    ${bookingMutation}
+    ${eventQuery}
   }
   schema {
     query: RootQuery
