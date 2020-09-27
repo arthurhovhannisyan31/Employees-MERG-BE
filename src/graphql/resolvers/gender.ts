@@ -1,0 +1,36 @@
+// deps
+// local
+import { Gender } from '../../models'
+// helpers
+import { transformGender } from './helpers'
+import { IAuthRequest, ICreateGenderInput } from '../../types'
+import { authCheck } from '../utils/helpers'
+
+export const genders = async () => {
+  try {
+    const result = await Gender.find()
+    return result.map(transformGender)
+  } catch (err) {
+    throw err
+  }
+}
+
+export const createGender = async (
+  { input: { name } }: ICreateGenderInput,
+  req: IAuthRequest
+) => {
+  authCheck(req)
+  try {
+    const duplicate = await Gender.findOne({ name })
+    if (duplicate) {
+      throw new Error(`Gender ${name} already exists`)
+    }
+    const gender = new Gender({
+      name,
+    })
+    const result = await gender.save()
+    return transformGender(result)
+  } catch (err) {
+    throw err
+  }
+}

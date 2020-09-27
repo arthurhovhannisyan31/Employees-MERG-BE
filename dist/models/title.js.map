@@ -1,0 +1,1 @@
+{"version":3,"file":"title.js","sourceRoot":"","sources":["../../src/models/title.ts"],"names":[],"mappings":";;;;;;;;;;;;;;;;;;;;;;AAAA,OAAO;AACP,qDAA2C;AAK3C,MAAM,WAAW,GAAG,IAAI,iBAAM,CAAC;IAC7B,IAAI,EAAE;QACJ,IAAI,EAAE,MAAM;QACZ,QAAQ,EAAE,IAAI;QACd,IAAI,EAAE,IAAI;KACX;CACF,CAAC,CAAA;AAEW,QAAA,UAAU,GAAG,kBAAQ,CAAC,KAAK,CAAS,OAAO,EAAE,WAAW,EAAE,QAAQ,CAAC,CAAA"}
