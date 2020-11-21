@@ -2,7 +2,7 @@
 // local
 import { Employee } from '../../../models'
 // helpers
-import { transformEmployee } from '../helpers'
+import { transformEmployee } from './helpers'
 import {
   IAuthRequest,
   ICreateEmployeeInput,

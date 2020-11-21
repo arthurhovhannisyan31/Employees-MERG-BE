@@ -2,7 +2,7 @@
 // local
 import { Department } from '../../../models'
 // helpers
-import { transformDepartment } from '../helpers'
+import { transformDepartment } from './helpers'
 import { IAuthRequest, ICreateDepartmentInput } from '../../../types'
 import { authCheck } from '../../utils/helpers'
 

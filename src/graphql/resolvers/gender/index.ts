@@ -2,7 +2,7 @@
 // local
 import { Gender } from '../../../models'
 // helpers
-import { transformGender } from '../helpers'
+import { transformGender } from './helpers'
 import { IAuthRequest, ICreateGenderInput } from '../../../types'
 import { authCheck } from '../../utils/helpers'
 

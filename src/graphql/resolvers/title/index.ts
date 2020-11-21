@@ -2,7 +2,7 @@
 // local
 import { TitleModel as Title } from '../../../models/title'
 // helpers
-import { transformTitle } from '../helpers'
+import { transformTitle } from './helpers'
 import { IAuthRequest, ITitleInput } from '../../../types'
 import { authCheck } from '../../utils/helpers'
 

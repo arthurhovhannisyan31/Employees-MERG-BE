@@ -2,7 +2,7 @@
 // local
 import { Employment } from '../../../models'
 // helpers
-import { transformEmployment } from '../helpers'
+import { transformEmployment } from './helpers'
 import { IAuthRequest, ICreateEmploymentInput } from '../../../types'
 import { authCheck } from '../../utils/helpers'
 

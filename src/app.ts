@@ -37,6 +37,9 @@ app.use(
 const dbName = encodeURI(process.env.MONGO_DB || '')
 const PORT = process.env.PORT || 3000
 
+const userName = 'events_booking_owner'
+const userPwd = 'events_booking_owner'
+
 mongoose
   .connect(
     `mongodb+srv://${userName}:${userPwd}@cluster0.wn6yq.mongodb.net/${dbName}?retryWrites=true`,

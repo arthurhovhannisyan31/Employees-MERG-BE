@@ -2,7 +2,8 @@
 // local
 import { Booking, Event } from '../../../models'
 // helpers
-import { transformBooking, transformEvent } from '../helpers'
+import { transformBooking } from './helpers'
+import { transformEvent } from '../events/helpers'
 import { IAuthRequest } from '../../../types'
 import { authCheck } from '../../utils/helpers'
 

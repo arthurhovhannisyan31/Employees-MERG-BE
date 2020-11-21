@@ -2,7 +2,7 @@
 // local
 import { EmployeeTitle } from '../../../models'
 // helpers
-import { transformEmployeeTitle } from '../helpers'
+import { transformEmployeeTitle } from './helpers'
 import { ICreateEmployeeTitleInput, IAuthRequest } from '../../../types'
 import { authCheck } from '../../utils/helpers'
 

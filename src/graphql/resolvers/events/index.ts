@@ -3,7 +3,7 @@
 import { EventModel as Event } from '../../../models/events'
 import { UserModel as User } from '../../../models/user'
 // helpers
-import { transformEvent } from '../helpers'
+import { transformEvent } from './helpers'
 import { IAuthRequest, ICreateEventInput } from '../../../types'
 import { authCheck } from '../../utils/helpers'
 

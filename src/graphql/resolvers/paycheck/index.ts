@@ -2,7 +2,7 @@
 // local
 import { Paycheck } from '../../../models'
 // helpers
-import { transformPaycheck } from '../helpers'
+import { transformPaycheck } from './helpers'
 import { IAuthRequest, ICreatePaycheckInput } from '../../../types'
 import { authCheck } from '../../utils/helpers'
 
