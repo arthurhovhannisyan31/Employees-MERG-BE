@@ -2,7 +2,7 @@
 import DataLoader from 'dataloader'
 // local
 import { User } from '../../../models'
-import { eventLoader } from './'
+import { eventLoader } from '../events/helpers'
 // helpers
 
 // @ts-ignore

@@ -1,10 +1,10 @@
 // deps
 // local
-import { Department } from '../../models'
+import { Department } from '../../../models'
 // helpers
-import { transformDepartment } from './helpers'
-import { IAuthRequest, ICreateDepartmentInput } from '../../types'
-import { authCheck } from '../utils/helpers'
+import { transformDepartment } from '../helpers'
+import { IAuthRequest, ICreateDepartmentInput } from '../../../types'
+import { authCheck } from '../../utils/helpers'
 
 export const departments = async (_: never, req: IAuthRequest) => {
   authCheck(req)

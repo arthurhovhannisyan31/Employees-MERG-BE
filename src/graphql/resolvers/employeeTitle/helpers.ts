@@ -3,7 +3,9 @@ import DataLoader from 'dataloader'
 
 // local
 import { EmployeeTitle } from '../../../models'
-import { getSingleTitle, getSingleEmployee } from './'
+import { getSingleEmployee } from '../employees/helpers'
+import { getSingleTitle } from '../title/helpers'
+
 // helpers
 import { IEmployeeTitle } from '../../../types'
 

@@ -7,7 +7,8 @@ const models_1 = require("../../models");
 // helpers
 const helpers_1 = require("./helpers");
 const helpers_2 = require("../utils/helpers");
-exports.paycheckHistory = async () => {
+exports.paycheckHistory = async (_, req) => {
+    helpers_2.authCheck(req);
     try {
         const result = await models_1.Paycheck.find();
         return result.map(helpers_1.transformPaycheck);

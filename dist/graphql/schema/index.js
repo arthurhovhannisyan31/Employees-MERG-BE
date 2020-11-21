@@ -46,7 +46,7 @@ exports.schema = graphql_1.buildSchema(`
     ${employeeTitle_1.query}
     ${paycheck_1.query}
     ${booking_1.query}
-    ${event_1.mutation}
+    ${event_1.query}
   }
   type RootMutation {
     ${department_1.mutation}
@@ -58,7 +58,7 @@ exports.schema = graphql_1.buildSchema(`
     ${employeeTitle_1.mutation}
     ${paycheck_1.mutation}
     ${booking_1.mutation}
-    ${event_1.query}
+    ${event_1.mutation}
   }
   schema {
     query: RootQuery

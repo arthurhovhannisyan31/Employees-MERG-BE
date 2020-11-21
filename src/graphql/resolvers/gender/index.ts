@@ -1,10 +1,10 @@
 // deps
 // local
-import { Gender } from '../../models'
+import { Gender } from '../../../models'
 // helpers
-import { transformGender } from './helpers'
-import { IAuthRequest, ICreateGenderInput } from '../../types'
-import { authCheck } from '../utils/helpers'
+import { transformGender } from '../helpers'
+import { IAuthRequest, ICreateGenderInput } from '../../../types'
+import { authCheck } from '../../utils/helpers'
 
 export const genders = async (_: never, req: IAuthRequest) => {
   authCheck(req)

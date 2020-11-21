@@ -8,7 +8,8 @@ const user_1 = require("../../models/user");
 // helpers
 const helpers_1 = require("./helpers");
 const helpers_2 = require("../utils/helpers");
-exports.events = async () => {
+exports.events = async (_, req) => {
+    helpers_2.authCheck(req);
     try {
         const result = await events_1.EventModel.find();
         // @ts-ignore

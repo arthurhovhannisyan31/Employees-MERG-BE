@@ -2,12 +2,13 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createEmployeeTitle = exports.employeesTitles = void 0;
 // deps
-const models_1 = require("../../models");
 // local
+const models_1 = require("../../models");
 // helpers
 const helpers_1 = require("./helpers");
 const helpers_2 = require("../utils/helpers");
-exports.employeesTitles = async () => {
+exports.employeesTitles = async (_, req) => {
+    helpers_2.authCheck(req);
     try {
         const result = await models_1.EmployeeTitle.find();
         return result.map(helpers_1.transformEmployeeTitle);

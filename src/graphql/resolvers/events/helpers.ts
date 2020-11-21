@@ -2,7 +2,7 @@
 import DataLoader from 'dataloader'
 // local
 import { Event } from '../../../models'
-import { getSingleUser } from './'
+import { getSingleUser } from '../auth/helpers'
 // helpers
 import { dateToISOString } from '../../utils/helpers'
 import { IEvent } from '../../../types'

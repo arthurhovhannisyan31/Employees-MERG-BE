@@ -2,10 +2,10 @@
 import { hash, compare } from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 // local
-import { UserModel as User } from '../../models/user'
+import { UserModel as User } from '../../../models/user'
 // helpers
-import { ICreateUserInput } from '../../types'
-import { ILogin } from '../../types'
+import { ICreateUserInput } from '../../../types'
+import { ILogin } from '../../../types'
 
 export const createUser = async ({
   userInput: { email, password },

@@ -29,7 +29,7 @@ app.use(
   graphqlHTTP({
     schema,
     rootValue: resolvers,
-    graphiql: true,
+    graphiql: process.env.NODE_ENV === 'development',
   })
 )
 
@@ -39,8 +39,8 @@ const PORT = process.env.PORT || 3000
 
 mongoose
   .connect(
-    // `mongodb+srv://${userName}:${userPwd}@cluster0.wn6yq.mongodb.net/${dbName}?retryWrites=true`,
-    `//mongodb://localhost:27017/${dbName}`,
+    `mongodb+srv://${userName}:${userPwd}@cluster0.wn6yq.mongodb.net/${dbName}?retryWrites=true`,
+    // `//mongodb://localhost:27017/${dbName}`,
     {
       useUnifiedTopology: true,
       useNewUrlParser: true,

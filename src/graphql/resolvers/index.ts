@@ -12,8 +12,6 @@ import { employeesTitles, createEmployeeTitle } from './employeeTitle'
 import { createPaycheck, paycheckHistory } from './paycheck'
 // helpers
 
-// todo split folders redux-duck style
-
 export const resolvers = {
   // Events
   events,

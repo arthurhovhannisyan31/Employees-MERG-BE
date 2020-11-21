@@ -1,10 +1,10 @@
 // deps
 // local
-import { Booking, Event } from '../../models'
+import { Booking, Event } from '../../../models'
 // helpers
-import { transformBooking, transformEvent } from './helpers'
-import { IAuthRequest } from '../../types'
-import { authCheck } from '../utils/helpers'
+import { transformBooking, transformEvent } from '../helpers'
+import { IAuthRequest } from '../../../types'
+import { authCheck } from '../../utils/helpers'
 
 export const bookEvent = async (
   { eventId }: { eventId: string },

@@ -94,7 +94,7 @@ export const schema = buildSchema(`
     ${employeeTitleQuery}
     ${paycheckQuery}
     ${bookingQuery}
-    ${eventMutation}
+    ${eventQuery}
   }
   type RootMutation {
     ${departmentMutation}
@@ -106,7 +106,7 @@ export const schema = buildSchema(`
     ${employeeTitleMutation}
     ${paycheckMutation}
     ${bookingMutation}
-    ${eventQuery}
+    ${eventMutation}
   }
   schema {
     query: RootQuery

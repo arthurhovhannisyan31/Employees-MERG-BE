@@ -1,6 +1,7 @@
 // deps
 // local
-import { getSingleUser, getSingleEvent } from './'
+import { getSingleUser } from '../auth/helpers'
+import { getSingleEvent } from '../events/helpers'
 // helpers
 import { IBooking } from '../../../types'
 import { dateToISOString } from '../../utils/helpers'

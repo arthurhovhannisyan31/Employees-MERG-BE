@@ -1,14 +1,14 @@
 // deps
 // local
-import { Employee } from '../../models'
+import { Employee } from '../../../models'
 // helpers
-import { transformEmployee } from './helpers'
+import { transformEmployee } from '../helpers'
 import {
   IAuthRequest,
   ICreateEmployeeInput,
   IGetEmployeeInput,
-} from '../../types'
-import { authCheck } from '../utils/helpers'
+} from '../../../types'
+import { authCheck } from '../../utils/helpers'
 
 export const employees = async (_: never, req: IAuthRequest) => {
   authCheck(req)

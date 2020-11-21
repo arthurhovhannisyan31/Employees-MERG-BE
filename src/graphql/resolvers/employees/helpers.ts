@@ -2,7 +2,7 @@
 import DataLoader from 'dataloader'
 // local
 import { Employee } from '../../../models'
-import { getSingleGender } from './'
+import { getSingleGender } from '../gender/helpers'
 // helpers
 import { IEmployee } from '../../../types'
 
