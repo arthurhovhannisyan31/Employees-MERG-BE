@@ -24,6 +24,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
   }
   next()
 })
+
 app.use(
   '/graphql',
   graphqlHTTP({
@@ -37,13 +38,12 @@ app.use(
 const dbName = encodeURI(process.env.MONGO_DB || '')
 const PORT = process.env.PORT || 3000
 
-const userName = 'events_booking_owner'
-const userPwd = 'events_booking_owner'
-
+// const userName = 'events_booking_owner'
+// const userPwd = 'events_booking_owner'
 mongoose
   .connect(
-    `mongodb+srv://${userName}:${userPwd}@cluster0.wn6yq.mongodb.net/${dbName}?retryWrites=true`,
-    // `//mongodb://localhost:27017/${dbName}`,
+    // `mongodb+srv://${userName}:${userPwd}@cluster0.wn6yq.mongodb.net/${dbName}?retryWrites=true`,
+    `//mongodb://localhost:27017/${dbName}`,
     {
       useUnifiedTopology: true,
       useNewUrlParser: true,
