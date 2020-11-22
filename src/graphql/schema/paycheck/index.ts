@@ -22,7 +22,7 @@ export const input = `
 `
 
 export const query = `
-  paycheckHistory: [Paycheck!]!
+  paychecks: [Paycheck!]!
 
 `
 
