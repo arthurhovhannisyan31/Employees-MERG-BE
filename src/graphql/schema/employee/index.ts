@@ -11,6 +11,10 @@ export const type = `
     hire_date: String!
     gender: Gender!
     department: Department!
+    title: Title!
+    paychecks: [Paycheck]!
+    titles: [EmployeeTitle]!
+    employments: [Employment]!
   }
 `
 
@@ -22,6 +26,7 @@ export const input = `
     hire_date: String!
     gender: ID!
     department: ID!
+    title: ID!
   }
   input GetEmployeeInput {
     id: ID!

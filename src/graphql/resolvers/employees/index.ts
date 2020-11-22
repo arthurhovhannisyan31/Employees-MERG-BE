@@ -36,7 +36,15 @@ export const employee = async (
 }
 export const createEmployee = async (
   {
-    input: { birth_date, first_name, last_name, gender, hire_date, department },
+    input: {
+      birth_date,
+      first_name,
+      last_name,
+      gender,
+      hire_date,
+      department,
+      title,
+    },
   }: ICreateEmployeeInput,
   req: IAuthRequest
 ) => {
@@ -49,6 +57,7 @@ export const createEmployee = async (
       gender,
       hire_date,
       department,
+      title,
     })
     if (duplicate) {
       throw new Error(
@@ -62,6 +71,7 @@ export const createEmployee = async (
       gender,
       hire_date,
       department,
+      title,
     })
     const result = await employee.save()
     return transformEmployee(result)

@@ -5,6 +5,7 @@ import { Paycheck } from '../../../models'
 import { getSingleEmployee } from '../employees/helpers'
 // helpers
 import { IPaycheck } from '../../../models/paycheck'
+import { IEmployee } from '../../../models/employee'
 
 // @ts-ignore
 export const paycheckLoader = new DataLoader((ids: string[]) =>
@@ -18,6 +19,20 @@ export const getPaycheckHistory = async (ids: string[]) => {
       (a: IPaycheck, b: IPaycheck) =>
         ids.indexOf(a._id.toString()) - ids.indexOf(b._id.toString())
     )
+    return paycheckHistory.map(transformPaycheck)
+  } catch (err) {
+    throw err
+  }
+}
+
+export const getPaycheckByEmployee = async (
+  id: string
+): Promise<IPaycheck[]> => {
+  try {
+    const paycheckHistory = await Paycheck.find({
+      employee: (id as never) as IEmployee,
+    })
+    // @ts-ignore
     return paycheckHistory.map(transformPaycheck)
   } catch (err) {
     throw err

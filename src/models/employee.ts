@@ -4,14 +4,16 @@ import mongoose, { Document, Schema } from 'mongoose'
 // helpers
 import { IGender } from './gender'
 import { IDepartment } from './departmnet'
+import { ITitle } from './title'
 
 export interface IEmployee extends Document {
   birth_date: string
   first_name: string
   last_name: string
-  gender: IGender
   hire_date: string
+  gender: IGender
   department: IDepartment
+  title: ITitle
 }
 
 export interface ICreateEmployeeInput {
@@ -51,6 +53,10 @@ const EmployeeSchema = new Schema({
   department: {
     type: Schema.Types.ObjectId,
     ref: 'Department',
+  },
+  title: {
+    type: Schema.Types.ObjectId,
+    ref: 'Title',
   },
 })
 
