@@ -1,8 +1,27 @@
 // deps
-import mongoose, { Schema } from 'mongoose'
+import mongoose, { Document, Schema } from 'mongoose'
 // local
 // helpers
-import { IEmployee } from '../types'
+import { IGender } from './gender'
+import { IDepartment } from './departmnet'
+
+export interface IEmployee extends Document {
+  birth_date: string
+  first_name: string
+  last_name: string
+  gender: IGender
+  hire_date: string
+  department: IDepartment
+}
+
+export interface ICreateEmployeeInput {
+  input: IEmployee
+}
+export interface IGetEmployeeInput {
+  input: {
+    id: string
+  }
+}
 
 const EmployeeSchema = new Schema({
   birth_date: {
@@ -28,6 +47,10 @@ const EmployeeSchema = new Schema({
   gender: {
     type: Schema.Types.ObjectId,
     ref: 'Gender',
+  },
+  department: {
+    type: Schema.Types.ObjectId,
+    ref: 'Department',
   },
 })
 

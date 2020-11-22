@@ -1,4 +1,19 @@
-import mongoose, { Schema } from 'mongoose'
+// deps
+import mongoose, { Document, Schema } from 'mongoose'
+// local
+// helpers
+
+export interface IBooking extends Document {
+  id: string
+  event: string
+  user: string
+  createdAt: string
+  updatedAt: string
+}
+
+export interface IBookingID {
+  bookingId: string
+}
 
 const bookingSchema = new Schema(
   {

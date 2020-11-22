@@ -3,8 +3,9 @@ import DataLoader from 'dataloader'
 // local
 import { Employee } from '../../../models'
 import { getSingleGender } from '../gender/helpers'
+import { getSingleDepartment } from '../departments/helpers'
 // helpers
-import { IEmployee } from '../../../types'
+import { IEmployee } from '../../../models/employee'
 
 // @ts-ignore
 export const employeeLoader = new DataLoader((ids: string[]) =>
@@ -40,6 +41,7 @@ export const transformEmployee = ({
   first_name,
   birth_date,
   hire_date,
+  department,
 }: IEmployee) => {
   return {
     _id,
@@ -48,5 +50,6 @@ export const transformEmployee = ({
     last_name,
     gender: getSingleGender((gender as never) as string),
     hire_date,
+    department: getSingleDepartment((department as never) as string),
   }
 }

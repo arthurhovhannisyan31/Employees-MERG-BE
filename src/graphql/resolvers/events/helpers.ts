@@ -5,7 +5,7 @@ import { Event } from '../../../models'
 import { getSingleUser } from '../auth/helpers'
 // helpers
 import { dateToISOString } from '../../utils/helpers'
-import { IEvent } from '../../../types'
+import { IEvent } from '../../../models/events'
 
 // @ts-ignore
 export const eventLoader = new DataLoader((eventIds: string[]) =>

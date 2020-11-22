@@ -1,7 +1,7 @@
 // deps
 import DataLoader from 'dataloader'
 import { Title } from '../../../models'
-import { ITitle } from '../../../types'
+import { ITitle } from '../../../models/title'
 // local
 // helpers
 

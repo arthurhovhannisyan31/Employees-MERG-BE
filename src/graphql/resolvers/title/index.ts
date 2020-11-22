@@ -3,7 +3,8 @@
 import { TitleModel as Title } from '../../../models/title'
 // helpers
 import { transformTitle } from './helpers'
-import { IAuthRequest, ITitleInput } from '../../../types'
+import { IAuthRequest } from '../../../models/auth'
+import { ITitleInput } from '../../../models/title'
 import { authCheck } from '../../utils/helpers'
 
 export const titles = async (_: never, req: IAuthRequest) => {

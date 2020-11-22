@@ -10,6 +10,7 @@ export const type = `
     last_name: String!
     hire_date: String!
     gender: Gender!
+    department: Department!
   }
 `
 
@@ -20,6 +21,7 @@ export const input = `
     last_name: String!
     hire_date: String!
     gender: ID!
+    department: ID!
   }
   input GetEmployeeInput {
     id: ID!

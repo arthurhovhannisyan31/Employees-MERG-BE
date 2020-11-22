@@ -3,7 +3,7 @@ import DataLoader from 'dataloader'
 // local
 import { Department } from '../../../models'
 // helpers
-import { IDepartment } from '../../../types'
+import { IDepartment } from '../../../models/departmnet'
 
 // @ts-ignore
 export const departmentLoader = new DataLoader((ids: string[]) =>

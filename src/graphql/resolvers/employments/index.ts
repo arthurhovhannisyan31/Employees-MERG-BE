@@ -3,7 +3,8 @@
 import { Employment } from '../../../models'
 // helpers
 import { transformEmployment } from './helpers'
-import { IAuthRequest, ICreateEmploymentInput } from '../../../types'
+import { IAuthRequest } from '../../../models/auth'
+import { ICreateEmploymentInput } from '../../../models/employment'
 import { authCheck } from '../../utils/helpers'
 
 export const employments = async (_: never, req: IAuthRequest) => {

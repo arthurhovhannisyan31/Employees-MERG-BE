@@ -3,7 +3,7 @@ import DataLoader from 'dataloader'
 // local
 import { Gender } from '../../../models'
 // helpers
-import { IGender } from '../../../types'
+import { IGender } from '../../../models/gender'
 
 // @ts-ignore
 export const genderLoader = new DataLoader((ids: string[]) => getGenders(ids))

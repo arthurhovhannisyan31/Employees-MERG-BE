@@ -1,8 +1,20 @@
 // deps
-import mongoose, { Schema } from 'mongoose'
+import mongoose, { Document, Schema } from 'mongoose'
 // local
 // helpers
-import { IEmployeeTitle } from '../types'
+import { IEmployee } from './employee'
+import { ITitle } from './title'
+
+export interface IEmployeeTitle extends Document {
+  employee: IEmployee
+  title: ITitle
+  start_date: string
+  end_date: string
+}
+
+export interface ICreateEmployeeTitleInput {
+  input: IEmployeeTitle
+}
 
 const EmployeeTitleSchema = new Schema({
   employee: {

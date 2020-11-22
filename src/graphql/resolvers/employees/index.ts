@@ -3,11 +3,11 @@
 import { Employee } from '../../../models'
 // helpers
 import { transformEmployee } from './helpers'
+import { IAuthRequest } from '../../../models/auth'
 import {
-  IAuthRequest,
   ICreateEmployeeInput,
   IGetEmployeeInput,
-} from '../../../types'
+} from '../../../models/employee'
 import { authCheck } from '../../utils/helpers'
 
 export const employees = async (_: never, req: IAuthRequest) => {
@@ -36,7 +36,7 @@ export const employee = async (
 }
 export const createEmployee = async (
   {
-    input: { birth_date, first_name, last_name, gender, hire_date },
+    input: { birth_date, first_name, last_name, gender, hire_date, department },
   }: ICreateEmployeeInput,
   req: IAuthRequest
 ) => {
@@ -48,6 +48,7 @@ export const createEmployee = async (
       last_name,
       gender,
       hire_date,
+      department,
     })
     if (duplicate) {
       throw new Error(
@@ -60,6 +61,7 @@ export const createEmployee = async (
       last_name,
       gender,
       hire_date,
+      department,
     })
     const result = await employee.save()
     return transformEmployee(result)

@@ -1,8 +1,22 @@
 // deps
-import mongoose, { Schema } from 'mongoose'
+import mongoose, { Document, Schema } from 'mongoose'
 // local
 // helpers
-import { IUser } from '../types'
+import { IEvent } from './events'
+
+export interface IUser extends Document {
+  _id: string
+  email: string
+  password: string
+  createdEvents: IEvent[]
+}
+
+export interface ICreateUserInput {
+  userInput: {
+    email: string
+    password: string
+  }
+}
 
 const userSchema = new Schema({
   email: {

@@ -1,8 +1,27 @@
 // deps
-import mongoose, { Schema } from 'mongoose'
+import mongoose, { Document, Schema } from 'mongoose'
 // local
 // helpers
-import { IPaycheck } from '../types'
+import { IEmployee } from './employee'
+
+export interface IPaycheck extends Document {
+  employee: IEmployee
+  salary: number
+  start_date: string
+  end_date: string
+}
+
+export interface ICreatePaycheckInput {
+  input: IPaycheck
+}
+
+export interface IGetPaychecksInput {
+  input: {
+    id: string
+    start_date: string
+    end_date: string
+  }
+}
 
 const PaycheckSchema = new Schema({
   employee: {

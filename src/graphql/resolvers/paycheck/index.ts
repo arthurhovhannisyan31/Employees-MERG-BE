@@ -3,13 +3,21 @@
 import { Paycheck } from '../../../models'
 // helpers
 import { transformPaycheck } from './helpers'
-import { IAuthRequest, ICreatePaycheckInput } from '../../../types'
+import { IAuthRequest } from '../../../models/auth'
+import {
+  ICreatePaycheckInput,
+  IGetPaychecksInput,
+} from '../../../models/paycheck'
+import { IEmployee } from '../../../models/employee'
 import { authCheck } from '../../utils/helpers'
 
-export const paycheckHistory = async (_: never, req: IAuthRequest) => {
+export const paycheckHistory = async (
+  { input: { id } }: IGetPaychecksInput,
+  req: IAuthRequest
+) => {
   authCheck(req)
   try {
-    const result = await Paycheck.find()
+    const result = await Paycheck.find({ employee: (id as never) as IEmployee })
     return result.map(transformPaycheck)
   } catch (err) {
     throw err

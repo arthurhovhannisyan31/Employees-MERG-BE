@@ -1,4 +1,30 @@
-import mongoose, { Schema } from 'mongoose'
+// deps
+import mongoose, { Document, Schema } from 'mongoose'
+// local
+// helpers
+import { IUser } from './user'
+
+export interface IEvent extends Document {
+  _id: string
+  title: string
+  description: string
+  price: number
+  date: string
+  creator: IUser
+}
+
+export interface IEventID {
+  eventId: string
+}
+
+export interface ICreateEventInput {
+  eventInput: {
+    title: string
+    description: string
+    price: number
+    date: string
+  }
+}
 
 const eventSchema = new Schema({
   title: {

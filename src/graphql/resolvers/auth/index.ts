@@ -4,8 +4,8 @@ import jwt from 'jsonwebtoken'
 // local
 import { UserModel as User } from '../../../models/user'
 // helpers
-import { ICreateUserInput } from '../../../types'
-import { ILogin } from '../../../types'
+import { ICreateUserInput } from '../../../models/user'
+import { ILogin } from '../../../models/auth'
 
 export const createUser = async ({
   userInput: { email, password },

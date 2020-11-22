@@ -5,7 +5,7 @@ import { Employment } from '../../../models'
 import { getSingleEmployee, employeeLoader } from '../employees/helpers'
 import { getSingleDepartment } from '../departments/helpers'
 // helpers
-import { IEmployment } from '../../../types'
+import { IEmployment } from '../../../models/employment'
 
 // @ts-ignore
 export const employmentLoader = new DataLoader((ids: string[]) =>

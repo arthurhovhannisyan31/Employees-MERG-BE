@@ -4,7 +4,7 @@ import { Booking, Event } from '../../../models'
 // helpers
 import { transformBooking } from './helpers'
 import { transformEvent } from '../events/helpers'
-import { IAuthRequest } from '../../../types'
+import { IAuthRequest } from '../../../models/auth'
 import { authCheck } from '../../utils/helpers'
 
 export const bookEvent = async (

@@ -1,7 +1,7 @@
 // deps
 // local
 // helpers
-import { IAuthRequest } from '../../types'
+import { IAuthRequest } from '../../models/auth'
 
 export const dateToISOString = (date: string): string =>
   new Date(date).toISOString()

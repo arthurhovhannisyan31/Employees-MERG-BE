@@ -1,8 +1,11 @@
 // deps
-import mongoose, { Schema } from 'mongoose'
+import mongoose, { Document, Schema } from 'mongoose'
 // local
 // helpers
-import { IGender } from '../types'
+
+export interface IGender extends Document {
+  name: string
+}
 
 const GenderSchema = new Schema({
   name: {
@@ -12,6 +15,10 @@ const GenderSchema = new Schema({
     trim: true,
   },
 })
+
+export interface ICreateGenderInput {
+  input: IGender
+}
 
 export const GenderModel = mongoose.model<IGender>(
   'Gender',

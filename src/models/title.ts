@@ -1,8 +1,15 @@
 // deps
-import mongoose, { Schema } from 'mongoose'
+import mongoose, { Document, Schema } from 'mongoose'
 // local
 // helpers
-import { ITitle } from '../types'
+
+export interface ITitle extends Document {
+  name: string
+}
+
+export interface ITitleInput {
+  input: ITitle
+}
 
 const TitleSchema = new Schema({
   name: {

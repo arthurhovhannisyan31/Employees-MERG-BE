@@ -4,7 +4,7 @@ import DataLoader from 'dataloader'
 import { Paycheck } from '../../../models'
 import { getSingleEmployee } from '../employees/helpers'
 // helpers
-import { IPaycheck } from '../../../types'
+import { IPaycheck } from '../../../models/paycheck'
 
 // @ts-ignore
 export const paycheckLoader = new DataLoader((ids: string[]) =>

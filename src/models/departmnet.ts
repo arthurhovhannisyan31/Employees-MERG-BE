@@ -1,8 +1,15 @@
 // deps
-import mongoose, { Schema } from 'mongoose'
+import mongoose, { Document, Schema } from 'mongoose'
 // local
 // helpers
-import { IDepartment } from '../types'
+
+export interface IDepartment extends Document {
+  name: string
+}
+
+export interface ICreateDepartmentInput {
+  input: IDepartment
+}
 
 const DepartmentSchema = new Schema({
   name: {

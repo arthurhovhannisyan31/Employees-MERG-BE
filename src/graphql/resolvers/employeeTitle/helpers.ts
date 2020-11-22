@@ -7,7 +7,7 @@ import { getSingleEmployee } from '../employees/helpers'
 import { getSingleTitle } from '../title/helpers'
 
 // helpers
-import { IEmployeeTitle } from '../../../types'
+import { IEmployeeTitle } from '../../../models/employeeTitle'
 
 // @ts-ignore
 export const employeeTitleLoader = new DataLoader((ids: string) =>
