@@ -1,13 +1,12 @@
 // deps
 import DataLoader from 'dataloader'
-
-// local
+// model
+import { IEmployeeTitle } from '../../../models/employeeTitle'
 import { EmployeeTitle } from '../../../models'
+import { IEmployee } from '../../../models/employee'
+// helpers
 import { getSingleEmployee } from '../employees/helpers'
 import { getSingleTitle } from '../title/helpers'
-
-// helpers
-import { IEmployeeTitle } from '../../../models/employeeTitle'
 
 // @ts-ignore
 export const employeeTitleLoader = new DataLoader((ids: string) =>
@@ -22,6 +21,20 @@ export const getEmployeeTitles = async (ids: string) => {
         ids.indexOf(a._id.toString()) - ids.indexOf(b._id.toString())
     )
     return employeesTitles.map(transformEmployeeTitle)
+  } catch (err) {
+    throw err
+  }
+}
+
+export const getEmployeeTitlesByEmployee = async (
+  id: string
+): Promise<IEmployeeTitle[]> => {
+  try {
+    const employeeTitles = await EmployeeTitle.find({
+      employee: (id as never) as IEmployee,
+    })
+    // @ts-ignore
+    return employeeTitles.map(transformEmployeeTitle)
   } catch (err) {
     throw err
   }

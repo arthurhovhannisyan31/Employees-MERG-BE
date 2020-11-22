@@ -13,7 +13,8 @@ export const type = `
     department: Department!
     title: Title!
     paychecks: [Paycheck]!
-    titles: [Title]!
+    titles: [EmployeeTitle]!
+    employments: [Employment]!
   }
 `
 

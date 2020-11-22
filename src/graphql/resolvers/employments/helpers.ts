@@ -1,11 +1,12 @@
 // deps
 import DataLoader from 'dataloader'
-// local
+// model
 import { Employment } from '../../../models'
+import { IEmployment } from '../../../models/employment'
+import { IEmployee } from '../../../models/employee'
+// helpers
 import { getSingleEmployee, employeeLoader } from '../employees/helpers'
 import { getSingleDepartment } from '../departments/helpers'
-// helpers
-import { IEmployment } from '../../../models/employment'
 
 // @ts-ignore
 export const employmentLoader = new DataLoader((ids: string[]) =>
@@ -24,6 +25,21 @@ export const getEmployments = async (ids: string[]) => {
     throw err
   }
 }
+
+export const getEmploymentsByEmployee = async (
+  id: string
+): Promise<IEmployment[]> => {
+  try {
+    const employments = await Employment.find({
+      employee: (id as never) as IEmployee,
+    })
+    // @ts-ignore
+    return employments.map(transformEmployment)
+  } catch (err) {
+    throw err
+  }
+}
+
 export const getSingleEmployment = async (id: string) => {
   try {
     const employment = await employeeLoader.load(id.toString())

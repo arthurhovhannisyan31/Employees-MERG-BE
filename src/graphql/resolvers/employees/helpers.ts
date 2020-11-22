@@ -8,6 +8,8 @@ import { getSingleGender } from '../gender/helpers'
 import { getSingleDepartment } from '../departments/helpers'
 import { getSingleTitle } from '../title/helpers'
 import { getPaycheckByEmployee } from '../paycheck/helpers'
+import { getEmployeeTitlesByEmployee } from '../employeeTitle/helpers'
+import { getEmploymentsByEmployee } from '../employments/helpers'
 
 // @ts-ignore
 export const employeeLoader = new DataLoader((ids: string[]) =>
@@ -56,5 +58,7 @@ export const transformEmployee = ({
     department: getSingleDepartment((department as never) as string),
     title: getSingleTitle((title as never) as string),
     paychecks: getPaycheckByEmployee((_id as never) as string),
+    titles: getEmployeeTitlesByEmployee((_id as never) as string),
+    employments: getEmploymentsByEmployee((_id as never) as string),
   }
 }
