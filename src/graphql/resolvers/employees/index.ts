@@ -7,14 +7,22 @@ import { IAuthRequest } from '../../../models/auth'
 import {
   ICreateEmployeeInput,
   IGetEmployeeInput,
+  IGetEmployeesInput,
 } from '../../../models/employee'
 import { authCheck } from '../../utils/helpers'
 
-export const employees = async (_: never, req: IAuthRequest) => {
+export const employees = async (
+  { input: { limit, offset } }: IGetEmployeesInput,
+  req: IAuthRequest
+) => {
   authCheck(req)
   try {
-    const result = await Employee.find()
-    return result.map(transformEmployee)
+    const result = await Employee.find().limit(limit).skip(offset)
+    const count = await Employee.countDocuments()
+    return {
+      nodes: result.map(transformEmployee),
+      count: count,
+    }
   } catch (err) {
     throw err
   }

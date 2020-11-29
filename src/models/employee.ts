@@ -25,6 +25,13 @@ export interface IGetEmployeeInput {
   }
 }
 
+export interface IGetEmployeesInput {
+  input: {
+    limit: number
+    offset: number
+  }
+}
+
 const EmployeeSchema = new Schema({
   birth_date: {
     type: String,

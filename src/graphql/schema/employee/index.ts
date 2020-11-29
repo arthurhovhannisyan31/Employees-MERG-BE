@@ -16,6 +16,10 @@ export const type = `
     titles: [EmployeeTitle]!
     employments: [Employment]!
   }
+  type Employees {
+    nodes: [Employee]!
+    count: Int! 
+  }
 `
 
 export const input = `
@@ -31,10 +35,14 @@ export const input = `
   input GetEmployeeInput {
     id: ID!
   }
+  input GetEmployeesInput {
+    limit: Int!
+    offset: Int!
+  }
 `
 
 export const query = `
-  employees: [Employee!]!
+  employees(input: GetEmployeesInput!): Employees!
   employee(input: GetEmployeeInput!): Employee!
 `
 
