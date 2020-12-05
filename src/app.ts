@@ -61,8 +61,3 @@ mongoose
   .catch((err) => {
     console.log(err)
   })
-
-// todo replace gender with enum Gender
-// todo add fragments
-// todo pagination
-// todo add data loader to departments, titles
