@@ -1,14 +1,13 @@
-// deps
-// local
-import { Employee } from '../../../models'
-// helpers
-import { transformEmployee } from './helpers'
+// model
 import { IAuthRequest } from '../../../models/auth'
 import {
   ICreateEmployeeInput,
   IGetEmployeeInput,
   IGetEmployeesInput,
 } from '../../../models/employee'
+// helpers
+import { Employee } from '../../../models'
+import { transformEmployee } from './helpers'
 import { authCheck } from '../../utils/helpers'
 
 export const employees = async (
@@ -87,4 +86,12 @@ export const createEmployee = async (
   } catch (err) {
     throw err
   }
+}
+
+export const updateEmployee = async () => {
+  return null
+}
+
+export const deleteEmployee = async () => {
+  return null
 }

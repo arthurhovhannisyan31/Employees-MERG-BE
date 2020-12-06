@@ -1,5 +1,4 @@
-// deps
-// local
+// helpers
 import { createUser, login } from './auth'
 import { events, createEvent } from './events'
 import { bookings, bookEvent, cancelBooking } from './bookings'
@@ -10,7 +9,6 @@ import { genders, createGender } from './gender'
 import { employments, createEmployment } from './employments'
 import { employeesTitles, createEmployeeTitle } from './employeeTitle'
 import { createPaycheck, paycheckHistory } from './paycheck'
-// helpers
 
 export const resolvers = {
   // Events
