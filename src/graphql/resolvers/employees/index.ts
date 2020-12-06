@@ -12,11 +12,12 @@ import {
 import { authCheck } from '../../utils/helpers'
 
 export const employees = async (
-  { input: { limit, offset } }: IGetEmployeesInput,
+  { input }: IGetEmployeesInput,
   req: IAuthRequest
 ) => {
   authCheck(req)
   try {
+    const { limit = 100, offset = 0 } = input || {}
     const result = await Employee.find().limit(limit).skip(offset)
     const count = await Employee.countDocuments()
     return {
