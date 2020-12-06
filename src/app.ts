@@ -3,11 +3,10 @@ import express, { Request, Response, NextFunction } from 'express'
 import bodyParser from 'body-parser'
 import { graphqlHTTP } from 'express-graphql'
 import mongoose from 'mongoose'
-// local
+// helpers
 import { schema } from './graphql/schema'
 import { resolvers } from './graphql/resolvers'
 import { isAuth } from './graphql/middleware/auth'
-// helpers
 
 const app = express()
 
