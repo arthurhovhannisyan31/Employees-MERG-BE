@@ -23,7 +23,6 @@ app.use((req: Request, res: Response, next: NextFunction) => {
   }
   next()
 })
-
 app.use(
   '/graphql',
   graphqlHTTP({

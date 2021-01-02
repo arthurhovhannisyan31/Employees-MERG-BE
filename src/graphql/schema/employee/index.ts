@@ -17,7 +17,7 @@ export const type = `
     employments: [Employment]!
   }
   type Employees {
-    nodes: [Employee]!
+    nodes: [Employee!]!
     count: Int! 
   }
 `
