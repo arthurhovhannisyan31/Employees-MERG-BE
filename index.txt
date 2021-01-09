@@ -5,8 +5,6 @@
 // todo add employee detail with all nested data
 // todo replace gender with enum Gender
 // todo add fragments
-// todo pagination
 // todo add data loader to departments, titles
-// todo add state management
+
 // todo create full CRUD functions
-// todo add graphql-code-generator
