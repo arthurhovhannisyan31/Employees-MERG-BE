@@ -11,7 +11,6 @@ export const events = async (_: never, req: IAuthRequest) => {
   authCheck(req)
   try {
     const result = await Event.find()
-    // @ts-ignore
     return result.map(transformEvent)
   } catch (err) {
     throw err
@@ -36,10 +35,8 @@ export const createEvent = async (
     if (!user) {
       throw new Error('User not found')
     }
-    // @ts-ignore
     user.createdEvents.push(event)
     await user.save()
-    // @ts-ignore
     return transformEvent(result)
   } catch (err) {
     throw err

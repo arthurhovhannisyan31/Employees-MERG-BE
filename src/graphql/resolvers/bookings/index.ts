@@ -6,6 +6,7 @@ import { transformBooking } from './helpers'
 import { transformEvent } from '../events/helpers'
 import { IAuthRequest } from '../../../models/auth'
 import { authCheck } from '../../utils/helpers'
+import { IEvent } from '../../../models/events'
 
 export const bookEvent = async (
   { eventId }: { eventId: string },
@@ -22,7 +23,6 @@ export const bookEvent = async (
       event: fetchedEvent._id,
     })
     const result = await booking.save()
-    // @ts-ignore
     return transformBooking(result)
   } catch (err) {
     throw err
@@ -34,7 +34,6 @@ export const bookings = async (_: never, req: IAuthRequest) => {
     authCheck(req)
     const bookings = await Booking.find({ user: req.userId })
     return bookings.map((booking) => {
-      // @ts-ignore
       return transformBooking(booking)
     })
   } catch (err) {
@@ -49,8 +48,7 @@ export const cancelBooking = async (
   authCheck(req)
   try {
     const booking = await Booking.findById(bookingId).populate('event')
-    // @ts-ignore
-    const event = transformEvent(booking.event)
+    const event = transformEvent(booking?.event as never as IEvent)
     await Booking.deleteOne({ _id: bookingId })
     return event
   } catch (err) {

@@ -31,4 +31,4 @@ const bookingSchema = new Schema(
   }
 )
 
-export const BookingModel = mongoose.model('Booking', bookingSchema, 'bookings')
+export const BookingModel = mongoose.model<IBooking>('Booking', bookingSchema, 'bookings')

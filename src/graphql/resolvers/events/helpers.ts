@@ -14,7 +14,6 @@ export const eventLoader = new DataLoader((eventIds) =>
 export const getEvents = async (eventIds: string[]): Promise<IEvent[]> => {
   try {
     const events = await Event.find({ _id: { $in: eventIds } })
-    // @ts-ignore
     events.sort((a: IEvent, b: IEvent) => {
       return (
         eventIds.indexOf(a._id.toString()) - eventIds.indexOf(b._id.toString())
@@ -32,7 +31,6 @@ export const getSingleEvent = async (eventId: string): Promise<IEvent> => {
     if (!event) {
       throw new Error(`Event ${eventId} not found`)
     }
-    // @ts-ignore
     return event
   } catch (err) {
     throw err
