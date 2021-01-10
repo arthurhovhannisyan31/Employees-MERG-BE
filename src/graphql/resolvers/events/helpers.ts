@@ -7,9 +7,8 @@ import { getSingleUser } from '../auth/helpers'
 import { dateToISOString } from '../../utils/helpers'
 import { IEvent } from '../../../models/events'
 
-// @ts-ignore
-export const eventLoader = new DataLoader((eventIds: string[]) =>
-  getEvents(eventIds)
+export const eventLoader = new DataLoader((eventIds) =>
+  getEvents(eventIds as string[])
 )
 
 export const getEvents = async (eventIds: string[]): Promise<IEvent[]> => {
@@ -47,7 +46,6 @@ export const transformEvent = (event: IEvent) => {
     description: event.description,
     price: event.price,
     date: dateToISOString(event.date),
-    // @ts-ignore
-    creator: getSingleUser(event.creator),
+    creator: getSingleUser(event.creator as unknown as string),
   }
 }

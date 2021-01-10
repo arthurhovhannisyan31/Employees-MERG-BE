@@ -1,4 +1,3 @@
-// deps
 // local
 import { EventModel as Event } from '../../../models/events'
 import { UserModel as User } from '../../../models/user'
@@ -30,11 +29,9 @@ export const createEvent = async (
       description,
       price: +price,
       date: new Date(date),
-      // @ts-ignore
       creator: req.userId,
     })
     const result = await event.save()
-    // @ts-ignore
     const user = await User.findById(req.userId)
     if (!user) {
       throw new Error('User not found')

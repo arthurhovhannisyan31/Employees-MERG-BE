@@ -5,9 +5,8 @@ import { Department } from '../../../models'
 // helpers
 import { IDepartment } from '../../../models/departmnet'
 
-// @ts-ignore
-export const departmentLoader = new DataLoader((ids: string[]) =>
-  getDepartments(ids)
+export const departmentLoader = new DataLoader((ids) =>
+  getDepartments(ids as string[])
 )
 
 export const getDepartments = async (ids: string[]) => {

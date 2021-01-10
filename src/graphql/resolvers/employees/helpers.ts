@@ -11,9 +11,8 @@ import { getPaycheckByEmployee } from '../paycheck/helpers'
 import { getEmployeeTitlesByEmployee } from '../employeeTitle/helpers'
 import { getEmploymentsByEmployee } from '../employments/helpers'
 
-// @ts-ignore
-export const employeeLoader = new DataLoader((ids: string[]) =>
-  getEmployees(ids)
+export const employeeLoader = new DataLoader((ids) =>
+  getEmployees(ids as string[])
 )
 
 export const getEmployees = async (ids: string[]) => {

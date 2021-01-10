@@ -5,8 +5,7 @@ import { ITitle } from '../../../models/title'
 // local
 // helpers
 
-// @ts-ignore
-export const titleLoader = new DataLoader((ids: string[]) => getTitles(ids))
+export const titleLoader = new DataLoader((ids) => getTitles(ids as string[]))
 
 export const getTitles = async (ids: string[]) => {
   try {

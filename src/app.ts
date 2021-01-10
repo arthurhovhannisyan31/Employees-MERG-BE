@@ -11,9 +11,7 @@ import { isAuth } from './graphql/middleware/auth'
 const app = express()
 
 app.use(bodyParser.json())
-// @ts-ignore
 app.use(isAuth)
-// @ts-ignore
 app.use((req: Request, res: Response, next: NextFunction) => {
   res.setHeader('Access-Control-Allow-Origin', '*')
   res.setHeader('Access-Control-Allow-Methods', 'POST,GET,OPTIONS')
@@ -21,7 +19,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
   if (req.method === 'OPTIONS') {
     return res.sendStatus(200)
   }
-  next()
+  return next()
 })
 app.use(
   '/graphql',

@@ -8,9 +8,8 @@ import { IEmployee } from '../../../models/employee'
 import { getSingleEmployee, employeeLoader } from '../employees/helpers'
 import { getSingleDepartment } from '../departments/helpers'
 
-// @ts-ignore
-export const employmentLoader = new DataLoader((ids: string[]) =>
-  getEmployments(ids)
+export const employmentLoader = new DataLoader((ids) =>
+  getEmployments(ids as string[])
 )
 
 export const getEmployments = async (ids: string[]) => {

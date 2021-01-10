@@ -5,8 +5,7 @@ import { Gender } from '../../../models'
 // helpers
 import { IGender } from '../../../models/gender'
 
-// @ts-ignore
-export const genderLoader = new DataLoader((ids: string[]) => getGenders(ids))
+export const genderLoader = new DataLoader((ids) => getGenders(ids as string[]))
 
 export const getGenders = async (ids: string[]) => {
   try {

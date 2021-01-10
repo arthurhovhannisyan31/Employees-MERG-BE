@@ -5,14 +5,12 @@ import { User } from '../../../models'
 import { eventLoader } from '../events/helpers'
 // helpers
 
-// @ts-ignore
-export const userLoader = new DataLoader((userIds: string[]) =>
-  getUsers(userIds)
+export const userLoader = new DataLoader((userIds) =>
+  getUsers(userIds as string[])
 )
 
 export const getUsers = async (userIds: string[]) => {
   try {
-    // @ts-ignore
     return await User.find({ _id: { $in: userIds } })
   } catch (err) {
     throw err
@@ -27,7 +25,6 @@ export const getSingleUser = async (userId: string) => {
       _id: user?._id,
       email: user?.email,
       password: '',
-      // @ts-ignore
       createdEvents: () => eventLoader.loadMany(user.createdEvents),
     }
   } catch (err) {

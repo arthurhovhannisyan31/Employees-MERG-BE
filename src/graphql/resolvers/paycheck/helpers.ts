@@ -7,9 +7,8 @@ import { getSingleEmployee } from '../employees/helpers'
 import { IPaycheck } from '../../../models/paycheck'
 import { IEmployee } from '../../../models/employee'
 
-// @ts-ignore
-export const paycheckLoader = new DataLoader((ids: string[]) =>
-  getPaycheckHistory(ids)
+export const paycheckLoader = new DataLoader((ids) =>
+  getPaycheckHistory(ids as string[])
 )
 
 export const getPaycheckHistory = async (ids: string[]) => {
