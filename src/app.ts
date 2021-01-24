@@ -21,13 +21,13 @@ app.use((req: Request, res: Response, next: NextFunction) => {
   }
   return next()
 })
-app.use(
-  '/graphql',
+app.use('/graphql', (req: Request, res: Response) =>
   graphqlHTTP({
     schema,
     rootValue: resolvers,
+    context: { req },
     graphiql: process.env.NODE_ENV === 'development',
-  })
+  })(req, res)
 )
 
 // env vars

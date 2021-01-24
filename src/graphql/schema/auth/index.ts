@@ -9,8 +9,12 @@ export const type = `
     password: String
     createdEvents: [Event!]
   }
+  type UserCredentials{
+    id: String!
+    email: String!
+  }
   type AuthData {
-    userId: ID!
+    userCredentials: UserCredentials
     token: String!
     tokenExpiration: Int!
   }

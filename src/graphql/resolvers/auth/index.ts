@@ -5,7 +5,7 @@ import jwt from 'jsonwebtoken'
 import { UserModel as User } from '../../../models/user'
 // helpers
 import { ICreateUserInput } from '../../../models/user'
-import { ILogin } from '../../../models/auth'
+import { IAuthData, TLoginInput } from '../../../models/auth'
 
 export const createUser = async ({
   userInput: { email, password },
@@ -31,7 +31,10 @@ export const createUser = async ({
   }
 }
 
-export const login = async ({ email, password }: ILogin) => {
+export const login = async ({
+  email,
+  password,
+}: TLoginInput): Promise<IAuthData | Error> => {
   const user = await User.findOne({ email })
   if (!user) {
     throw new Error('User does not exist')
@@ -45,7 +48,10 @@ export const login = async ({ email, password }: ILogin) => {
     expiresIn: '1h',
   })
   return {
-    userId: user.id,
+    userCredentials: {
+      id: user.id,
+      email: user.email,
+    },
     token,
     tokenExpiration: 1,
   }

@@ -1,14 +1,14 @@
 // deps
-// local
 import { Request } from 'express'
+// model
+import {IUser} from './user'
+
 // helpers
 
-export interface ILogin {
-  email: string
-  password: string
-}
+export type TLoginInput = Pick<IUser, 'email'|"password">
+export type UserCredentials = Pick<IUser, 'email'|"id">
 export interface IAuthData {
-  userId: string
+  userCredentials: UserCredentials
   token: string
   tokenExpiration: number
 }
