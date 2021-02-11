@@ -14,9 +14,8 @@ export const type = `
     email: String!
   }
   type AuthData {
-    userCredentials: UserCredentials
+    userCredentials: UserCredentials!
     token: String!
-    tokenExpiration: Int!
   }
 `
 export const input = `
@@ -28,7 +27,7 @@ export const input = `
 
 export const query = `
   login(email: String!, password: String!):AuthData!
-  
+  me: UserCredentials!
 `
 
 export const mutation = `

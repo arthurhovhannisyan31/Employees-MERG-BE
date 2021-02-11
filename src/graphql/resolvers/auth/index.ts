@@ -5,7 +5,8 @@ import jwt from 'jsonwebtoken'
 import { UserModel as User } from '../../../models/user'
 // helpers
 import { ICreateUserInput } from '../../../models/user'
-import { IAuthData, TLoginInput } from '../../../models/auth'
+import { IAuthData, IAuthRequest, TLoginInput, UserCredentials } from "../../../models/auth";
+import { authCheck } from "../../utils/helpers";
 
 export const createUser = async ({
   userInput: { email, password },
@@ -45,7 +46,7 @@ export const login = async ({
   }
   const secretKey = process.env.AUTH_SECRET_KEY || ''
   const token = jwt.sign({ userId: user.id, email: user.email }, secretKey, {
-    expiresIn: '1h',
+    expiresIn: '1d',
   })
   return {
     userCredentials: {
@@ -53,6 +54,21 @@ export const login = async ({
       email: user.email,
     },
     token,
-    tokenExpiration: 1,
+  }
+}
+
+export const me = async (_: unknown, req: IAuthRequest): Promise<UserCredentials | Error> => {
+  authCheck(req);
+  try {
+    const user = await User.findOne({_id: req.userId})
+    if (!user) {
+      throw new Error('User does not exist')
+    }
+    return {
+      id: user.id,
+      email: user.email,
+    }
+  } catch (err){
+    throw err
   }
 }

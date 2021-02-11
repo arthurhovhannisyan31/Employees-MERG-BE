@@ -3,12 +3,17 @@ import express, { Request, Response, NextFunction } from 'express'
 import bodyParser from 'body-parser'
 import { graphqlHTTP } from 'express-graphql'
 import mongoose from 'mongoose'
+import { GraphQLError } from 'graphql'
 // helpers
 import { schema } from './graphql/schema'
 import { resolvers } from './graphql/resolvers'
 import { isAuth } from './graphql/middleware/auth'
+import { getErrorCode } from './graphql/utils/helpers'
+import { EErrorName } from './graphql/constants/error'
 
 const app = express()
+
+// todo add me resolver and check authorization
 
 app.use(bodyParser.json())
 app.use(isAuth)
@@ -21,11 +26,24 @@ app.use((req: Request, res: Response, next: NextFunction) => {
   }
   return next()
 })
-app.use('/graphql',
+app.use(
+  '/graphql',
   graphqlHTTP({
     schema,
     rootValue: resolvers,
     graphiql: process.env.NODE_ENV === 'development',
+    customFormatErrorFn: (err: GraphQLError) => {
+      if (err.message in EErrorName) {
+        const error = getErrorCode(
+          EErrorName[err.message as keyof typeof EErrorName]
+        )
+        return {
+          message: error.message,
+          statusCode: error.statusCode,
+        }
+      }
+      return err
+    },
   })
 )
 

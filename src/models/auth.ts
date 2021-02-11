@@ -10,7 +10,6 @@ export type UserCredentials = Pick<IUser, 'email'|"id">
 export interface IAuthData {
   userCredentials: UserCredentials
   token: string
-  tokenExpiration: number
 }
 export interface IAuthRequest extends Request {
   isAuth: boolean

@@ -1,5 +1,5 @@
 // helpers
-import { createUser, login } from './auth'
+import { createUser, login, me } from './auth'
 import { events, createEvent } from './events'
 import { bookings, bookEvent, cancelBooking } from './bookings'
 import { departments, createDepartment } from './departments'
@@ -21,6 +21,7 @@ export const resolvers = {
   // User
   createUser,
   login,
+  me,
   // Department
   departments,
   createDepartment,
