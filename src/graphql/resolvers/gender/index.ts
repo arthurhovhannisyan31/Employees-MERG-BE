@@ -19,7 +19,7 @@ export const genders = async (_: never, req: IAuthRequest) => {
 
 export const createGender = async (
   { input: { name } }: ICreateGenderInput,
-  req: IAuthRequest
+  req: IAuthRequest,
 ) => {
   authCheck(req)
   try {

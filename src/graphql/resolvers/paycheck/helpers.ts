@@ -8,7 +8,7 @@ import { IPaycheck } from '../../../models/paycheck'
 import { IEmployee } from '../../../models/employee'
 
 export const paycheckLoader = new DataLoader((ids) =>
-  getPaycheckHistory(ids as string[])
+  getPaycheckHistory(ids as string[]),
 )
 
 export const getPaycheckHistory = async (ids: string[]) => {
@@ -16,7 +16,7 @@ export const getPaycheckHistory = async (ids: string[]) => {
     const paycheckHistory = await Paycheck.find({ _id: { $in: ids } })
     paycheckHistory.sort(
       (a: IPaycheck, b: IPaycheck) =>
-        ids.indexOf(a._id.toString()) - ids.indexOf(b._id.toString())
+        ids.indexOf(a._id.toString()) - ids.indexOf(b._id.toString()),
     )
     return paycheckHistory.map(transformPaycheck)
   } catch (err) {
@@ -25,7 +25,7 @@ export const getPaycheckHistory = async (ids: string[]) => {
 }
 
 export const getPaycheckByEmployee = async (
-  id: string
+  id: string,
 ): Promise<IPaycheck[]> => {
   try {
     const paycheckHistory = await Paycheck.find({

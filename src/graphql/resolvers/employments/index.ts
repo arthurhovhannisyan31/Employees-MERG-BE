@@ -21,7 +21,7 @@ export const createEmployment = async (
   {
     input: { employee, department, start_date, end_date },
   }: ICreateEmploymentInput,
-  req: IAuthRequest
+  req: IAuthRequest,
 ) => {
   try {
     authCheck(req)

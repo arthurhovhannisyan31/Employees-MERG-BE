@@ -5,6 +5,6 @@ export enum EErrorName {
 export const errorTypeMap = {
   [EErrorName.UNAUTHORIZED]: {
     message: 'Unauthorized',
-    statusCode: 401
-  }
+    statusCode: 401,
+  },
 }

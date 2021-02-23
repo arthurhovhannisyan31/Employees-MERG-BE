@@ -9,7 +9,7 @@ import { getSingleEmployee } from '../employees/helpers'
 import { getSingleTitle } from '../title/helpers'
 
 export const employeeTitleLoader = new DataLoader((ids) =>
-  getEmployeeTitles(ids as unknown as string)
+  getEmployeeTitles((ids as unknown) as string),
 )
 
 export const getEmployeeTitles = async (ids: string) => {
@@ -17,7 +17,7 @@ export const getEmployeeTitles = async (ids: string) => {
     const employeesTitles = await EmployeeTitle.find({ _id: { $in: ids } })
     employeesTitles.sort(
       (a: IEmployeeTitle, b: IEmployeeTitle) =>
-        ids.indexOf(a._id.toString()) - ids.indexOf(b._id.toString())
+        ids.indexOf(a._id.toString()) - ids.indexOf(b._id.toString()),
     )
     return employeesTitles.map(transformEmployeeTitle)
   } catch (err) {
@@ -26,7 +26,7 @@ export const getEmployeeTitles = async (ids: string) => {
 }
 
 export const getEmployeeTitlesByEmployee = async (
-  id: string
+  id: string,
 ): Promise<IEmployeeTitle[]> => {
   try {
     const employeeTitles = await EmployeeTitle.find({

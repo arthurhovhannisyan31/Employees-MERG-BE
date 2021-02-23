@@ -12,7 +12,7 @@ export const getTitles = async (ids: string[]) => {
     const titles = await Title.find({ _id: { $in: ids } })
     titles.sort(
       (a: ITitle, b: ITitle) =>
-        ids.indexOf(a._id.toString()) - ids.indexOf(b._id.toString())
+        ids.indexOf(a._id.toString()) - ids.indexOf(b._id.toString()),
     )
     return titles.map(transformTitle)
   } catch (err) {

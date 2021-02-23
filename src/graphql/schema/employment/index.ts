@@ -1,7 +1,3 @@
-// deps
-// local
-// helpers
-
 export const type = `
   type Employment {
     _id: ID!

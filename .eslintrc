@@ -9,14 +9,29 @@
     "prettier/@typescript-eslint"
   ],
   "plugins": [
-    "@typescript-eslint"
+    "@typescript-eslint",
+    "prettier"
   ],
   "env": {
     "jest": true
   },
   "rules": {
+    "prettier/prettier": [
+      2,
+      {
+        "trailingComma": "all",
+        "tabWidth": 2,
+        "semi": false,
+        "singleQuote": true
+      }
+    ],
     "@typescript-eslint/ban-ts-comment": "warn",
-    "@typescript-eslint/explicit-module-boundary-types": 0
+    "@typescript-eslint/explicit-module-boundary-types": 0,
+    "@typescript-eslint/no-unused-vars": "warn",
+    "no-underscore-dangle": 0,
+    "no-console": 0,
+    "@typescript-eslint/semi": 0,
+    "@typescript-eslint/indent": 0
   },
   "globals": {
     "window": true,

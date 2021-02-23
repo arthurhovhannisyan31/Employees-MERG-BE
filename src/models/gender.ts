@@ -23,5 +23,5 @@ export interface ICreateGenderInput {
 export const GenderModel = mongoose.model<IGender>(
   'Gender',
   GenderSchema,
-  'genders'
+  'genders',
 )

@@ -6,7 +6,7 @@ import { eventLoader } from '../events/helpers'
 // helpers
 
 export const userLoader = new DataLoader((userIds) =>
-  getUsers(userIds as string[])
+  getUsers(userIds as string[]),
 )
 
 export const getUsers = async (userIds: string[]) => {

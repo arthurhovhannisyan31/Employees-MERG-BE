@@ -40,5 +40,5 @@ const EmployeeTitleSchema = new Schema({
 export const EmployeeTitleModel = mongoose.model<IEmployeeTitle>(
   'EmployeeTitle',
   EmployeeTitleSchema,
-  'employees_title_history'
+  'employees_title_history',
 )

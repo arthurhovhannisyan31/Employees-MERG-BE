@@ -35,7 +35,7 @@ app.use(
     customFormatErrorFn: (err: GraphQLError) => {
       if (err.message in EErrorName) {
         const error = getErrorCode(
-          EErrorName[err.message as keyof typeof EErrorName]
+          EErrorName[err.message as keyof typeof EErrorName],
         )
         return {
           message: error.message,
@@ -44,7 +44,7 @@ app.use(
       }
       return err
     },
-  })
+  }),
 )
 
 // env vars
@@ -60,7 +60,7 @@ mongoose
     {
       useUnifiedTopology: true,
       useNewUrlParser: true,
-    }
+    },
   )
   .then(() => {
     app.listen(PORT)
@@ -68,7 +68,7 @@ mongoose
   .then(() => {
     console.log(`Server started at http://localhost:${PORT}`)
     console.log(
-      `Please see graphql environment at http://localhost:${PORT}/graphql`
+      `Please see graphql environment at http://localhost:${PORT}/graphql`,
     )
   })
   .catch((err) => {

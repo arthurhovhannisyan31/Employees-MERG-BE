@@ -19,7 +19,7 @@ export const events = async (_: never, req: IAuthRequest) => {
 
 export const createEvent = async (
   { eventInput: { date, description, price, title } }: ICreateEventInput,
-  req: IAuthRequest
+  req: IAuthRequest,
 ) => {
   authCheck(req)
   try {

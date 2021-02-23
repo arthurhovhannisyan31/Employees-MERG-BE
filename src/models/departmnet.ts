@@ -23,5 +23,5 @@ const DepartmentSchema = new Schema({
 export const DepartmentModel = mongoose.model<IDepartment>(
   'Department',
   DepartmentSchema,
-  'departments'
+  'departments',
 )

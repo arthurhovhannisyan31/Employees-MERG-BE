@@ -1,7 +1,3 @@
-// deps
-// local
-// helpers
-
 export const type = `
   type EmployeeTitle {
     _id: ID!

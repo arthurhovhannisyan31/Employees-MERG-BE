@@ -21,7 +21,7 @@ export const createEmployeeTitle = async (
   {
     input: { employee, title, start_date, end_date },
   }: ICreateEmployeeTitleInput,
-  req: IAuthRequest
+  req: IAuthRequest,
 ) => {
   authCheck(req)
   try {
@@ -33,7 +33,7 @@ export const createEmployeeTitle = async (
     })
     if (duplicate) {
       throw new Error(
-        `Employee ${employee} title ${title} record already exists`
+        `Employee ${employee} title ${title} record already exists`,
       )
     }
     const employeeTitle = new EmployeeTitle({

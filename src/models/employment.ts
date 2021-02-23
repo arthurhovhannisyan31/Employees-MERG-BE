@@ -40,5 +40,5 @@ const EmploymentSchema = new Schema({
 export const EmploymentModel = mongoose.model<IEmployment>(
   'Employment',
   EmploymentSchema,
-  'employment_history'
+  'employment_history',
 )

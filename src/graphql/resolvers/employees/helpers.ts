@@ -12,7 +12,7 @@ import { getEmployeeTitlesByEmployee } from '../employeeTitle/helpers'
 import { getEmploymentsByEmployee } from '../employments/helpers'
 
 export const employeeLoader = new DataLoader((ids) =>
-  getEmployees(ids as string[])
+  getEmployees(ids as string[]),
 )
 
 export const getEmployees = async (ids: string[]) => {
@@ -20,7 +20,7 @@ export const getEmployees = async (ids: string[]) => {
     const employees = await Employee.find({ _id: { $in: ids } })
     employees.sort(
       (a: IEmployee, b: IEmployee) =>
-        ids.indexOf(a._id.toString()) - ids.indexOf(b._id.toString())
+        ids.indexOf(a._id.toString()) - ids.indexOf(b._id.toString()),
     )
     return employees.map(transformEmployee)
   } catch (err) {

@@ -12,7 +12,7 @@ import { authCheck } from '../../utils/helpers'
 
 export const employees = async (
   { input }: IGetEmployeesInput,
-  req: IAuthRequest
+  req: IAuthRequest,
 ) => {
   authCheck(req)
   try {
@@ -29,7 +29,7 @@ export const employees = async (
 }
 export const employee = async (
   { input: { id } }: IGetEmployeeInput,
-  req: IAuthRequest
+  req: IAuthRequest,
 ) => {
   authCheck(req)
   try {
@@ -54,7 +54,7 @@ export const createEmployee = async (
       title,
     },
   }: ICreateEmployeeInput,
-  req: IAuthRequest
+  req: IAuthRequest,
 ) => {
   authCheck(req)
   try {
@@ -69,7 +69,7 @@ export const createEmployee = async (
     })
     if (duplicate) {
       throw new Error(
-        `Employee name:${first_name}, ${last_name} already exists`
+        `Employee name:${first_name}, ${last_name} already exists`,
       )
     }
     const employee = new Employee({

@@ -19,7 +19,7 @@ export const titles = async (_: never, req: IAuthRequest) => {
 
 export const createTitle = async (
   { input: { name } }: ITitleInput,
-  req: IAuthRequest
+  req: IAuthRequest,
 ) => {
   if (!req.isAuth) {
     throw new Error('Unauthenticated request')

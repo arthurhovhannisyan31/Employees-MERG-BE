@@ -19,7 +19,7 @@ export const departments = async (_: never, req: IAuthRequest) => {
 
 export const createDepartment = async (
   { input: { name } }: ICreateDepartmentInput,
-  req: IAuthRequest
+  req: IAuthRequest,
 ) => {
   authCheck(req)
   try {

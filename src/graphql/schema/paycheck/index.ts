@@ -1,7 +1,3 @@
-// deps
-// local
-// helpers
-
 export const type = `
   type Paycheck {
     _id: ID!

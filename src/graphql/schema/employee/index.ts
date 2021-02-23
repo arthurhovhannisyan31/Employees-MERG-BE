@@ -1,7 +1,3 @@
-// deps
-// local
-// helpers
-
 export const type = `
   type Employee {
     _id: ID!
@@ -48,4 +44,5 @@ export const query = `
 
 export const mutation = `
   createEmployee(input: CreateEmployeeInput!): Employee!
+  updateEmployee(input: CreateEmployeeInput!): Employee!
 `

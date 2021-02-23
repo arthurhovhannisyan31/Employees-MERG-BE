@@ -10,7 +10,7 @@ import { IEvent } from '../../../models/events'
 
 export const bookEvent = async (
   { eventId }: { eventId: string },
-  req: IAuthRequest
+  req: IAuthRequest,
 ) => {
   authCheck(req)
   try {
@@ -43,12 +43,12 @@ export const bookings = async (_: never, req: IAuthRequest) => {
 
 export const cancelBooking = async (
   { bookingId }: { bookingId: string },
-  req: IAuthRequest
+  req: IAuthRequest,
 ) => {
   authCheck(req)
   try {
     const booking = await Booking.findById(bookingId).populate('event')
-    const event = transformEvent(booking?.event as never as IEvent)
+    const event = transformEvent((booking?.event as never) as IEvent)
     await Booking.deleteOne({ _id: bookingId })
     return event
   } catch (err) {

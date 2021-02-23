@@ -9,7 +9,7 @@ import { getSingleEmployee, employeeLoader } from '../employees/helpers'
 import { getSingleDepartment } from '../departments/helpers'
 
 export const employmentLoader = new DataLoader((ids) =>
-  getEmployments(ids as string[])
+  getEmployments(ids as string[]),
 )
 
 export const getEmployments = async (ids: string[]) => {
@@ -17,7 +17,7 @@ export const getEmployments = async (ids: string[]) => {
     const employments = await Employment.find({ _id: { $in: ids } })
     employments.sort(
       (a: IEmployment, b: IEmployment) =>
-        ids.indexOf(a._id.toString()) - ids.indexOf(b._id.toString())
+        ids.indexOf(a._id.toString()) - ids.indexOf(b._id.toString()),
     )
     return employments.map(transformEmployment)
   } catch (err) {
@@ -26,7 +26,7 @@ export const getEmployments = async (ids: string[]) => {
 }
 
 export const getEmploymentsByEmployee = async (
-  id: string
+  id: string,
 ): Promise<IEmployment[]> => {
   try {
     const employments = await Employment.find({

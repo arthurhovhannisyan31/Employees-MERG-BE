@@ -5,7 +5,9 @@
   "license": "MIT",
   "scripts": {
     "start:dev": "nodemon ./dist/app.js",
-    "watch": "tsc -w"
+    "watch": "tsc -w",
+    "lint": "eslint src/",
+    "format": "eslint src/ --fix"
   },
   "dependencies": {
     "@types/bcryptjs": "^2.4.2",

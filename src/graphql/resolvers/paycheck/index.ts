@@ -19,7 +19,7 @@ export const paycheckHistory = async (_: never, req: IAuthRequest) => {
 
 export const createPaycheck = async (
   { input: { employee, salary, start_date, end_date } }: ICreatePaycheckInput,
-  req: IAuthRequest
+  req: IAuthRequest,
 ) => {
   authCheck(req)
   try {
@@ -31,7 +31,7 @@ export const createPaycheck = async (
     })
     if (duplicate) {
       throw new Error(
-        `Paycheck for period ${start_date}-${end_date} for employee ${employee} for amount ${salary} already exist`
+        `Paycheck for period ${start_date}-${end_date} for employee ${employee} for amount ${salary} already exist`,
       )
     }
     const paycheck = new Paycheck({

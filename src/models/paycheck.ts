@@ -47,5 +47,5 @@ const PaycheckSchema = new Schema({
 export const PaycheckModel = mongoose.model<IPaycheck>(
   'Paycheck',
   PaycheckSchema,
-  'paychecks'
+  'paychecks',
 )
