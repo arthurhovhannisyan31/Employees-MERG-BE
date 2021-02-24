@@ -19,6 +19,9 @@ export interface IEmployee extends Document {
 export interface ICreateEmployeeInput {
   input: IEmployee
 }
+export interface IUpdateEmployeeInput {
+  input: Partial<IEmployee> & { id: string }
+}
 export interface IGetEmployeeInput {
   input: {
     id: string

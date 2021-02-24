@@ -28,6 +28,15 @@ export const input = `
     department: ID!
     title: ID!
   }
+  input UpdateEmployeeInput {
+    id: ID!
+    birth_date: String
+    first_name: String
+    last_name: String
+    hire_date: String
+    department: ID
+    title: ID
+  }
   input GetEmployeeInput {
     id: ID!
   }
@@ -44,5 +53,5 @@ export const query = `
 
 export const mutation = `
   createEmployee(input: CreateEmployeeInput!): Employee!
-  updateEmployee(input: CreateEmployeeInput!): Employee!
+  updateEmployee(input: UpdateEmployeeInput!): Employee!
 `

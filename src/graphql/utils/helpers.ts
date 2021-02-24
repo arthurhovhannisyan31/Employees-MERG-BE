@@ -6,9 +6,9 @@ export const dateToISOString = (date: string): string =>
   new Date(date).toISOString()
 
 export const authCheck = (req: IAuthRequest) => {
-  // if (!req.isAuth) {
-  //   throw new Error(EErrorName.UNAUTHORIZED)
-  // }
+  if (!req.isAuth) {
+    throw new Error(EErrorName.UNAUTHORIZED)
+  }
 }
 
 export const getErrorCode = (

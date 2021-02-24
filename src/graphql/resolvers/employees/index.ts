@@ -2,6 +2,7 @@
 import { IAuthRequest } from '../../../models/auth'
 import {
   ICreateEmployeeInput,
+  IUpdateEmployeeInput,
   IGetEmployeeInput,
   IGetEmployeesInput,
 } from '../../../models/employee'
@@ -43,44 +44,21 @@ export const employee = async (
   }
 }
 export const createEmployee = async (
-  {
-    input: {
-      birth_date,
-      first_name,
-      last_name,
-      gender,
-      hire_date,
-      department,
-      title,
-    },
-  }: ICreateEmployeeInput,
+  { input }: ICreateEmployeeInput,
   req: IAuthRequest,
 ) => {
   authCheck(req)
   try {
     const duplicate = await Employee.findOne({
-      birth_date,
-      first_name,
-      last_name,
-      gender,
-      hire_date,
-      department,
-      title,
+      first_name: input.first_name,
+      last_name: input.last_name,
     })
     if (duplicate) {
       throw new Error(
-        `Employee name:${first_name}, ${last_name} already exists`,
+        `Employee name:${input.first_name}, ${input.last_name} already exists`,
       )
     }
-    const employee = new Employee({
-      birth_date,
-      first_name,
-      last_name,
-      gender,
-      hire_date,
-      department,
-      title,
-    })
+    const employee = new Employee(input)
     const result = await employee.save()
     return transformEmployee(result)
   } catch (err) {
@@ -88,8 +66,23 @@ export const createEmployee = async (
   }
 }
 
-export const updateEmployee = async () => {
-  return null
+export const updateEmployee = async (
+  { input: props }: IUpdateEmployeeInput,
+  req: IAuthRequest,
+) => {
+  authCheck(req)
+  try {
+    const { id, ...updateProps } = props
+    const employee = await Employee.findOneAndUpdate({ _id: id }, updateProps, {
+      new: true,
+    })
+    if (!employee) {
+      throw new Error(`Employee by id: ${id} does not exists`)
+    }
+    return transformEmployee(employee)
+  } catch (err) {
+    throw err
+  }
 }
 
 export const deleteEmployee = async () => {

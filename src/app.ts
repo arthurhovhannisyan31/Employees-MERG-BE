@@ -58,6 +58,7 @@ mongoose
     // `mongodb+srv://${userName}:${userPwd}@cluster0.wn6yq.mongodb.net/${dbName}?retryWrites=true`,
     `//mongodb://localhost:27017/${dbName}`,
     {
+      useFindAndModify: false,
       useUnifiedTopology: true,
       useNewUrlParser: true,
     },
