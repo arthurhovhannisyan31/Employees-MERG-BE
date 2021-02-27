@@ -5,9 +5,9 @@ export const type = `
     first_name: String!
     last_name: String!
     hire_date: String!
-    gender: Gender!
-    department: Department!
-    title: Title!
+    gender: ID!
+    department: ID!
+    title: ID!
     paychecks: [Paycheck]!
     titles: [EmployeeTitle]!
     employments: [Employment]!
@@ -30,12 +30,12 @@ export const input = `
   }
   input UpdateEmployeeInput {
     id: ID!
-    birth_date: String
-    first_name: String
-    last_name: String
-    hire_date: String
-    department: ID
-    title: ID
+    birth_date: String!
+    first_name: String!
+    last_name: String!
+    hire_date: String!
+    department: ID!
+    title: ID!
   }
   input GetEmployeeInput {
     id: ID!

@@ -4,9 +4,6 @@ import DataLoader from 'dataloader'
 import { Employee } from '../../../models'
 import { IEmployee } from '../../../models/employee'
 // helpers
-import { getSingleGender } from '../gender/helpers'
-import { getSingleDepartment } from '../departments/helpers'
-import { getSingleTitle } from '../title/helpers'
 import { getPaycheckByEmployee } from '../paycheck/helpers'
 import { getEmployeeTitlesByEmployee } from '../employeeTitle/helpers'
 import { getEmploymentsByEmployee } from '../employments/helpers'
@@ -52,10 +49,10 @@ export const transformEmployee = ({
     birth_date,
     first_name,
     last_name,
-    gender: getSingleGender((gender as never) as string),
+    gender,
     hire_date,
-    department: getSingleDepartment((department as never) as string),
-    title: getSingleTitle((title as never) as string),
+    department,
+    title,
     paychecks: getPaycheckByEmployee((_id as never) as string),
     titles: getEmployeeTitlesByEmployee((_id as never) as string),
     employments: getEmploymentsByEmployee((_id as never) as string),

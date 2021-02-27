@@ -6,6 +6,7 @@
   "scripts": {
     "start:dev": "nodemon ./dist/app.js",
     "watch": "tsc -w",
+    "build": "tsc",
     "lint": "eslint src/",
     "format": "eslint src/ --fix"
   },
