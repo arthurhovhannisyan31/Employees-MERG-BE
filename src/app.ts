@@ -13,8 +13,6 @@ import { EErrorName } from './graphql/constants/error'
 
 const app = express()
 
-// todo add me resolver and check authorization
-
 app.use(bodyParser.json())
 app.use(isAuth)
 app.use((req: Request, res: Response, next: NextFunction) => {
