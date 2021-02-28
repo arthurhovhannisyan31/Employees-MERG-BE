@@ -4,9 +4,10 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
+    "start": "nodemon ./dist/app.js",
+    "build": "tsc",
     "start:dev": "nodemon ./dist/app.js",
     "watch": "tsc -w",
-    "build": "tsc",
     "lint": "eslint src/",
     "format": "eslint src/ --fix"
   },

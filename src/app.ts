@@ -45,16 +45,14 @@ app.use(
   }),
 )
 
-// env vars
 const dbName = encodeURI(process.env.MONGO_DB || '')
 const PORT = process.env.PORT || 3000
+const userName = process.env.USER
+const userPwd = process.env.PWD
 
-// const userName = 'events_booking_owner'
-// const userPwd = 'events_booking_owner'
 mongoose
   .connect(
-    // `mongodb+srv://${userName}:${userPwd}@cluster0.wn6yq.mongodb.net/${dbName}?retryWrites=true`,
-    `//mongodb://localhost:27017/${dbName}`,
+    `mongodb+srv://${userName}:${userPwd}@cluster0.oxr6p.mongodb.net/${dbName}?retryWrites=true&w=majority`,
     {
       useFindAndModify: false,
       useUnifiedTopology: true,
