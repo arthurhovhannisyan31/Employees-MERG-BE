@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "node -r dotenv/config ./dist/app.js",
+    "start": "node ./dist/app.js",
     "build": "tsc",
     "start:dev": "nodemon -r dotenv/config ./dist/app.js",
     "watch": "tsc -w",
