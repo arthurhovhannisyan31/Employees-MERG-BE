@@ -4,9 +4,9 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon ./dist/app.js",
+    "start": "node -r dotenv/config ./dist/app.js",
     "build": "tsc",
-    "start:dev": "nodemon ./dist/app.js",
+    "start:dev": "nodemon -r dotenv/config ./dist/app.js",
     "watch": "tsc -w",
     "lint": "eslint src/",
     "format": "eslint src/ --fix"

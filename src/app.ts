@@ -10,6 +10,7 @@ import { resolvers } from './graphql/resolvers'
 import { isAuth } from './graphql/middleware/auth'
 import { getErrorCode } from './graphql/utils/helpers'
 import { EErrorName } from './graphql/constants/error'
+import CONSTS from './constants.config'
 
 const app = express()
 
@@ -44,15 +45,9 @@ app.use(
     },
   }),
 )
-
-const dbName = encodeURI(process.env.MONGO_DB || '')
-const PORT = process.env.PORT || 3000
-const userName = process.env.USER
-const userPwd = process.env.PWD
-
 mongoose
   .connect(
-    `mongodb+srv://${userName}:${userPwd}@cluster0.oxr6p.mongodb.net/${dbName}?retryWrites=true&w=majority`,
+    `mongodb+srv://${CONSTS.USER_NAME}:${CONSTS.PASSWORD}@cluster0.oxr6p.mongodb.net/${CONSTS.DB_NAME}?retryWrites=true&w=majority`,
     {
       useFindAndModify: false,
       useUnifiedTopology: true,
@@ -60,12 +55,12 @@ mongoose
     },
   )
   .then(() => {
-    app.listen(PORT)
+    app.listen(CONSTS.PORT)
   })
   .then(() => {
-    console.log(`Server started at http://localhost:${PORT}`)
+    console.log(`Server started at http://localhost:${CONSTS.PORT}`)
     console.log(
-      `Please see graphql environment at http://localhost:${PORT}/graphql`,
+      `Please see graphql environment at http://localhost:${CONSTS.PORT}/graphql`,
     )
   })
   .catch((err) => {
