@@ -1,7 +1,5 @@
 // helpers
 import { createUser, login, me } from './auth'
-import { events, createEvent } from './events'
-import { bookings, bookEvent, cancelBooking } from './bookings'
 import { departments, createDepartment } from './departments'
 import {
   employees,
@@ -16,13 +14,6 @@ import { employeesTitles, createEmployeeTitle } from './employeeTitle'
 import { createPaycheck, paycheckHistory } from './paycheck'
 
 export const resolvers = {
-  // Events
-  events,
-  createEvent,
-  // Booking
-  bookings,
-  bookEvent,
-  cancelBooking,
   // User
   createUser,
   login,

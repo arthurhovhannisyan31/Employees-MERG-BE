@@ -2,7 +2,6 @@
 import DataLoader from 'dataloader'
 // local
 import { User } from '../../../models'
-import { eventLoader } from '../events/helpers'
 // helpers
 
 export const userLoader = new DataLoader((userIds) =>
@@ -25,7 +24,6 @@ export const getSingleUser = async (userId: string) => {
       _id: user?._id,
       email: user?.email,
       password: '',
-      createdEvents: () => eventLoader.loadMany(user.createdEvents),
     }
   } catch (err) {
     throw err
