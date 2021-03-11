@@ -8,9 +8,9 @@ import { GraphQLError } from 'graphql'
 import { schema } from './graphql/schema'
 import { resolvers } from './graphql/resolvers'
 import { isAuth } from './graphql/middleware/auth'
-import { getErrorCode } from './graphql/utils/helpers'
-import { EErrorName } from './graphql/constants/error'
-import CONSTS from './constants.config'
+import { getErrorCode } from './utils/helpers'
+import { EErrorName } from './constants/error'
+import { config } from './constants/config'
 
 const app = express()
 
@@ -30,7 +30,7 @@ app.use(
   graphqlHTTP({
     schema,
     rootValue: resolvers,
-    graphiql: process.env.NODE_ENV === 'development',
+    graphiql: config.IS_DEV,
     customFormatErrorFn: (err: GraphQLError) => {
       if (err.message in EErrorName) {
         const error = getErrorCode(
@@ -46,21 +46,18 @@ app.use(
   }),
 )
 mongoose
-  .connect(
-    `mongodb+srv://${CONSTS.USER_NAME}:${CONSTS.PASSWORD}@cluster0.oxr6p.mongodb.net/${CONSTS.DB_NAME}?retryWrites=true&w=majority`,
-    {
-      useFindAndModify: false,
-      useUnifiedTopology: true,
-      useNewUrlParser: true,
-    },
-  )
-  .then(() => {
-    app.listen(CONSTS.PORT)
+  .connect(config.CONNECTION_STRING, {
+    useFindAndModify: false,
+    useUnifiedTopology: true,
+    useNewUrlParser: true,
   })
   .then(() => {
-    console.log(`Server started at http://localhost:${CONSTS.PORT}`)
+    app.listen(config.PORT)
+  })
+  .then(() => {
+    console.log(`Server started at http://localhost:${config.PORT}`)
     console.log(
-      `Please see graphql environment at http://localhost:${CONSTS.PORT}/graphql`,
+      `Please see graphql environment at http://localhost:${config.PORT}/graphql`,
     )
   })
   .catch((err) => {

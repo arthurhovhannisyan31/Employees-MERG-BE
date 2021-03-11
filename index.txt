@@ -5,5 +5,3 @@
 
 
 // todo create full CRUD functions
-
-// add .env file to project

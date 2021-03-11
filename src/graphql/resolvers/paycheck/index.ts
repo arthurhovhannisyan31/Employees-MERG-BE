@@ -5,7 +5,7 @@ import { Paycheck } from '../../../models'
 import { transformPaycheck } from './helpers'
 import { IAuthRequest } from '../../../models/auth'
 import { ICreatePaycheckInput } from '../../../models/paycheck'
-import { authCheck } from '../../utils/helpers'
+import { authCheck } from '../../../utils/helpers'
 
 export const paycheckHistory = async (_: never, req: IAuthRequest) => {
   authCheck(req)

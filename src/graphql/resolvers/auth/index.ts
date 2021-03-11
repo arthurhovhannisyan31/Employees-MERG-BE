@@ -1,7 +1,7 @@
 // deps
 import { hash, compare } from 'bcryptjs'
 import jwt from 'jsonwebtoken'
-// local
+// model
 import { UserModel as User } from '../../../models/user'
 // helpers
 import { ICreateUserInput } from '../../../models/user'
@@ -11,7 +11,8 @@ import {
   TLoginInput,
   UserCredentials,
 } from '../../../models/auth'
-import { authCheck } from '../../utils/helpers'
+import { authCheck } from '../../../utils/helpers'
+import { config } from '../../../constants/config'
 
 export const createUser = async ({
   userInput: { email, password },
@@ -49,7 +50,7 @@ export const login = async ({
   if (!isEqual) {
     throw new Error('Password is incorrect')
   }
-  const secretKey = process.env.AUTH_SECRET_KEY || ''
+  const secretKey = config.AUTH_SECRET_KEY || ''
   const token = jwt.sign({ userId: user.id, email: user.email }, secretKey, {
     expiresIn: '1d',
   })

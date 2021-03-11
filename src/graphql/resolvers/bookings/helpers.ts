@@ -4,7 +4,7 @@ import { getSingleUser } from '../auth/helpers'
 import { getSingleEvent } from '../events/helpers'
 // helpers
 import { IBooking } from '../../../models/booking'
-import { dateToISOString } from '../../utils/helpers'
+import { dateToISOString } from '../../../utils/helpers'
 
 export const transformBooking = (booking: IBooking) => ({
   ...booking,

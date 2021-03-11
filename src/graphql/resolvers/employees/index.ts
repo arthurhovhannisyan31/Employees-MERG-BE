@@ -9,7 +9,7 @@ import {
 // helpers
 import { Employee } from '../../../models'
 import { transformEmployee } from './helpers'
-import { authCheck } from '../../utils/helpers'
+import { authCheck } from '../../../utils/helpers'
 
 export const employees = async (
   { input }: IGetEmployeesInput,
