@@ -5,7 +5,7 @@ import { EmployeeTitle } from '../../../models'
 import { transformEmployeeTitle } from './helpers'
 import { ICreateEmployeeTitleInput } from '../../../models/employeeTitle'
 import { IAuthRequest } from '../../../models/auth'
-import { authCheck } from '../../utils/helpers'
+import { authCheck } from '../../../utils/helpers'
 
 export const employeesTitles = async (_: never, req: IAuthRequest) => {
   authCheck(req)

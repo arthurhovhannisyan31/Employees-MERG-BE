@@ -4,7 +4,7 @@ import DataLoader from 'dataloader'
 import { Event } from '../../../models'
 import { getSingleUser } from '../auth/helpers'
 // helpers
-import { dateToISOString } from '../../utils/helpers'
+import { dateToISOString } from '../../../utils/helpers'
 import { IEvent } from '../../../models/events'
 
 export const eventLoader = new DataLoader((eventIds) =>

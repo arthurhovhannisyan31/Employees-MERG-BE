@@ -1,5 +1,5 @@
 // helpers
-import { IAuthRequest } from '../../models/auth'
+import { IAuthRequest } from '../models/auth'
 import { EErrorName, errorTypeMap } from '../constants/error'
 
 export const dateToISOString = (date: string): string =>

@@ -5,7 +5,7 @@ import { Gender } from '../../../models'
 import { transformGender } from './helpers'
 import { IAuthRequest } from '../../../models/auth'
 import { ICreateGenderInput } from '../../../models/gender'
-import { authCheck } from '../../utils/helpers'
+import { authCheck } from '../../../utils/helpers'
 
 export const genders = async (_: never, req: IAuthRequest) => {
   authCheck(req)

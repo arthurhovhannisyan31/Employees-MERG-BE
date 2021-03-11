@@ -1,6 +1,8 @@
 // deps
 import { Request, Response, NextFunction } from 'express'
 import jwt from 'jsonwebtoken'
+// helpers
+import { config } from '../../constants/config'
 
 interface IAuthCheck extends Request {
   isAuth?: boolean
@@ -17,7 +19,7 @@ export const isAuth = (req: IAuthCheck, _: Response, next: NextFunction) => {
     req.isAuth = false
     return next()
   }
-  const secretKey = process.env.AUTH_SECRET_KEY || ''
+  const secretKey = config.AUTH_SECRET_KEY || ''
   let decodedToken
   try {
     decodedToken = jwt.verify(token, secretKey) as Pick<IAuthCheck, 'userId'>

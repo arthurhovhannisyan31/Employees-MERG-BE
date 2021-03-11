@@ -5,7 +5,7 @@ import { UserModel as User } from '../../../models/user'
 import { transformEvent } from './helpers'
 import { IAuthRequest } from '../../../models/auth'
 import { ICreateEventInput } from '../../../models/events'
-import { authCheck } from '../../utils/helpers'
+import { authCheck } from '../../../utils/helpers'
 
 export const events = async (_: never, req: IAuthRequest) => {
   authCheck(req)
