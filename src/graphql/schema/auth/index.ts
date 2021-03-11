@@ -3,7 +3,6 @@ export const type = `
     _id: ID!
     email: String!
     password: String
-    createdEvents: [Event!]
   }
   type UserCredentials{
     id: String!

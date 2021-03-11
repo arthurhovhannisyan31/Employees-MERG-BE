@@ -2,13 +2,11 @@
 import mongoose, { Document, Schema } from 'mongoose'
 // local
 // helpers
-import { IEvent } from './events'
 
 export interface IUser extends Document {
   _id: string
   email: string
   password: string
-  createdEvents: IEvent[]
 }
 
 export interface ICreateUserInput {
@@ -27,12 +25,6 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
-  createdEvents: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'Event',
-    },
-  ],
 })
 
 export const UserModel = mongoose.model<IUser>('User', userSchema, 'users')

@@ -49,18 +49,6 @@ import {
   mutation as paycheckMutation,
   query as paycheckQuery,
 } from './paycheck'
-import {
-  type as bookingType,
-  input as bookingInput,
-  mutation as bookingMutation,
-  query as bookingQuery,
-} from './booking'
-import {
-  type as eventType,
-  input as eventInput,
-  mutation as eventMutation,
-  query as eventQuery,
-} from './event'
 // helpers
 
 export const schema = buildSchema(`
@@ -80,10 +68,6 @@ export const schema = buildSchema(`
   ${employeeTitleInput}
   ${paycheckType}
   ${paycheckInput}
-  ${bookingType}
-  ${bookingInput}
-  ${eventType}
-  ${eventInput}
   type RootQuery {
     ${departmentQuery}
     ${authQuery}
@@ -93,8 +77,6 @@ export const schema = buildSchema(`
     ${employeeQuery}
     ${employeeTitleQuery}
     ${paycheckQuery}
-    ${bookingQuery}
-    ${eventQuery}
   }
   type RootMutation {
     ${departmentMutation}
@@ -105,8 +87,6 @@ export const schema = buildSchema(`
     ${employeeMutation}
     ${employeeTitleMutation}
     ${paycheckMutation}
-    ${bookingMutation}
-    ${eventMutation}
   }
   schema {
     query: RootQuery
