@@ -1,6 +1,8 @@
-# v0.1.0 (Sun Mar 21 2021)
+# v0.1.1 (Sun Mar 21 2021)
 
-####️ Pushed to `master`
+## Test update tag
+
+# v0.1.0 (Sun Mar 21 2021)
 
 ## Init release
 
