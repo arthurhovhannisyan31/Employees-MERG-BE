@@ -1,8 +1,13 @@
 // deps
+import { sign, verify } from 'jsonwebtoken'
+import { hash, compare } from 'bcryptjs'
 import DataLoader from 'dataloader'
-// local
+// model
 import { User } from '../../../models'
+import { IUser } from '../../../models/user'
+import { IAuthCheck } from '../../middleware/auth'
 // helpers
+import { config } from '../../../constants/config'
 
 export const userLoader = new DataLoader((userIds) =>
   getUsers(userIds as string[]),
@@ -29,3 +34,24 @@ export const getSingleUser = async (userId: string) => {
     throw err
   }
 }
+
+export const getSecretKey = () => config.AUTH_SECRET_KEY || ''
+
+export const verifyPassword = async (
+  passwordAttempt: string,
+  hashedPassword: string,
+) => await compare(passwordAttempt, hashedPassword)
+
+export const verifyToken = (token: string): Pick<IAuthCheck, 'userId'> => {
+  return verify(token, getSecretKey()) as Pick<IAuthCheck, 'userId'>
+}
+
+export const generateToken = ({ id, email }: IUser): string => {
+  return sign({ userId: id, email }, getSecretKey(), {
+    expiresIn: '1d',
+    algorithm: 'HS256',
+  })
+}
+
+export const hashPassword = async (password: string): Promise<string> =>
+  await hash(password, 12)

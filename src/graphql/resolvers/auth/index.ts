@@ -1,6 +1,3 @@
-// deps
-import { hash, compare } from 'bcryptjs'
-import jwt from 'jsonwebtoken'
 // model
 import { UserModel as User } from '../../../models/user'
 // helpers
@@ -12,7 +9,7 @@ import {
   UserCredentials,
 } from '../../../models/auth'
 import { authCheck } from '../../../utils/helpers'
-import { config } from '../../../constants/config'
+import { verifyPassword, generateToken, hashPassword } from './helpers'
 
 export const createUser = async ({
   userInput: { email, password },
@@ -22,7 +19,7 @@ export const createUser = async ({
     if (existingUser) {
       throw new Error('User exists already')
     }
-    const hashedPassword = await hash(password, 12)
+    const hashedPassword = await hashPassword(password)
     const user = new User({
       email,
       password: hashedPassword,
@@ -46,20 +43,16 @@ export const login = async ({
   if (!user) {
     throw new Error('User does not exist')
   }
-  const isEqual = await compare(password, user.password)
+  const isEqual = await verifyPassword(password, user.password)
   if (!isEqual) {
     throw new Error('Password is incorrect')
   }
-  const secretKey = config.AUTH_SECRET_KEY || ''
-  const token = jwt.sign({ userId: user.id, email: user.email }, secretKey, {
-    expiresIn: '1d',
-  })
   return {
     userCredentials: {
       id: user.id,
       email: user.email,
     },
-    token,
+    token: generateToken(user),
   }
 }
 
