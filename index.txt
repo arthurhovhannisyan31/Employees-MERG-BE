@@ -5,3 +5,6 @@
 
 
 // todo create full CRUD functions
+
+// release 0.2
+setup jest and add tests

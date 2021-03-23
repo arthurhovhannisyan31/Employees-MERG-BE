@@ -1,6 +1,5 @@
 // model
 import { UserModel as User } from '../../../models/user'
-// helpers
 import { ICreateUserInput } from '../../../models/user'
 import {
   IAuthData,
@@ -8,6 +7,7 @@ import {
   TLoginInput,
   UserCredentials,
 } from '../../../models/auth'
+// helpers
 import { authCheck } from '../../../utils/helpers'
 import { verifyPassword, generateToken, hashPassword } from './helpers'
 
