@@ -12,9 +12,10 @@ import { config } from './constants/config'
 
 const app = express()
 
+app.use(customCorsCheck)
 app.use(bodyParser.json())
 app.use(isAuth)
-app.use(customCorsCheck)
+
 app.use(
   '/graphql',
   graphqlHTTP({
@@ -24,7 +25,7 @@ app.use(
     customFormatErrorFn: customFormatError,
   }),
 )
-;(async () => {
+async function connect() {
   try {
     await mongoose.connect(config.CONNECTION_STRING, {
       useFindAndModify: false,
@@ -39,4 +40,5 @@ app.use(
   } catch (err) {
     console.log(err)
   }
-})()
+}
+connect()
