@@ -8,7 +8,7 @@ import { schema } from './graphql/schema'
 import { resolvers } from './graphql/resolvers'
 import { isAuth } from './graphql/middleware/auth'
 import { customCorsCheck, customFormatError } from './utils/helpers'
-import { config } from './constants/config'
+import { CONFIG } from './constants/config'
 
 const app = express()
 
@@ -21,21 +21,21 @@ app.use(
   graphqlHTTP({
     schema,
     rootValue: resolvers,
-    graphiql: config.IS_DEV,
+    graphiql: CONFIG.IS_DEV,
     customFormatErrorFn: customFormatError,
   }),
 )
 async function connect() {
   try {
-    await mongoose.connect(config.CONNECTION_STRING, {
+    await mongoose.connect(CONFIG.CONNECTION_STRING, {
       useFindAndModify: false,
       useUnifiedTopology: true,
       useNewUrlParser: true,
     })
-    await app.listen(config.PORT)
-    console.log(`Server started at http://localhost:${config.PORT}`)
+    await app.listen(CONFIG.PORT)
+    console.log(`Server started at http://localhost:${CONFIG.PORT}`)
     console.log(
-      `Please see graphql environment at http://localhost:${config.PORT}/graphql`,
+      `Please see graphql environment at http://localhost:${CONFIG.PORT}/graphql`,
     )
   } catch (err) {
     console.log(err)

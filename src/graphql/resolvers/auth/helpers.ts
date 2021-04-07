@@ -7,7 +7,7 @@ import { User } from '../../../models'
 import { IUser } from '../../../models/user'
 import { IAuthCheck } from '../../middleware/auth'
 // helpers
-import { config } from '../../../constants/config'
+import { CONFIG } from '../../../constants/config'
 
 export const userLoader = new DataLoader((userIds) =>
   getUsers(userIds as string[]),
@@ -35,7 +35,7 @@ export const getSingleUser = async (userId: string) => {
   }
 }
 
-export const getSecretKey = () => config.AUTH_SECRET_KEY || ''
+export const getSecretKey = () => CONFIG.AUTH_SECRET_KEY || ''
 
 export const verifyPassword = async (
   passwordAttempt: string,

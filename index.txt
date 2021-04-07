@@ -20,3 +20,9 @@ ex: User.find({ _id: { $in: userIds } }).lean()
 
 // release 0.4
 add cookies
+
+
+app.delete(
+  '/api/inventory/:id',
+  requireAuth,
+  requireAdmin,
