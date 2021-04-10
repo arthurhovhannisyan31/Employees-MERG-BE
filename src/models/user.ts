@@ -1,9 +1,7 @@
 // deps
 import mongoose, { Document, Schema } from 'mongoose'
-// local
-// helpers
 
-export interface IUser extends Document {
+export interface IUser {
   _id: string
   email: string
   password: string
@@ -27,4 +25,8 @@ const userSchema = new Schema({
   },
 })
 
-export const UserModel = mongoose.model<IUser>('User', userSchema, 'users')
+export const UserModel = mongoose.model<IUser & Document>(
+  'User',
+  userSchema,
+  'users',
+)

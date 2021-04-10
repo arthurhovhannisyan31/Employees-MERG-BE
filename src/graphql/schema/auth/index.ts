@@ -5,7 +5,7 @@ export const type = `
     password: String
   }
   type UserCredentials{
-    id: String!
+    _id: String!
     email: String!
   }
   type AuthData {

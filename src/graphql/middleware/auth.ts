@@ -7,7 +7,11 @@ export interface IAuthCheck extends Request {
   isAuth?: boolean
   userId?: string
 }
-export const isAuth = (req: IAuthCheck, _: Response, next: NextFunction) => {
+export const isAuth = (
+  req: IAuthCheck,
+  _: Response,
+  next: NextFunction,
+): void => {
   const authHeader = req.get('Authorization')
   if (!authHeader) {
     req.isAuth = false

@@ -29,7 +29,7 @@ app.use(
     },
   })),
 )
-async function connect() {
+async function connect(): Promise<void> {
   try {
     await mongoose.connect(CONFIG.CONNECTION_STRING, {
       useFindAndModify: false,

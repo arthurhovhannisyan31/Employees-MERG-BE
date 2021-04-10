@@ -1,10 +1,10 @@
 // deps
 import mongoose, { Document, Schema } from 'mongoose'
-// local
-// helpers
+// model
 import { IEmployee } from './employee'
 
-export interface IPaycheck extends Document {
+export interface IPaycheck {
+  _id: string
   employee: IEmployee
   salary: number
   start_date: string
@@ -44,7 +44,7 @@ const PaycheckSchema = new Schema({
   },
 })
 
-export const PaycheckModel = mongoose.model<IPaycheck>(
+export const PaycheckModel = mongoose.model<IPaycheck & Document>(
   'Paycheck',
   PaycheckSchema,
   'paychecks',

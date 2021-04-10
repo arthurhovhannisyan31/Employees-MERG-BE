@@ -1,9 +1,8 @@
 // deps
 import mongoose, { Document, Schema } from 'mongoose'
-// local
-// helpers
 
-export interface ITitle extends Document {
+export interface ITitle {
+  _id: string
   name: string
 }
 
@@ -19,4 +18,8 @@ const TitleSchema = new Schema({
   },
 })
 
-export const TitleModel = mongoose.model<ITitle>('Title', TitleSchema, 'titles')
+export const TitleModel = mongoose.model<ITitle & Document>(
+  'Title',
+  TitleSchema,
+  'titles',
+)

@@ -1,9 +1,8 @@
 // deps
 import mongoose, { Document, Schema } from 'mongoose'
-// local
-// helpers
 
-export interface IDepartment extends Document {
+export interface IDepartment {
+  _id: string
   name: string
 }
 
@@ -20,7 +19,7 @@ const DepartmentSchema = new Schema({
   },
 })
 
-export const DepartmentModel = mongoose.model<IDepartment>(
+export const DepartmentModel = mongoose.model<IDepartment & Document>(
   'Department',
   DepartmentSchema,
   'departments',

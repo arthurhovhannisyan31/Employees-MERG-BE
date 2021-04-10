@@ -8,27 +8,25 @@ import { authCheck } from '../../../utils/helpers'
 import { verifyPassword, generateToken, hashPassword } from './helpers'
 import { cookieOptions } from '../../../constants/auth'
 
-export const createUser = async ({
-  userInput: { email, password },
-}: ICreateUserInput) => {
-  try {
-    const existingUser = await User.findOne({ email })
-    if (existingUser) {
-      throw new Error('User exists already')
-    }
-    const hashedPassword = await hashPassword(password)
-    const user = new User({
-      email,
-      password: hashedPassword,
-    })
-    const result = await user.save()
-    return {
-      _id: result._id,
-      email: result.email,
-      password: null,
-    }
-  } catch (err) {
-    throw err
+export const createUser = async (
+  { userInput: { email, password } }: ICreateUserInput,
+  { res }: QueryOptions,
+) => {
+  const existingUser = await User.findOne({ email })
+  if (existingUser) {
+    throw new Error('User exists already')
+  }
+  const hashedPassword = await hashPassword(password)
+  const user = new User({
+    email,
+    password: hashedPassword,
+  })
+  const result = await user.save()
+  res.cookie('token', generateToken(user), cookieOptions)
+  return {
+    _id: result._id,
+    email: result.email,
+    password: null,
   }
 }
 
@@ -47,7 +45,7 @@ export const login = async (
   res.cookie('token', generateToken(user), cookieOptions)
   return {
     userCredentials: {
-      id: user.id,
+      _id: user.id,
       email: user.email,
     },
     token: generateToken(user),
@@ -59,16 +57,12 @@ export const me = async (
   { req }: QueryOptions,
 ): Promise<UserCredentials | Error> => {
   authCheck(req)
-  try {
-    const user = await User.findOne({ _id: req.userId })
-    if (!user) {
-      throw new Error('User does not exist')
-    }
-    return {
-      id: user.id,
-      email: user.email,
-    }
-  } catch (err) {
-    throw err
+  const user = await User.findOne({ _id: req.userId })
+  if (!user) {
+    throw new Error('User does not exist')
+  }
+  return {
+    _id: user.id,
+    email: user.email,
   }
 }
