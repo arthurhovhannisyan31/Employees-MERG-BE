@@ -2,27 +2,27 @@
 // model
 // helpers
 
+// release 0.
++ add set cookies
+- express-session
 
-
-// todo create full CRUD functions
-// release 0.2
+// release 0.
 registration
 forgot password + email with link
 change password
 logout
 
 
-// release 0.3
+// release 0.
 - setup jest and add tests
 - add .lean() call to instance async calls
 ex: User.find({ _id: { $in: userIds } }).lean()
 
 
-// release 0.4
-add cookies
 
-
-app.delete(
+- app.delete(
   '/api/inventory/:id',
   requireAuth,
   requireAdmin,
+
+// todo create full CRUD functions

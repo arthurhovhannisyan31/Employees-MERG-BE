@@ -1,13 +1,12 @@
-// deps
-// local
+// model
 import { Gender } from '../../../models'
+import { ICreateGenderInput } from '../../../models/gender'
+import { QueryOptions } from '../../../models/common'
 // helpers
 import { transformGender } from './helpers'
-import { IAuthRequest } from '../../../models/auth'
-import { ICreateGenderInput } from '../../../models/gender'
 import { authCheck } from '../../../utils/helpers'
 
-export const genders = async (_: never, req: IAuthRequest) => {
+export const genders = async (_: never, { req }: QueryOptions) => {
   authCheck(req)
   try {
     const result = await Gender.find()
@@ -19,7 +18,7 @@ export const genders = async (_: never, req: IAuthRequest) => {
 
 export const createGender = async (
   { input: { name } }: ICreateGenderInput,
-  req: IAuthRequest,
+  { req }: QueryOptions,
 ) => {
   authCheck(req)
   try {

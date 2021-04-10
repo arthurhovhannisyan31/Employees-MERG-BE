@@ -1,13 +1,12 @@
-// deps
-// local
+// model
 import { Department } from '../../../models'
+import { ICreateDepartmentInput } from '../../../models/departmnet'
+import { QueryOptions } from '../../../models/common'
 // helpers
 import { transformDepartment } from './helpers'
-import { ICreateDepartmentInput } from '../../../models/departmnet'
-import { IAuthRequest } from '../../../models/auth'
 import { authCheck } from '../../../utils/helpers'
 
-export const departments = async (_: never, req: IAuthRequest) => {
+export const departments = async (_: never, { req }: QueryOptions) => {
   authCheck(req)
   try {
     const result = await Department.find()
@@ -19,7 +18,7 @@ export const departments = async (_: never, req: IAuthRequest) => {
 
 export const createDepartment = async (
   { input: { name } }: ICreateDepartmentInput,
-  req: IAuthRequest,
+  { req }: QueryOptions,
 ) => {
   authCheck(req)
   try {

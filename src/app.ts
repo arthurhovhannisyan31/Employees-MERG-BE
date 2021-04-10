@@ -18,12 +18,16 @@ app.use(isAuth)
 
 app.use(
   '/graphql',
-  graphqlHTTP({
+  graphqlHTTP((req, res) => ({
     schema,
     rootValue: resolvers,
     graphiql: CONFIG.IS_DEV,
     customFormatErrorFn: customFormatError,
-  }),
+    context: {
+      req,
+      res,
+    },
+  })),
 )
 async function connect() {
   try {

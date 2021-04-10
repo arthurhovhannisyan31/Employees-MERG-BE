@@ -1,10 +1,10 @@
-// deps
-// local
+// model
 import { EmployeeTitle } from '../../../models'
-// helpers
-import { transformEmployeeTitle } from './helpers'
 import { ICreateEmployeeTitleInput } from '../../../models/employeeTitle'
 import { IAuthRequest } from '../../../models/auth'
+import { QueryOptions } from '../../../models/common'
+// helpers
+import { transformEmployeeTitle } from './helpers'
 import { authCheck } from '../../../utils/helpers'
 
 export const employeesTitles = async (_: never, req: IAuthRequest) => {
@@ -21,7 +21,7 @@ export const createEmployeeTitle = async (
   {
     input: { employee, title, start_date, end_date },
   }: ICreateEmployeeTitleInput,
-  req: IAuthRequest,
+  { req }: QueryOptions,
 ) => {
   authCheck(req)
   try {

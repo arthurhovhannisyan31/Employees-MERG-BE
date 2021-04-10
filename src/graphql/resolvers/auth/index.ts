@@ -1,15 +1,12 @@
 // model
 import { UserModel as User } from '../../../models/user'
 import { ICreateUserInput } from '../../../models/user'
-import {
-  IAuthData,
-  IAuthRequest,
-  TLoginInput,
-  UserCredentials,
-} from '../../../models/auth'
+import { IAuthData, TLoginInput, UserCredentials } from '../../../models/auth'
+import { QueryOptions } from '../../../models/common'
 // helpers
 import { authCheck } from '../../../utils/helpers'
 import { verifyPassword, generateToken, hashPassword } from './helpers'
+import { cookieOptions } from '../../../constants/auth'
 
 export const createUser = async ({
   userInput: { email, password },
@@ -35,10 +32,10 @@ export const createUser = async ({
   }
 }
 
-export const login = async ({
-  email,
-  password,
-}: TLoginInput): Promise<IAuthData | Error> => {
+export const login = async (
+  { email, password }: TLoginInput,
+  { res }: QueryOptions,
+): Promise<IAuthData | Error> => {
   const user = await User.findOne({ email })
   if (!user) {
     throw new Error('User does not exist')
@@ -47,6 +44,7 @@ export const login = async ({
   if (!isEqual) {
     throw new Error('Password is incorrect')
   }
+  res.cookie('token', generateToken(user), cookieOptions)
   return {
     userCredentials: {
       id: user.id,
@@ -58,7 +56,7 @@ export const login = async ({
 
 export const me = async (
   _: unknown,
-  req: IAuthRequest,
+  { req }: QueryOptions,
 ): Promise<UserCredentials | Error> => {
   authCheck(req)
   try {

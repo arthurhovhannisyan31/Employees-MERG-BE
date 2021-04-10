@@ -1,13 +1,12 @@
-// deps
-// local
+// model
 import { Employment } from '../../../models'
+import { ICreateEmploymentInput } from '../../../models/employment'
+import { QueryOptions } from '../../../models/common'
 // helpers
 import { transformEmployment } from './helpers'
-import { IAuthRequest } from '../../../models/auth'
-import { ICreateEmploymentInput } from '../../../models/employment'
 import { authCheck } from '../../../utils/helpers'
 
-export const employments = async (_: never, req: IAuthRequest) => {
+export const employments = async (_: never, { req }: QueryOptions) => {
   authCheck(req)
   try {
     const result = await Employment.find()
@@ -21,7 +20,7 @@ export const createEmployment = async (
   {
     input: { employee, department, start_date, end_date },
   }: ICreateEmploymentInput,
-  req: IAuthRequest,
+  { req }: QueryOptions,
 ) => {
   try {
     authCheck(req)

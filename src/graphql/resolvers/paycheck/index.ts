@@ -1,13 +1,12 @@
-// deps
-// local
+// model
 import { Paycheck } from '../../../models'
+import { ICreatePaycheckInput } from '../../../models/paycheck'
+import { QueryOptions } from '../../../models/common'
 // helpers
 import { transformPaycheck } from './helpers'
-import { IAuthRequest } from '../../../models/auth'
-import { ICreatePaycheckInput } from '../../../models/paycheck'
 import { authCheck } from '../../../utils/helpers'
 
-export const paycheckHistory = async (_: never, req: IAuthRequest) => {
+export const paycheckHistory = async (_: never, { req }: QueryOptions) => {
   authCheck(req)
   try {
     const result = await Paycheck.find()
@@ -19,7 +18,7 @@ export const paycheckHistory = async (_: never, req: IAuthRequest) => {
 
 export const createPaycheck = async (
   { input: { employee, salary, start_date, end_date } }: ICreatePaycheckInput,
-  req: IAuthRequest,
+  { req }: QueryOptions,
 ) => {
   authCheck(req)
   try {

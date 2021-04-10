@@ -1,11 +1,11 @@
 // model
-import { IAuthRequest } from '../../../models/auth'
 import {
   ICreateEmployeeInput,
   IUpdateEmployeeInput,
   IGetEmployeeInput,
   IGetEmployeesInput,
 } from '../../../models/employee'
+import { QueryOptions } from '../../../models/common'
 // helpers
 import { Employee } from '../../../models'
 import { transformEmployee } from './helpers'
@@ -13,7 +13,7 @@ import { authCheck } from '../../../utils/helpers'
 
 export const employees = async (
   { input }: IGetEmployeesInput,
-  req: IAuthRequest,
+  { req }: QueryOptions,
 ) => {
   authCheck(req)
   try {
@@ -30,7 +30,7 @@ export const employees = async (
 }
 export const employee = async (
   { input: { id } }: IGetEmployeeInput,
-  req: IAuthRequest,
+  { req }: QueryOptions,
 ) => {
   authCheck(req)
   try {
@@ -45,7 +45,7 @@ export const employee = async (
 }
 export const createEmployee = async (
   { input }: ICreateEmployeeInput,
-  req: IAuthRequest,
+  { req }: QueryOptions,
 ) => {
   authCheck(req)
   try {
@@ -68,7 +68,7 @@ export const createEmployee = async (
 
 export const updateEmployee = async (
   { input: props }: IUpdateEmployeeInput,
-  req: IAuthRequest,
+  { req }: QueryOptions,
 ) => {
   authCheck(req)
   try {

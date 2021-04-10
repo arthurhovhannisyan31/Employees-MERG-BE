@@ -1,13 +1,12 @@
-// deps
-// local
+// model
 import { TitleModel as Title } from '../../../models/title'
+import { ITitleInput } from '../../../models/title'
+import { QueryOptions } from '../../../models/common'
 // helpers
 import { transformTitle } from './helpers'
-import { IAuthRequest } from '../../../models/auth'
-import { ITitleInput } from '../../../models/title'
 import { authCheck } from '../../../utils/helpers'
 
-export const titles = async (_: never, req: IAuthRequest) => {
+export const titles = async (_: never, { req }: QueryOptions) => {
   authCheck(req)
   try {
     const result = await Title.find()
@@ -19,7 +18,7 @@ export const titles = async (_: never, req: IAuthRequest) => {
 
 export const createTitle = async (
   { input: { name } }: ITitleInput,
-  req: IAuthRequest,
+  { req }: QueryOptions,
 ) => {
   if (!req.isAuth) {
     throw new Error('Unauthenticated request')
