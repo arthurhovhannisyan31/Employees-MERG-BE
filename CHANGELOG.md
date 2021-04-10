@@ -1,6 +1,8 @@
 # v0.1.1 (Sun Mar 21 2021)
 
-## Test update tag
+## Authorization improvements
+
+- Add set cookies on login
 
 # v0.1.0 (Sun Mar 21 2021)
 

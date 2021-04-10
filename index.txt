@@ -26,3 +26,4 @@ ex: User.find({ _id: { $in: userIds } }).lean()
   requireAdmin,
 
 // todo create full CRUD functions
+- add register
