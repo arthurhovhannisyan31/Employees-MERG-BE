@@ -1,17 +1,17 @@
 // model
-import { UserModel as User } from '../../../models/user'
+import { IUser, UserModel as User } from '../../../models/user'
 import { ICreateUserInput } from '../../../models/user'
 import { IAuthData, TLoginInput, UserCredentials } from '../../../models/auth'
 import { QueryOptions } from '../../../models/common'
 // helpers
 import { authCheck } from '../../../utils/helpers'
 import { verifyPassword, generateToken, hashPassword } from './helpers'
-import { cookieOptions } from '../../../constants/auth'
+import { cookieOptions } from '../../../constants'
 
 export const createUser = async (
   { userInput: { email, password } }: ICreateUserInput,
   { res }: QueryOptions,
-) => {
+): Promise<IUser> => {
   const existingUser = await User.findOne({ email })
   if (existingUser) {
     throw new Error('User exists already')
@@ -26,7 +26,7 @@ export const createUser = async (
   return {
     _id: result._id,
     email: result.email,
-    password: null,
+    password: '',
   }
 }
 
@@ -50,6 +50,10 @@ export const login = async (
     },
     token: generateToken(user),
   }
+}
+
+export const logout = async () => {
+  // req.session.destroy
 }
 
 export const me = async (

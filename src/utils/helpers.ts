@@ -3,7 +3,7 @@ import { GraphQLError } from 'graphql'
 import { NextFunction, Request, Response } from 'express'
 // model
 import { IAuthRequest } from '../models/auth'
-import { ErrorMessages, errorTypeMap } from '../constants/error'
+import { ErrorMessages, errorTypeMap } from '../constants'
 import { ErrorType } from '../models/common'
 
 export const dateToISOString = (date: string): string =>
