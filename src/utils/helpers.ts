@@ -10,7 +10,7 @@ export const dateToISOString = (date: string): string =>
   new Date(date).toISOString()
 
 export const authCheck = (req: IAuthRequest): void => {
-  if (!req.isAuth) {
+  if (!req.session.userId) {
     throw new Error(ErrorMessages.Unauthorized)
   }
 }

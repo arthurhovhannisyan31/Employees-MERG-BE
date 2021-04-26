@@ -2,15 +2,15 @@
 import { IUser, UserModel as User } from '../../../models/user'
 import { ICreateUserInput } from '../../../models/user'
 import { IAuthData, TLoginInput, UserCredentials } from '../../../models/auth'
-import { QueryOptions } from '../../../models/common'
+import { QueryContext } from '../../../models/common'
 // helpers
 import { authCheck } from '../../../utils/helpers'
-import { verifyPassword, generateToken, hashPassword } from './helpers'
-import { cookieOptions } from '../../../constants'
+import { verifyPassword, hashPassword } from './helpers'
+import { COOKIE_NAME } from '../../../constants'
 
 export const createUser = async (
   { userInput: { email, password } }: ICreateUserInput,
-  { res }: QueryOptions,
+  { req }: QueryContext,
 ): Promise<IUser> => {
   const existingUser = await User.findOne({ email })
   if (existingUser) {
@@ -22,7 +22,7 @@ export const createUser = async (
     password: hashedPassword,
   })
   const result = await user.save()
-  res.cookie('token', generateToken(user), cookieOptions)
+  req.session.userId = user.id
   return {
     _id: result._id,
     email: result.email,
@@ -32,36 +32,48 @@ export const createUser = async (
 
 export const login = async (
   { email, password }: TLoginInput,
-  { res }: QueryOptions,
+  { req }: QueryContext,
 ): Promise<IAuthData | Error> => {
   const user = await User.findOne({ email })
   if (!user) {
     throw new Error('User does not exist')
   }
-  const isEqual = await verifyPassword(password, user.password)
-  if (!isEqual) {
+  const isPasswordCorrect = await verifyPassword(password, user.password)
+  if (!isPasswordCorrect) {
     throw new Error('Password is incorrect')
   }
-  res.cookie('token', generateToken(user), cookieOptions)
+  req.session.userId = user.id
   return {
     userCredentials: {
       _id: user.id,
       email: user.email,
     },
-    token: generateToken(user),
   }
 }
 
-export const logout = async () => {
-  // req.session.destroy
+export const logout = (
+  _: never,
+  { req, res }: QueryContext,
+): Promise<boolean> => {
+  return new Promise((resolve) =>
+    req.session.destroy((err) => {
+      res.clearCookie(COOKIE_NAME)
+      if (err) {
+        console.log(`session.destroy failed, error: ${err}`)
+        resolve(false)
+        return
+      }
+      resolve(true)
+    }),
+  )
 }
 
 export const me = async (
   _: unknown,
-  { req }: QueryOptions,
+  { req }: QueryContext,
 ): Promise<UserCredentials | Error> => {
   authCheck(req)
-  const user = await User.findOne({ _id: req.userId })
+  const user = await User.findOne({ _id: req.session.userId })
   if (!user) {
     throw new Error('User does not exist')
   }

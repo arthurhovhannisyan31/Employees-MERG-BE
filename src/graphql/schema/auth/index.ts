@@ -10,7 +10,6 @@ export const type = `
   }
   type AuthData {
     userCredentials: UserCredentials!
-    token: String!
   }
 `
 export const input = `
@@ -21,7 +20,8 @@ export const input = `
 `
 
 export const query = `
-  login(email: String!, password: String!):AuthData!
+  login(email: String!, password: String!): AuthData!
+  logout: Boolean
   me: UserCredentials!
 `
 

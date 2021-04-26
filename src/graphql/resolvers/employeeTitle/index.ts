@@ -5,7 +5,7 @@ import {
   IEmployeeTitle,
 } from '../../../models/employeeTitle'
 import { IAuthRequest } from '../../../models/auth'
-import { QueryOptions } from '../../../models/common'
+import { QueryContext } from '../../../models/common'
 // helpers
 import { transformEmployeeTitle } from './helpers'
 import { authCheck } from '../../../utils/helpers'
@@ -23,7 +23,7 @@ export const createEmployeeTitle = async (
   {
     input: { employee, title, start_date, end_date },
   }: ICreateEmployeeTitleInput,
-  { req }: QueryOptions,
+  { req }: QueryContext,
 ): Promise<IEmployeeTitle> => {
   authCheck(req)
   const duplicate = await EmployeeTitle.findOne({

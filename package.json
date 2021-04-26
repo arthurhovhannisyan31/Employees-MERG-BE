@@ -8,6 +8,7 @@
     "start": "node ./dist/app.js",
     "build": "tsc",
     "start:dev": "nodemon -r dotenv/config ./dist/app.js",
+    "start:dev-session-debug": "DEBUG=express-session nodemon -r dotenv/config ./dist/app.js",
     "watch": "tsc -w",
     "lint": "eslint src/",
     "format": "eslint src/ --fix",

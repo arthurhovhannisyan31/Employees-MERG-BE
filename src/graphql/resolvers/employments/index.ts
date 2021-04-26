@@ -4,14 +4,14 @@ import {
   ICreateEmploymentInput,
   IEmploymentResponse,
 } from '../../../models/employment'
-import { QueryOptions } from '../../../models/common'
+import { QueryContext } from '../../../models/common'
 // helpers
 import { transformEmployment } from './helpers'
 import { authCheck } from '../../../utils/helpers'
 
 export const employments = async (
   _: never,
-  { req }: QueryOptions,
+  { req }: QueryContext,
 ): Promise<Promise<IEmploymentResponse>[]> => {
   authCheck(req)
   const result = await Employment.find()
@@ -22,7 +22,7 @@ export const createEmployment = async (
   {
     input: { employee, department, start_date, end_date },
   }: ICreateEmploymentInput,
-  { req }: QueryOptions,
+  { req }: QueryContext,
 ): Promise<IEmploymentResponse> => {
   authCheck(req)
   const duplicate = await Employment.findOne({

@@ -1,14 +1,14 @@
 // model
 import { Gender } from '../../../models'
 import { ICreateGenderInput, IGender } from '../../../models/gender'
-import { QueryOptions } from '../../../models/common'
+import { QueryContext } from '../../../models/common'
 // helpers
 import { transformGender } from './helpers'
 import { authCheck } from '../../../utils/helpers'
 
 export const genders = async (
   _: never,
-  { req }: QueryOptions,
+  { req }: QueryContext,
 ): Promise<IGender[]> => {
   authCheck(req)
   const result = await Gender.find()
@@ -17,7 +17,7 @@ export const genders = async (
 
 export const createGender = async (
   { input: { name } }: ICreateGenderInput,
-  { req }: QueryOptions,
+  { req }: QueryContext,
 ): Promise<IGender> => {
   authCheck(req)
   const duplicate = await Gender.findOne({ name })

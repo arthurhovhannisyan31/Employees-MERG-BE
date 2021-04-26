@@ -1,14 +1,14 @@
 // model
 import { ITitle, TitleModel as Title } from '../../../models/title'
 import { ITitleInput } from '../../../models/title'
-import { QueryOptions } from '../../../models/common'
+import { QueryContext } from '../../../models/common'
 // helpers
 import { transformTitle } from './helpers'
 import { authCheck } from '../../../utils/helpers'
 
 export const titles = async (
   _: never,
-  { req }: QueryOptions,
+  { req }: QueryContext,
 ): Promise<ITitle[]> => {
   authCheck(req)
   const result = await Title.find()
@@ -17,11 +17,9 @@ export const titles = async (
 
 export const createTitle = async (
   { input: { name } }: ITitleInput,
-  { req }: QueryOptions,
+  { req }: QueryContext,
 ): Promise<ITitle> => {
-  if (!req.isAuth) {
-    throw new Error('Unauthenticated request')
-  }
+  authCheck(req)
   const duplicate = await Title.findOne({ name })
   if (duplicate) {
     throw new Error(`Title ${name} already exists`)

@@ -8,7 +8,6 @@ import MongoStore from 'connect-mongo'
 // helpers
 import { schema } from './graphql/schema'
 import { resolvers } from './graphql/resolvers'
-import { isAuth } from './graphql/middleware/auth'
 import { customCorsCheck, customFormatError } from './utils/helpers'
 import {
   CONNECT_CONFIG,
@@ -19,10 +18,14 @@ import {
 
 const main = async (): Promise<void> => {
   const app = express()
+  const sessionStore = MongoStore.create({
+    mongoUrl: CONNECT_CONFIG.SESSION_DB_CONNECTION_STRING,
+    mongoOptions,
+    touchAfter: 24 * 3600,
+  })
 
   app.use(customCorsCheck)
   app.use(bodyParser.json())
-  // todo extract to helper
   app.use(
     session({
       name: COOKIE_NAME,
@@ -30,15 +33,9 @@ const main = async (): Promise<void> => {
       resave: false,
       saveUninitialized: false,
       cookie: cookieOptions,
-      store: MongoStore.create({
-        mongoUrl: CONNECT_CONFIG.SESSION_DB_CONNECTION_STRING,
-        mongoOptions,
-        touchAfter: 24 * 3600,
-      }),
+      store: sessionStore,
     }),
   )
-  app.use(isAuth)
-
   app.use(
     '/graphql',
     graphqlHTTP((req, res) => ({
@@ -49,6 +46,7 @@ const main = async (): Promise<void> => {
       context: {
         req,
         res,
+        sessionStore,
       },
     })),
   )

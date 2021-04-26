@@ -1,14 +1,14 @@
 // model
 import { Paycheck } from '../../../models'
 import { ICreatePaycheckInput, IPaycheck } from '../../../models/paycheck'
-import { QueryOptions } from '../../../models/common'
+import { QueryContext } from '../../../models/common'
 // helpers
 import { transformPaycheck } from './helpers'
 import { authCheck } from '../../../utils/helpers'
 
 export const paycheckHistory = async (
   _: never,
-  { req }: QueryOptions,
+  { req }: QueryContext,
 ): Promise<Promise<IPaycheck>[]> => {
   authCheck(req)
   const result = await Paycheck.find()
@@ -17,7 +17,7 @@ export const paycheckHistory = async (
 
 export const createPaycheck = async (
   { input: { employee, salary, start_date, end_date } }: ICreatePaycheckInput,
-  { req }: QueryOptions,
+  { req }: QueryContext,
 ): Promise<IPaycheck> => {
   authCheck(req)
   const duplicate = await Paycheck.findOne({

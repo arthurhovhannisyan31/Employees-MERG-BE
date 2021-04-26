@@ -2,9 +2,9 @@
 import { Response } from 'express'
 // model
 import { IAuthRequest } from './auth'
-import { ErrorCodes, ErrorMessages } from '../constants/error'
+import { ErrorCodes, ErrorMessages } from '../constants'
 
-export interface QueryOptions {
+export interface QueryContext {
   req: IAuthRequest
   res: Response
 }

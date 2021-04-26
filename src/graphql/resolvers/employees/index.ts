@@ -7,7 +7,7 @@ import {
   IEmployee,
   IEmployees,
 } from '../../../models/employee'
-import { QueryOptions } from '../../../models/common'
+import { QueryContext } from '../../../models/common'
 // helpers
 import { Employee } from '../../../models'
 import { transformEmployee } from './helpers'
@@ -15,7 +15,7 @@ import { authCheck } from '../../../utils/helpers'
 
 export const employees = async (
   { input }: IGetEmployeesInput,
-  { req }: QueryOptions,
+  { req }: QueryContext,
 ): Promise<IEmployees> => {
   authCheck(req)
   const { limit = 100, offset = 0 } = input || {}
@@ -27,7 +27,7 @@ export const employees = async (
 }
 export const employee = async (
   { input: { id } }: IGetEmployeeInput,
-  { req }: QueryOptions,
+  { req }: QueryContext,
 ): Promise<IEmployee> => {
   authCheck(req)
   const result = await Employee.findOne({ _id: id })
@@ -38,7 +38,7 @@ export const employee = async (
 }
 export const createEmployee = async (
   { input }: ICreateEmployeeInput,
-  { req }: QueryOptions,
+  { req }: QueryContext,
 ): Promise<IEmployee> => {
   authCheck(req)
   const duplicate = await Employee.findOne({
@@ -57,7 +57,7 @@ export const createEmployee = async (
 
 export const updateEmployee = async (
   { input: props }: IUpdateEmployeeInput,
-  { req }: QueryOptions,
+  { req }: QueryContext,
 ): Promise<IEmployee> => {
   authCheck(req)
   const { id, ...updateProps } = props

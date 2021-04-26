@@ -1,14 +1,14 @@
 // model
 import { Department } from '../../../models'
 import { ICreateDepartmentInput, IDepartment } from '../../../models/departmnet'
-import { QueryOptions } from '../../../models/common'
+import { QueryContext } from '../../../models/common'
 // helpers
 import { transformDepartment } from './helpers'
 import { authCheck } from '../../../utils/helpers'
 
 export const departments = async (
   _: never,
-  { req }: QueryOptions,
+  { req }: QueryContext,
 ): Promise<IDepartment[]> => {
   authCheck(req)
   const result = await Department.find()
@@ -17,7 +17,7 @@ export const departments = async (
 
 export const createDepartment = async (
   { input: { name } }: ICreateDepartmentInput,
-  { req }: QueryOptions,
+  { req }: QueryContext,
 ): Promise<IDepartment> => {
   authCheck(req)
   const duplicate = await Department.findOne({ name })
