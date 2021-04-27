@@ -1,5 +1,9 @@
+// deps
+import MongoStore from 'connect-mongo'
+import { SessionOptions } from 'express-session'
 // model
 import { IConnectConfig } from '../models/config'
+import { COOKIE_NAME, cookieOptions } from './auth'
 
 export const __PROD__ = process.env.NODE_ENV === 'production'
 const getConnectionString = (dbName: string): string =>
@@ -21,3 +25,12 @@ export const mongoOptions: Record<string, boolean> = {
   useUnifiedTopology: true,
   useNewUrlParser: true,
 }
+
+export const getSessionMdlOptions = (store: MongoStore): SessionOptions => ({
+  name: COOKIE_NAME,
+  secret: CONNECT_CONFIG.AUTH_SECRET_KEY,
+  resave: false,
+  saveUninitialized: false,
+  cookie: cookieOptions,
+  store,
+})

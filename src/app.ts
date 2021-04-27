@@ -9,12 +9,7 @@ import MongoStore from 'connect-mongo'
 import { schema } from './graphql/schema'
 import { resolvers } from './graphql/resolvers'
 import { customCorsCheck, customFormatError } from './utils/helpers'
-import {
-  CONNECT_CONFIG,
-  COOKIE_NAME,
-  cookieOptions,
-  mongoOptions,
-} from './constants'
+import { CONNECT_CONFIG, getSessionMdlOptions, mongoOptions } from './constants'
 
 const main = async (): Promise<void> => {
   const app = express()
@@ -26,16 +21,7 @@ const main = async (): Promise<void> => {
 
   app.use(customCorsCheck)
   app.use(bodyParser.json())
-  app.use(
-    session({
-      name: COOKIE_NAME,
-      secret: CONNECT_CONFIG.AUTH_SECRET_KEY,
-      resave: false,
-      saveUninitialized: false,
-      cookie: cookieOptions,
-      store: sessionStore,
-    }),
-  )
+  app.use(session(getSessionMdlOptions(sessionStore)))
   app.use(
     '/graphql',
     graphqlHTTP((req, res) => ({
