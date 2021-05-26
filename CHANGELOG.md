@@ -1,11 +1,10 @@
-# v0.1.1 (Sun Mar 21 2021)
+# v0.1.2
+## Authorization improvements
+- Add cookies authorization
+- Add user sessions
 
-## Test update tag
-
-# v0.1.0 (Sun Mar 21 2021)
-
+# v0.1.0
 ## Init release
-
 - Add login and req auth check
 - Add entities model:
   Employee,

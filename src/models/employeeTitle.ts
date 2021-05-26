@@ -1,11 +1,11 @@
 // deps
 import mongoose, { Document, Schema } from 'mongoose'
-// local
-// helpers
+// model
 import { IEmployee } from './employee'
 import { ITitle } from './title'
 
-export interface IEmployeeTitle extends Document {
+export interface IEmployeeTitle {
+  _id: string
   employee: IEmployee
   title: ITitle
   start_date: string
@@ -37,8 +37,8 @@ const EmployeeTitleSchema = new Schema({
   },
 })
 
-export const EmployeeTitleModel = mongoose.model<IEmployeeTitle>(
+export const EmployeeTitleModel = mongoose.model<IEmployeeTitle & Document>(
   'EmployeeTitle',
   EmployeeTitleSchema,
-  'employees_title_history',
+  'employees_title_history'
 )
