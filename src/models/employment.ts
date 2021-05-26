@@ -1,12 +1,20 @@
 // deps
 import mongoose, { Document, Schema } from 'mongoose'
-// local
-// helpers
-import { IEmployee } from './employee'
+// model
+import { IEmployee, IEmployeeResponse } from './employee'
 import { IDepartment } from './departmnet'
 
-export interface IEmployment extends Document {
+export interface IEmployment {
+  _id: string
   employee: IEmployee
+  department: IDepartment
+  start_date: string
+  end_date: string
+}
+
+export interface IEmploymentResponse {
+  _id: string
+  employee: IEmployeeResponse
   department: IDepartment
   start_date: string
   end_date: string
@@ -37,8 +45,8 @@ const EmploymentSchema = new Schema({
   },
 })
 
-export const EmploymentModel = mongoose.model<IEmployment>(
+export const EmploymentModel = mongoose.model<IEmployment & Document>(
   'Employment',
   EmploymentSchema,
-  'employment_history',
+  'employment_history'
 )

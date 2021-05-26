@@ -1,12 +1,15 @@
 // deps
 import mongoose, { Document, Schema } from 'mongoose'
-// local
-// helpers
+// model
 import { IGender } from './gender'
 import { IDepartment } from './departmnet'
 import { ITitle } from './title'
+import { IPaycheck } from './paycheck'
+import { IEmployeeTitle } from './employeeTitle'
+import { IEmployment } from './employment'
 
-export interface IEmployee extends Document {
+export interface IEmployee {
+  _id: string
   birth_date: string
   first_name: string
   last_name: string
@@ -14,6 +17,17 @@ export interface IEmployee extends Document {
   gender: IGender
   department: IDepartment
   title: ITitle
+}
+
+export interface IEmployeeResponse extends IEmployee {
+  paychecks: Promise<IPaycheck>[]
+  titles: Promise<IEmployeeTitle>[]
+  employments: Promise<IEmployment>[]
+}
+
+export interface IEmployees {
+  nodes: Promise<IEmployeeResponse>[]
+  count: number
 }
 
 export interface ICreateEmployeeInput {
@@ -70,8 +84,8 @@ const EmployeeSchema = new Schema({
   },
 })
 
-export const EmployeeModel = mongoose.model<IEmployee>(
+export const EmployeeModel = mongoose.model<IEmployee & Document>(
   'Employee',
   EmployeeSchema,
-  'employees',
+  'employees'
 )
