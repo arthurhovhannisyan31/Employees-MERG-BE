@@ -9,12 +9,7 @@ import MongoStore from 'connect-mongo'
 import { schema } from './graphql/schema'
 import { resolvers } from './graphql/resolvers'
 import { customCorsCheck, customFormatError } from './utils/helpers'
-import {
-  __PROD__,
-  CONNECT_CONFIG,
-  getSessionMdlOptions,
-  mongoOptions,
-} from './constants'
+import { CONNECT_CONFIG, getSessionMdlOptions, mongoOptions } from './constants'
 
 const main = async (): Promise<void> => {
   const app = express()
@@ -26,8 +21,8 @@ const main = async (): Promise<void> => {
 
   app.use(customCorsCheck)
   app.use(bodyParser.json())
+  app.set('trust proxy', true)
   app.use(session(getSessionMdlOptions(sessionStore)))
-  app.set('trust proxy', 1)
   app.use(
     '/graphql',
     graphqlHTTP((req, res) => ({
