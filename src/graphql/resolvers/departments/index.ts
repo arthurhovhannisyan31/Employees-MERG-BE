@@ -8,7 +8,7 @@ import { authCheck } from '../../../utils/helpers'
 
 export const departments = async (
   _: never,
-  { req }: QueryContext,
+  { req }: QueryContext
 ): Promise<IDepartment[]> => {
   authCheck(req)
   const result = await Department.find()
@@ -17,7 +17,7 @@ export const departments = async (
 
 export const createDepartment = async (
   { input: { name } }: ICreateDepartmentInput,
-  { req }: QueryContext,
+  { req }: QueryContext
 ): Promise<IDepartment> => {
   authCheck(req)
   const duplicate = await Department.findOne({ name })

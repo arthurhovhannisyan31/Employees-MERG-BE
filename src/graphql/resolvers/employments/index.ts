@@ -11,7 +11,7 @@ import { authCheck } from '../../../utils/helpers'
 
 export const employments = async (
   _: never,
-  { req }: QueryContext,
+  { req }: QueryContext
 ): Promise<Promise<IEmploymentResponse>[]> => {
   authCheck(req)
   const result = await Employment.find()
@@ -22,7 +22,7 @@ export const createEmployment = async (
   {
     input: { employee, department, start_date, end_date },
   }: ICreateEmploymentInput,
-  { req }: QueryContext,
+  { req }: QueryContext
 ): Promise<IEmploymentResponse> => {
   authCheck(req)
   const duplicate = await Employment.findOne({

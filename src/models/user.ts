@@ -28,5 +28,5 @@ const userSchema = new Schema({
 export const UserModel = mongoose.model<IUser & Document>(
   'User',
   userSchema,
-  'users',
+  'users'
 )

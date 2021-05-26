@@ -9,31 +9,31 @@ import { getSingleEmployee } from '../employees/helpers'
 import { getSingleDepartment } from '../departments/helpers'
 
 export const employmentLoader = new DataLoader((ids) =>
-  getEmployments(ids as string[]),
+  getEmployments(ids as string[])
 )
 
 export const getEmployments = async (
-  ids: string[],
+  ids: string[]
 ): Promise<Promise<IEmploymentResponse>[]> => {
   const employments = await Employment.find({ _id: { $in: ids } })
   employments.sort(
     (a: IEmployment, b: IEmployment) =>
-      ids.indexOf(a._id.toString()) - ids.indexOf(b._id.toString()),
+      ids.indexOf(a._id.toString()) - ids.indexOf(b._id.toString())
   )
   return employments.map(transformEmployment)
 }
 
 export const getEmploymentsByEmployee = async (
-  id: string,
+  id: string
 ): Promise<Promise<IEmploymentResponse>[]> => {
   const employments = await Employment.find({
-    employee: (id as never) as IEmployee,
+    employee: id as never as IEmployee,
   })
   return employments.map(transformEmployment)
 }
 
 export const getSingleEmployment = async (
-  id: string,
+  id: string
 ): Promise<IEmploymentResponse> => {
   const employment = await employmentLoader.load(id.toString())
   if (!employment) throw new Error(`Employment record were not found`)
@@ -48,8 +48,8 @@ export const transformEmployment = async ({
   end_date,
 }: IEmployment): Promise<IEmploymentResponse> => ({
   _id,
-  employee: await getSingleEmployee((employee as never) as string),
-  department: await getSingleDepartment((department as never) as string),
+  employee: await getSingleEmployee(employee as never as string),
+  department: await getSingleDepartment(department as never as string),
   start_date,
   end_date,
 })

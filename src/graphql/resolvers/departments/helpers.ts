@@ -5,14 +5,14 @@ import { Department } from '../../../models'
 import { IDepartment } from '../../../models/departmnet'
 
 export const departmentLoader = new DataLoader((ids) =>
-  getDepartments(ids as string[]),
+  getDepartments(ids as string[])
 )
 
 export const getDepartments = async (ids: string[]): Promise<IDepartment[]> => {
   const departments = await Department.find({ _id: { $in: ids } })
   departments.sort(
     (a: IDepartment, b: IDepartment) =>
-      ids.indexOf(a._id.toString()) - ids.indexOf(b._id.toString()),
+      ids.indexOf(a._id.toString()) - ids.indexOf(b._id.toString())
   )
   return departments.map(transformDepartment)
 }

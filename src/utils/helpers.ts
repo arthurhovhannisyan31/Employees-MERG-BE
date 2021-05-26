@@ -16,15 +16,15 @@ export const authCheck = (req: IAuthRequest): void => {
 }
 
 export const getErrorCode = (
-  errorName: typeof ErrorMessages[keyof typeof ErrorMessages],
+  errorName: typeof ErrorMessages[keyof typeof ErrorMessages]
 ): ErrorType => errorTypeMap[errorName]
 
 export const customFormatError = (
-  err: GraphQLError,
+  err: GraphQLError
 ): GraphQLError | ErrorType => {
   if (err.message in ErrorMessages) {
     const error = getErrorCode(
-      ErrorMessages[err.message as keyof typeof ErrorMessages],
+      ErrorMessages[err.message as keyof typeof ErrorMessages]
     )
     return {
       message: error.message,
@@ -37,7 +37,7 @@ export const customFormatError = (
 export const customCorsCheck = (
   req: Request,
   res: Response,
-  next: NextFunction,
+  next: NextFunction
 ): Response | void => {
   res.setHeader('Access-Control-Allow-Origin', '*')
   res.setHeader('Access-Control-Allow-Methods', 'POST,GET,OPTIONS')

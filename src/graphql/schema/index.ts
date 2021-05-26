@@ -1,6 +1,6 @@
 // deps
-import { buildSchema } from 'graphql'
-// local
+import { buildSchema, GraphQLSchema } from 'graphql'
+// helpers
 import {
   type as departmentType,
   input as departmentInput,
@@ -49,9 +49,8 @@ import {
   mutation as paycheckMutation,
   query as paycheckQuery,
 } from './paycheck'
-// helpers
 
-export const schema = buildSchema(`
+export const schema: GraphQLSchema = buildSchema(`
   ${departmentType}
   ${departmentInput}
   ${authType}

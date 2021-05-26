@@ -12,7 +12,7 @@ import { authCheck } from '../../../utils/helpers'
 
 export const employeesTitles = async (
   _: never,
-  req: IAuthRequest,
+  req: IAuthRequest
 ): Promise<Promise<IEmployeeTitle>[]> => {
   authCheck(req)
   const result = await EmployeeTitle.find()
@@ -23,7 +23,7 @@ export const createEmployeeTitle = async (
   {
     input: { employee, title, start_date, end_date },
   }: ICreateEmployeeTitleInput,
-  { req }: QueryContext,
+  { req }: QueryContext
 ): Promise<IEmployeeTitle> => {
   authCheck(req)
   const duplicate = await EmployeeTitle.findOne({

@@ -8,7 +8,7 @@ import { authCheck } from '../../../utils/helpers'
 
 export const titles = async (
   _: never,
-  { req }: QueryContext,
+  { req }: QueryContext
 ): Promise<ITitle[]> => {
   authCheck(req)
   const result = await Title.find()
@@ -17,7 +17,7 @@ export const titles = async (
 
 export const createTitle = async (
   { input: { name } }: ITitleInput,
-  { req }: QueryContext,
+  { req }: QueryContext
 ): Promise<ITitle> => {
   authCheck(req)
   const duplicate = await Title.findOne({ name })

@@ -3,11 +3,6 @@
 // helpers
 
 // release 0.
-+ add set cookies
-- express-session
-- logout clear session
-
-// release 0.
 - registration
 - forgot password + email with link
 - change password
@@ -25,7 +20,6 @@ ex: User.find({ _id: { $in: userIds } }).lean()
   requireAdmin,
 
 // todo create full CRUD functions
-- add register
 
 Refactor
 - move all data loaders to gql context

@@ -10,7 +10,7 @@ import { COOKIE_NAME } from '../../../constants'
 
 export const createUser = async (
   { userInput: { email, password } }: ICreateUserInput,
-  { req }: QueryContext,
+  { req }: QueryContext
 ): Promise<IUser> => {
   const existingUser = await User.findOne({ email })
   if (existingUser) {
@@ -32,7 +32,7 @@ export const createUser = async (
 
 export const login = async (
   { email, password }: TLoginInput,
-  { req }: QueryContext,
+  { req }: QueryContext
 ): Promise<IAuthData | Error> => {
   const user = await User.findOne({ email })
   if (!user) {
@@ -53,24 +53,23 @@ export const login = async (
 
 export const logout = (
   _: never,
-  { req, res }: QueryContext,
+  { req, res }: QueryContext
 ): Promise<boolean> => {
   return new Promise((resolve) =>
     req.session.destroy((err) => {
       res.clearCookie(COOKIE_NAME)
       if (err) {
-        console.log(`session.destroy failed, error: ${err}`)
         resolve(false)
         return
       }
       resolve(true)
-    }),
+    })
   )
 }
 
 export const me = async (
   _: unknown,
-  { req }: QueryContext,
+  { req }: QueryContext
 ): Promise<UserCredentials | Error> => {
   authCheck(req)
   const user = await User.findOne({ _id: req.session.userId })

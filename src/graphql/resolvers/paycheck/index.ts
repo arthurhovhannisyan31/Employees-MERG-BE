@@ -8,7 +8,7 @@ import { authCheck } from '../../../utils/helpers'
 
 export const paycheckHistory = async (
   _: never,
-  { req }: QueryContext,
+  { req }: QueryContext
 ): Promise<Promise<IPaycheck>[]> => {
   authCheck(req)
   const result = await Paycheck.find()
@@ -17,7 +17,7 @@ export const paycheckHistory = async (
 
 export const createPaycheck = async (
   { input: { employee, salary, start_date, end_date } }: ICreatePaycheckInput,
-  { req }: QueryContext,
+  { req }: QueryContext
 ): Promise<IPaycheck> => {
   authCheck(req)
   const duplicate = await Paycheck.findOne({
@@ -28,7 +28,7 @@ export const createPaycheck = async (
   })
   if (duplicate) {
     throw new Error(
-      `Paycheck for period ${start_date}-${end_date} for employee ${employee} for amount ${salary} already exist`,
+      `Paycheck for period ${start_date}-${end_date} for employee ${employee} for amount ${salary} already exist`
     )
   }
   const paycheck = new Paycheck({

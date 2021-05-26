@@ -6,7 +6,7 @@ import { User } from '../../../models'
 import { IUser } from '../../../models/user'
 
 export const userLoader = new DataLoader(
-  (userIds): Promise<IUser[]> => getUsers(userIds as string[]),
+  (userIds): Promise<IUser[]> => getUsers(userIds as string[])
 )
 
 export const getUsers = async (userIds: string[]): Promise<IUser[]> => {
@@ -29,7 +29,7 @@ export const getSingleUser = async (userId: string): Promise<IUser> => {
 
 export const verifyPassword = async (
   passwordAttempt: string,
-  hashedPassword: string,
+  hashedPassword: string
 ): Promise<boolean> => await compare(passwordAttempt, hashedPassword)
 
 export const hashPassword = async (password: string): Promise<string> =>

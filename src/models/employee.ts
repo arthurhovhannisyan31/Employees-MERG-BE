@@ -87,5 +87,5 @@ const EmployeeSchema = new Schema({
 export const EmployeeModel = mongoose.model<IEmployee & Document>(
   'Employee',
   EmployeeSchema,
-  'employees',
+  'employees'
 )

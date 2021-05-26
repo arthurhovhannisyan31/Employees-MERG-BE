@@ -15,7 +15,7 @@ import { authCheck } from '../../../utils/helpers'
 
 export const employees = async (
   { input }: IGetEmployeesInput,
-  { req }: QueryContext,
+  { req }: QueryContext
 ): Promise<IEmployees> => {
   authCheck(req)
   const { limit = 100, offset = 0 } = input || {}
@@ -27,7 +27,7 @@ export const employees = async (
 }
 export const employee = async (
   { input: { id } }: IGetEmployeeInput,
-  { req }: QueryContext,
+  { req }: QueryContext
 ): Promise<IEmployee> => {
   authCheck(req)
   const result = await Employee.findOne({ _id: id })
@@ -38,7 +38,7 @@ export const employee = async (
 }
 export const createEmployee = async (
   { input }: ICreateEmployeeInput,
-  { req }: QueryContext,
+  { req }: QueryContext
 ): Promise<IEmployee> => {
   authCheck(req)
   const duplicate = await Employee.findOne({
@@ -47,7 +47,7 @@ export const createEmployee = async (
   })
   if (duplicate) {
     throw new Error(
-      `Employee name:${input.first_name}, ${input.last_name} already exists`,
+      `Employee name:${input.first_name}, ${input.last_name} already exists`
     )
   }
   const employee = new Employee(input)
@@ -57,7 +57,7 @@ export const createEmployee = async (
 
 export const updateEmployee = async (
   { input: props }: IUpdateEmployeeInput,
-  { req }: QueryContext,
+  { req }: QueryContext
 ): Promise<IEmployee> => {
   authCheck(req)
   const { id, ...updateProps } = props

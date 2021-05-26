@@ -8,7 +8,7 @@ import { authCheck } from '../../../utils/helpers'
 
 export const genders = async (
   _: never,
-  { req }: QueryContext,
+  { req }: QueryContext
 ): Promise<IGender[]> => {
   authCheck(req)
   const result = await Gender.find()
@@ -17,7 +17,7 @@ export const genders = async (
 
 export const createGender = async (
   { input: { name } }: ICreateGenderInput,
-  { req }: QueryContext,
+  { req }: QueryContext
 ): Promise<IGender> => {
   authCheck(req)
   const duplicate = await Gender.findOne({ name })

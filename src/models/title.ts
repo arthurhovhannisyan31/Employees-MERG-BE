@@ -21,5 +21,5 @@ const TitleSchema = new Schema({
 export const TitleModel = mongoose.model<ITitle & Document>(
   'Title',
   TitleSchema,
-  'titles',
+  'titles'
 )

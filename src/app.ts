@@ -34,14 +34,14 @@ const main = async (): Promise<void> => {
         res,
         sessionStore,
       },
-    })),
+    }))
   )
   try {
     await mongoose.connect(CONNECT_CONFIG.DB_CONNECTION_STRING, mongoOptions)
     await app.listen(CONNECT_CONFIG.PORT)
     console.log(`Server started at http://localhost:${CONNECT_CONFIG.PORT}`)
     console.log(
-      `Please see graphql environment at http://localhost:${CONNECT_CONFIG.PORT}/graphql`,
+      `Please see graphql environment at http://localhost:${CONNECT_CONFIG.PORT}/graphql`
     )
   } catch (err) {
     console.log(err)

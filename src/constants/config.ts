@@ -17,7 +17,7 @@ export const CONNECT_CONFIG: IConnectConfig = {
   IS_DEV: !__PROD__,
   DB_CONNECTION_STRING: getConnectionString(process.env.DB_NAME || ''),
   SESSION_DB_CONNECTION_STRING: getConnectionString(
-    process.env.SESSION_DB_NAME || '',
+    process.env.SESSION_DB_NAME || ''
   ),
 }
 

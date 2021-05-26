@@ -11,7 +11,7 @@ export const getGenders = async (ids: string[]): Promise<IGender[]> => {
   const genders = await Gender.find({ _id: { $in: ids } })
   genders.sort(
     (a: IGender, b: IGender) =>
-      ids.indexOf(a._id.toString()) - ids.indexOf(b._id.toString()),
+      ids.indexOf(a._id.toString()) - ids.indexOf(b._id.toString())
   )
   return genders.map(transformGender)
 }
