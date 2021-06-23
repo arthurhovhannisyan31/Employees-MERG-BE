@@ -28,3 +28,7 @@ Refactor
 https://nodejs.org/api/esm.html#esm_import_specifiers
 "type": "module",
 
+-- add mongoose lazy and select
+-- add me request answer based on req.session
+-- add X-CSRF-Token
+-- add rolling true to express-session config
