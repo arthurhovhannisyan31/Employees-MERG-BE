@@ -32,3 +32,5 @@ https://nodejs.org/api/esm.html#esm_import_specifiers
 -- add me request answer based on req.session
 -- add X-CSRF-Token
 -- add rolling true to express-session config
+
+-- response with 200 for me query on login
