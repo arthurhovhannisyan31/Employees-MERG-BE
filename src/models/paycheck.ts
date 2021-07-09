@@ -1,21 +1,21 @@
 // deps
 import mongoose, { Document, Schema } from 'mongoose'
 // model
-import { IEmployee } from './employee'
+import { Employee } from './employee'
 
-export interface IPaycheck {
+export interface Paycheck {
   _id: string
-  employee: IEmployee
+  employee: Employee
   salary: number
   start_date: string
   end_date: string
 }
 
-export interface ICreatePaycheckInput {
-  input: IPaycheck
+export interface CreatePaycheckInput {
+  input: Paycheck
 }
 
-export interface IGetPaychecksInput {
+export interface GetPaychecksInput {
   input: {
     id: string
     start_date: string
@@ -44,7 +44,7 @@ const PaycheckSchema = new Schema({
   },
 })
 
-export const PaycheckModel = mongoose.model<IPaycheck & Document>(
+export const PaycheckModel = mongoose.model<Paycheck & Document>(
   'Paycheck',
   PaycheckSchema,
   'paychecks'

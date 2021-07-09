@@ -24,7 +24,6 @@ export const CONNECT_CONFIG: IConnectConfig = {
 export const mongoOptions: Record<string, boolean> = {
   useUnifiedTopology: true,
   useNewUrlParser: true,
-  useFindAndModify: false,
 }
 
 export const getSessionMdlOptions = (store: MongoStore): SessionOptions => ({

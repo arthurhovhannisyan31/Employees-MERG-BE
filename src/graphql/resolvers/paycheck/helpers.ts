@@ -1,22 +1,22 @@
 // deps
 import DataLoader from 'dataloader'
 // model
-import { Paycheck } from '../../../models'
-import { IEmployee } from '../../../models/employee'
-import { IPaycheck } from '../../../models/paycheck'
+import { PaycheckModel } from '../../../models'
+import { Employee } from '../../../models/employee'
+import { Paycheck } from '../../../models/paycheck'
 // helpers
 import { getSingleEmployee } from '../employees/helpers'
 
 export const paycheckLoader = new DataLoader(
-  (ids): Promise<Promise<IPaycheck>[]> => getPaycheckHistory(ids as string[])
+  (ids): Promise<Promise<Paycheck>[]> => getPaycheckHistory(ids as string[])
 )
 
 export const getPaycheckHistory = async (
   ids: string[]
-): Promise<Promise<IPaycheck>[]> => {
-  const paycheckHistory = await Paycheck.find({ _id: { $in: ids } })
+): Promise<Promise<Paycheck>[]> => {
+  const paycheckHistory = await PaycheckModel.find({ _id: { $in: ids } })
   paycheckHistory.sort(
-    (a: IPaycheck, b: IPaycheck) =>
+    (a: Paycheck, b: Paycheck) =>
       ids.indexOf(a._id.toString()) - ids.indexOf(b._id.toString())
   )
   return paycheckHistory.map(transformPaycheck)
@@ -24,14 +24,14 @@ export const getPaycheckHistory = async (
 
 export const getPaycheckByEmployee = async (
   id: string
-): Promise<Promise<IPaycheck>[]> => {
-  const paycheckHistory = await Paycheck.find({
-    employee: id as never as IEmployee,
+): Promise<Promise<Paycheck>[]> => {
+  const paycheckHistory = await PaycheckModel.find({
+    employee: id as never as Employee,
   })
   return paycheckHistory.map(transformPaycheck)
 }
 
-export const getSinglePaycheck = async (id: string): Promise<IPaycheck> => {
+export const getSinglePaycheck = async (id: string): Promise<Paycheck> => {
   const paycheck = await paycheckLoader.load(id.toString())
   if (!paycheck) {
     throw new Error('Paycheck not found')
@@ -45,7 +45,7 @@ export const transformPaycheck = async ({
   salary,
   start_date,
   end_date,
-}: IPaycheck): Promise<IPaycheck> => ({
+}: Paycheck): Promise<Paycheck> => ({
   _id,
   salary,
   start_date,

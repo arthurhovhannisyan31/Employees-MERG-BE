@@ -1,13 +1,13 @@
 // deps
 import mongoose, { Document, Schema } from 'mongoose'
 
-export interface IUser {
+export interface User {
   _id: string
   email: string
   password: string
 }
 
-export interface ICreateUserInput {
+export interface CreateUserInput {
   userInput: {
     email: string
     password: string
@@ -25,7 +25,7 @@ const userSchema = new Schema({
   },
 })
 
-export const UserModel = mongoose.model<IUser & Document>(
+export const UserModel = mongoose.model<User & Document>(
   'User',
   userSchema,
   'users'

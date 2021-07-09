@@ -2,14 +2,14 @@
 import { GraphQLError } from 'graphql'
 import { NextFunction, Request, Response } from 'express'
 // model
-import { IAuthRequest } from '../models/auth'
+import { AuthRequest } from '../models/auth'
 import { ErrorType, errorResponses } from '../constants'
 import { ErrorProps } from '../models/common'
 
 export const dateToISOString = (date: string): string =>
   new Date(date).toISOString()
 
-export const authCheck = (req: IAuthRequest): void => {
+export const authCheck = (req: AuthRequest): void => {
   if (!req.session.userId) {
     throw new Error(ErrorType.Unauthorized)
   }

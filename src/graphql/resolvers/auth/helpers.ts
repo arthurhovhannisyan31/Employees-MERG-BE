@@ -2,21 +2,21 @@
 import { hash, compare } from 'bcryptjs'
 import DataLoader from 'dataloader'
 // model
-import { User } from '../../../models'
-import { IUser } from '../../../models/user'
+import { UserModel } from '../../../models'
+import { User } from '../../../models/user'
 
 export const userLoader = new DataLoader(
-  (userIds): Promise<IUser[]> => getUsers(userIds as string[])
+  (userIds): Promise<User[]> => getUsers(userIds as string[])
 )
 
-export const getUsers = async (userIds: string[]): Promise<IUser[]> => {
+export const getUsers = async (userIds: string[]): Promise<User[]> => {
   try {
-    return await User.find({ _id: { $in: userIds } })
+    return await UserModel.find({ _id: { $in: userIds } })
   } catch (err) {
     throw err
   }
 }
-export const getSingleUser = async (userId: string): Promise<IUser> => {
+export const getSingleUser = async (userId: string): Promise<User> => {
   const user = await userLoader.load(userId.toString())
   if (!user) throw new Error('User not found')
   return {

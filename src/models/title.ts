@@ -1,13 +1,13 @@
 // deps
 import mongoose, { Document, Schema } from 'mongoose'
 
-export interface ITitle {
+export interface Title {
   _id: string
   name: string
 }
 
-export interface ITitleInput {
-  input: ITitle
+export interface TitleInput {
+  input: Title
 }
 
 const TitleSchema = new Schema({
@@ -18,7 +18,7 @@ const TitleSchema = new Schema({
   },
 })
 
-export const TitleModel = mongoose.model<ITitle & Document>(
+export const TitleModel = mongoose.model<Title & Document>(
   'Title',
   TitleSchema,
   'titles'

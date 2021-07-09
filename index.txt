@@ -4,8 +4,6 @@
 
 Features:
 - registration
-- forgot password + email with link
-- change password
 
 - setup jest and add tests
 - test for all queries and mutations
@@ -23,12 +21,18 @@ ex: User.find({ _id: { $in: userIds } }).lean()
 Refactor
 - move all data loaders to gql context
 
--- add mongoose lazy and select
--- add me request answer based on req.session
--- add X-CSRF-Token
--- add rolling true to express-session config
+- add mongoose lazy and select
+- add me request answer based on req.session
+- add X-CSRF-Token
+- add rolling true to express-session config
+
+Security:
+All login events should be recorded including success. (create table and add authentication logging)
 
 + response with 200 for me query on login
+- add forgot password resolver
+- send password recovery by link
+- add change password resolver
 + add type generation
 + add forgot password resolver
 - add change password resolver

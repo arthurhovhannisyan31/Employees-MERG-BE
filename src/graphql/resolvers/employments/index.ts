@@ -1,8 +1,8 @@
 // model
-import { Employment } from '../../../models'
+import { EmploymentModel } from '../../../models'
 import {
-  ICreateEmploymentInput,
-  IEmploymentResponse,
+  CreateEmploymentInput,
+  EmploymentResponse,
 } from '../../../models/employment'
 import { QueryContext } from '../../../models/common'
 // helpers
@@ -12,20 +12,20 @@ import { authCheck } from '../../../utils/helpers'
 export const employments = async (
   _: never,
   { req }: QueryContext
-): Promise<Promise<IEmploymentResponse>[]> => {
+): Promise<Promise<EmploymentResponse>[]> => {
   authCheck(req)
-  const result = await Employment.find()
+  const result = await EmploymentModel.find()
   return result.map(transformEmployment)
 }
 
 export const createEmployment = async (
   {
     input: { employee, department, start_date, end_date },
-  }: ICreateEmploymentInput,
+  }: CreateEmploymentInput,
   { req }: QueryContext
-): Promise<IEmploymentResponse> => {
+): Promise<EmploymentResponse> => {
   authCheck(req)
-  const duplicate = await Employment.findOne({
+  const duplicate = await EmploymentModel.findOne({
     employee,
     department,
     start_date,
@@ -34,7 +34,7 @@ export const createEmployment = async (
   if (duplicate) {
     throw new Error(`Record already exists`)
   }
-  const employment = new Employment({
+  const employment = new EmploymentModel({
     employee,
     department,
     start_date,

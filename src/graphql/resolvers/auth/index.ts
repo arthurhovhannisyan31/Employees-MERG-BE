@@ -1,9 +1,13 @@
+// deps
+import { v4 as v4uuid } from 'uuid'
+import addHours from 'date-fns/addHours'
 // model
-import { IUser, UserModel as User } from '../../../models/user'
-import { ICreateUserInput } from '../../../models/user'
+import { User, UserModel } from '../../../models/user'
+import { ForgetPasswordModel } from '../../../models/forgetPassword'
+import { CreateUserInput } from '../../../models/user'
 import {
-  IAuthData,
-  TLoginInput,
+  AuthData,
+  AuthInput,
   UserCredentials,
   UserResponse,
 } from '../../../models/auth'
@@ -11,25 +15,24 @@ import { QueryContext } from '../../../models/common'
 // helpers
 import { authCheck } from '../../../utils/helpers'
 import { verifyPassword, hashPassword } from './helpers'
-import { COOKIE_NAME } from '../../../constants'
+import { COOKIE_NAME, FORGET_PASSWORD_PREFIX } from '../../../constants'
+import { getUserResponseErrors, isEmailValid } from '../../../utils/error'
 
 export const createUser = async (
-  { userInput: { email, password } }: ICreateUserInput,
+  { userInput: { email, password } }: CreateUserInput,
   { req }: QueryContext
-): Promise<UserResponse<IUser>> => {
-  const existingUser = await User.findOne({ email })
+): Promise<UserResponse<User>> => {
+  if (!isEmailValid) {
+    return getUserResponseErrors([['email', `Email is not valid`]])
+  }
+  const existingUser = await UserModel.findOne({ email })
   if (existingUser) {
-    return {
-      errors: [
-        {
-          field: 'email',
-          message: `User with email ${email} exists already`,
-        },
-      ],
-    }
+    return getUserResponseErrors([
+      ['email', `User with email ${email} exists already`],
+    ])
   }
   const hashedPassword = await hashPassword(password)
-  const user = new User({
+  const user = new UserModel({
     email,
     password: hashedPassword,
   })
@@ -44,31 +47,48 @@ export const createUser = async (
   }
 }
 
-export const login = async (
-  { email, password }: TLoginInput,
-  { req }: QueryContext
-): Promise<UserResponse<IAuthData>> => {
-  const user = await User.findOne({ email })
+// export const updatePassword = (
+//   { email, password }: AuthInput,
+//   { req }: QueryContext
+// ): Promise<UserResponse<AuthData>> => {
+//
+// }
+
+export const forgotPassword = async ({
+  email,
+}: AuthInput): Promise<UserResponse<AuthData> | void> => {
+  if (!isEmailValid) {
+    return getUserResponseErrors([['email', `Email is not valid`]])
+  }
+  const user = await UserModel.findOne({ email })
   if (!user) {
-    return {
-      errors: [
-        {
-          field: 'email',
-          message: `User with email ${email} does not exist`,
-        },
-      ],
-    }
+    return
+  }
+  const forgottenPassword = new ForgetPasswordModel({
+    key: `${FORGET_PASSWORD_PREFIX}-${v4uuid()}`,
+    userId: user._id,
+    expiration: addHours(Date.now(), 1),
+  })
+  await forgottenPassword.save()
+  // todo send email
+}
+
+export const login = async (
+  { email, password }: AuthInput,
+  { req }: QueryContext
+): Promise<UserResponse<AuthData>> => {
+  if (!isEmailValid) {
+    return getUserResponseErrors([['email', `Email is not valid`]])
+  }
+  const user = await UserModel.findOne({ email })
+  if (!user) {
+    return getUserResponseErrors([
+      ['email', `User with email ${email} does not exist`],
+    ])
   }
   const isPasswordCorrect = await verifyPassword(password, user.password)
   if (!isPasswordCorrect) {
-    return {
-      errors: [
-        {
-          field: 'password',
-          message: 'Password is incorrect',
-        },
-      ],
-    }
+    return getUserResponseErrors([['password', 'Password is incorrect']])
   }
   req.session.userId = user.id
   return {
@@ -102,7 +122,7 @@ export const me = async (
   { req }: QueryContext
 ): Promise<UserResponse<UserCredentials> | undefined> => {
   authCheck(req)
-  const user = await User.findOne({ _id: req.session.userId })
+  const user = await UserModel.findOne({ _id: req.session.userId })
   if (!user) {
     return
   }

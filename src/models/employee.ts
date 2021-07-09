@@ -1,48 +1,48 @@
 // deps
 import mongoose, { Document, Schema } from 'mongoose'
 // model
-import { IGender } from './gender'
-import { IDepartment } from './departmnet'
-import { ITitle } from './title'
-import { IPaycheck } from './paycheck'
-import { IEmployeeTitle } from './employeeTitle'
-import { IEmployment } from './employment'
+import { Gender } from './gender'
+import { Department } from './departmnet'
+import { Title } from './title'
+import { Paycheck } from './paycheck'
+import { EmployeeTitle } from './employeeTitle'
+import { Employment } from './employment'
 
-export interface IEmployee {
+export interface Employee {
   _id: string
   birth_date: string
   first_name: string
   last_name: string
   hire_date: string
-  gender: IGender
-  department: IDepartment
-  title: ITitle
+  gender: Gender
+  department: Department
+  title: Title
 }
 
-export interface IEmployeeResponse extends IEmployee {
-  paychecks: Promise<IPaycheck>[]
-  titles: Promise<IEmployeeTitle>[]
-  employments: Promise<IEmployment>[]
+export interface EmployeeResponse extends Employee {
+  paychecks: Promise<Paycheck>[]
+  titles: Promise<EmployeeTitle>[]
+  employments: Promise<Employment>[]
 }
 
-export interface IEmployees {
-  nodes: Promise<IEmployeeResponse>[]
+export interface Employees {
+  nodes: Promise<EmployeeResponse>[]
   count: number
 }
 
-export interface ICreateEmployeeInput {
-  input: IEmployee
+export interface CreateEmployeeInput {
+  input: Employee
 }
-export interface IUpdateEmployeeInput {
-  input: Partial<IEmployee> & { id: string }
+export interface UpdateEmployeeInput {
+  input: Partial<Employee> & { id: string }
 }
-export interface IGetEmployeeInput {
+export interface GetEmployeeInput {
   input: {
     id: string
   }
 }
 
-export interface IGetEmployeesInput {
+export interface GetEmployeesInput {
   input: {
     limit: number
     offset: number
@@ -84,7 +84,7 @@ const EmployeeSchema = new Schema({
   },
 })
 
-export const EmployeeModel = mongoose.model<IEmployee & Document>(
+export const EmployeeModel = mongoose.model<Employee & Document>(
   'Employee',
   EmployeeSchema,
   'employees'

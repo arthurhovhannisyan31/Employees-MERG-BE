@@ -1,10 +1,10 @@
 // model
-import { EmployeeTitle } from '../../../models'
+import { EmployeeTitleModel } from '../../../models'
 import {
-  ICreateEmployeeTitleInput,
-  IEmployeeTitle,
+  CreateEmployeeTitleInput,
+  EmployeeTitle,
 } from '../../../models/employeeTitle'
-import { IAuthRequest } from '../../../models/auth'
+import { AuthRequest } from '../../../models/auth'
 import { QueryContext } from '../../../models/common'
 // helpers
 import { transformEmployeeTitle } from './helpers'
@@ -12,21 +12,21 @@ import { authCheck } from '../../../utils/helpers'
 
 export const employeesTitles = async (
   _: never,
-  req: IAuthRequest
-): Promise<Promise<IEmployeeTitle>[]> => {
+  req: AuthRequest
+): Promise<Promise<EmployeeTitle>[]> => {
   authCheck(req)
-  const result = await EmployeeTitle.find()
+  const result = await EmployeeTitleModel.find()
   return result.map(transformEmployeeTitle)
 }
 
 export const createEmployeeTitle = async (
   {
     input: { employee, title, start_date, end_date },
-  }: ICreateEmployeeTitleInput,
+  }: CreateEmployeeTitleInput,
   { req }: QueryContext
-): Promise<IEmployeeTitle> => {
+): Promise<EmployeeTitle> => {
   authCheck(req)
-  const duplicate = await EmployeeTitle.findOne({
+  const duplicate = await EmployeeTitleModel.findOne({
     employee,
     title,
     start_date,
@@ -35,7 +35,7 @@ export const createEmployeeTitle = async (
   if (duplicate) {
     throw new Error(`Employee ${employee} title ${title} record already exists`)
   }
-  const employeeTitle = new EmployeeTitle({
+  const employeeTitle = new EmployeeTitleModel({
     employee,
     title,
     start_date,

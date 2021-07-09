@@ -1,19 +1,19 @@
 // deps
 import mongoose, { Document, Schema } from 'mongoose'
 // model
-import { IEmployee } from './employee'
-import { ITitle } from './title'
+import { Employee } from './employee'
+import { Title } from './title'
 
-export interface IEmployeeTitle {
+export interface EmployeeTitle {
   _id: string
-  employee: IEmployee
-  title: ITitle
+  employee: Employee
+  title: Title
   start_date: string
   end_date: string
 }
 
-export interface ICreateEmployeeTitleInput {
-  input: IEmployeeTitle
+export interface CreateEmployeeTitleInput {
+  input: EmployeeTitle
 }
 
 const EmployeeTitleSchema = new Schema({
@@ -37,7 +37,7 @@ const EmployeeTitleSchema = new Schema({
   },
 })
 
-export const EmployeeTitleModel = mongoose.model<IEmployeeTitle & Document>(
+export const EmployeeTitleModel = mongoose.model<EmployeeTitle & Document>(
   'EmployeeTitle',
   EmployeeTitleSchema,
   'employees_title_history'
