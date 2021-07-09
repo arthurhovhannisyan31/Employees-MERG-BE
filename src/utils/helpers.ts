@@ -3,29 +3,26 @@ import { GraphQLError } from 'graphql'
 import { NextFunction, Request, Response } from 'express'
 // model
 import { IAuthRequest } from '../models/auth'
-import { ErrorMessages, errorTypeMap } from '../constants'
-import { ErrorType } from '../models/common'
+import { ErrorType, errorResponses } from '../constants'
+import { ErrorProps } from '../models/common'
 
 export const dateToISOString = (date: string): string =>
   new Date(date).toISOString()
 
 export const authCheck = (req: IAuthRequest): void => {
   if (!req.session.userId) {
-    throw new Error(ErrorMessages.Unauthorized)
+    throw new Error(ErrorType.Unauthorized)
   }
 }
 
-export const getErrorCode = (
-  errorName: typeof ErrorMessages[keyof typeof ErrorMessages]
-): ErrorType => errorTypeMap[errorName]
+export const getErrorCode = (errorName: ErrorType): ErrorProps =>
+  errorResponses[errorName]
 
 export const customFormatError = (
   err: GraphQLError
-): GraphQLError | ErrorType => {
-  if (err.message in ErrorMessages) {
-    const error = getErrorCode(
-      ErrorMessages[err.message as keyof typeof ErrorMessages]
-    )
+): GraphQLError | ErrorProps => {
+  if (err.message in ErrorType) {
+    const error = getErrorCode(err.message as ErrorType)
     return {
       message: error.message,
       statusCode: error.statusCode,

@@ -11,6 +11,22 @@ export const type = `
   type AuthData {
     userCredentials: UserCredentials!
   }
+  type FieldError {
+    field: String!
+    message: String!
+  }
+  type LoginResponse {
+    errors: [FieldError!]
+    data: AuthData
+  }
+  type MeResponse {
+    errors: [FieldError!]
+    data: UserCredentials
+  }
+  type CreateUserResponse {
+    errors: [FieldError!]
+    data: User
+  }
 `
 export const input = `
   input UserInput {
@@ -20,11 +36,11 @@ export const input = `
 `
 
 export const query = `
-  login(email: String!, password: String!): AuthData!
+  login(email: String!, password: String!): LoginResponse!
   logout: Boolean
-  me: UserCredentials!
+  me: MeResponse!
 `
 
 export const mutation = `
-  createUser(userInput: UserInput!): User
+  createUser(userInput: UserInput!): CreateUserResponse!
 `
