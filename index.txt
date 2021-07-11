@@ -30,6 +30,7 @@ Security:
 All login events should be recorded including success. (create table and add authentication logging)
 
 + response with 200 for me query on login
++ add type generation
 - add forgot password resolver
 - send password recovery by link
 - add change password resolver

@@ -6,13 +6,13 @@ export async function sendEmail(to: string[], html: string): Promise<void> {
     port: 587,
     secure: false,
     auth: {
-      user: 'dv5apgzr34wyovjz@ethereal.email',
-      pass: 'A3hccPK9gTCaAMNaUk',
+      user: process.env.NODEMAILER_USER,
+      pass: process.env.NODEMAILER_PASSWORD,
     },
   })
 
   const info = await transporter.sendMail({
-    from: '"Fred Foo 👻" <restore-password@employees.com>',
+    from: '<restore-password@employees.com>',
     to: to.join(', '),
     subject: 'Change password',
     html,

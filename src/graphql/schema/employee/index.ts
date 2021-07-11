@@ -47,7 +47,7 @@ export const input = `
 `
 
 export const query = `
-  employees(input: GetEmployeesInput): Employees!
+  employees(input: GetEmployeesInput!): Employees!
   employee(input: GetEmployeeInput!): Employee!
 `
 

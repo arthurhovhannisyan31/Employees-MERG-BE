@@ -5,7 +5,10 @@ import { Session } from 'express-session'
 import { User } from './user'
 import { FieldError } from './common'
 
-export type AuthInput = Pick<User, 'email' | 'password'>
+export type ChangePasswordInput = {
+  token: string
+  newPassword: string
+}
 export type UserCredentials = Pick<User, 'email' | '_id'>
 export interface AuthData {
   userCredentials: UserCredentials

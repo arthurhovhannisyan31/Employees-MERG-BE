@@ -29,16 +29,24 @@ export const type = `
   }
 `
 export const input = `
+  input LoginInput {
+    email: String!
+    password: String!
+  }
   input UserInput {
     email: String!
     password: String!
   }
+  input ForgotPassword{
+    email: String!
+  }
 `
 
 export const query = `
-  login(email: String!, password: String!): LoginResponse!
+  login(input: LoginInput!): LoginResponse!
   logout: Boolean
   me: MeResponse!
+  forgotPassword(input: ForgotPassword!): LoginResponse
 `
 
 export const mutation = `
