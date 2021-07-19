@@ -11,4 +11,5 @@ export const getUserResponseErrors = (
   }
 }
 
-export const isEmailValid = (email: string): boolean => regExp.email.test(email)
+export const isEmailValid = (email: string): boolean =>
+  !!email.match(regExp.email)

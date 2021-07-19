@@ -38,8 +38,30 @@ export const verifyPassword = async (
 export const hashPassword = async (password: string): Promise<string> =>
   await hash(password, 12)
 
-export const getRestorePasswordTemplate = (token: string): string =>
-  `<a href="window.location.host/change-password/${token}">Reset password</a>`
+export const getRestorePasswordTemplate = (
+  token: string,
+  origin = ''
+): string =>
+  `
+    <!DOCTYPE html>
+    <html lang="en">
+      <head>
+        <meta charset="UTF-8" />
+        <meta
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+        name="viewport"
+        />
+        <meta content="ie=edge" http-equiv="X-UA-Compatible" />
+        <title>Document</title>
+      </head>
+      <body>
+        <div id="root">
+          Please open the link: ${origin}/change-password/${token}
+          <a rel="nofollow" href="${origin}/change-password/${token}">Reset password</a>
+        </div>
+      </body>
+    </html>
+  `
 
 export const isForgetTokenExpired = (
   token: ForgetPassword & Document

@@ -7,8 +7,8 @@
   "scripts": {
     "start": "node ./dist/app.js",
     "build": "tsc",
-    "start:dev": "nodemon -r dotenv/config ./dist/app.js",
-    "start:dev-session-debug": "DEBUG=express-session nodemon -r dotenv/config ./dist/app.js",
+    "start:dev": "nodemon -r dotenv/config ./dist/app.js dotenv_config_path=./configs/env/.env-dev",
+    "start:prod": "nodemon -r dotenv/config ./dist/app.js dotenv_config_path=./configs/env/.env",
     "gentypes": "graphql-codegen --config codegen.yml",
     "watch": "tsc -w",
     "lint": "eslint --ext .ts,.tsx,.js src/",

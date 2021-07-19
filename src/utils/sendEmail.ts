@@ -1,24 +1,26 @@
 import nodemailer from 'nodemailer'
-
+// nodemailerEmployees
 export async function sendEmail(to: string[], html: string): Promise<void> {
   const transporter = nodemailer.createTransport({
-    host: 'smtp.ethereal.email',
-    port: 587,
-    secure: false,
+    service: 'Yandex',
+    host: 'smtp.yandex.ru',
+    port: 465,
+    secure: true,
     auth: {
-      user: process.env.NODEMAILER_USER,
-      pass: process.env.NODEMAILER_PASSWORD,
+      user: 'employeesemployees',
+      pass: 'miulaanzfnbtzjqq',
     },
   })
 
   const info = await transporter.sendMail({
-    from: '<restore-password@employees.com>',
+    from: '"Employees" <employeesemployees@yandex.ru>',
     to: to.join(', '),
     subject: 'Change password',
-    html,
+    html, // todo html page
   })
 
   // TODO remove
+  console.log(info)
   console.log('Message sent: %s', info.messageId)
   console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info))
 }

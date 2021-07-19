@@ -26,6 +26,9 @@ Refactor
 - add X-CSRF-Token
 - add rolling true to express-session config
 
+Cache:
+- add loaded users to IndexedDB as a cache
+
 Security:
 All login events should be recorded including success. (create table and add authentication logging)
 

@@ -18,7 +18,6 @@ import {
 import { COOKIE_NAME, FORGET_PASSWORD_PREFIX } from '../../../constants'
 import { getUserResponseErrors, isEmailValid } from '../../../utils/error'
 import { sendEmail } from '../../../utils/sendEmail'
-import { regExp } from '../../../constants/regExp'
 
 export const createUser = async (
   { userInput: { email, password } }: CreateUserInput,
@@ -72,22 +71,9 @@ export const createUser = async (
 //   }
 // }
 
-export const forgotPassword = async (
-  { input: { email } }: RootQueryForgotPasswordArgs,
-  { req }: QueryContext
-): Promise<UserResponse<AuthData> | void> => {
-  console.log('test')
-  console.log('test')
-  console.log(email, regExp.email, regExp.email.test(email))
-  console.log(req.baseUrl)
-  console.log(req.hostname)
-  console.log(req.ip)
-  console.log(req.ips)
-  console.log(req.url)
-  console.log(req.originalUrl)
-  console.log(req.headers)
-  console.log(req.headers.origin)
-
+export const forgotPassword = async ({
+  input: { email },
+}: RootQueryForgotPasswordArgs): Promise<UserResponse<AuthData> | void> => {
   if (!isEmailValid(email)) {
     return getUserResponseErrors([['email', `Email is not valid`]])
   }
@@ -101,7 +87,10 @@ export const forgotPassword = async (
     expiration: addHours(Date.now(), 1).toISOString(),
   })
   await forgottenPassword.save()
-  await sendEmail([email], getRestorePasswordTemplate(forgottenPassword.key))
+  await sendEmail(
+    [email],
+    getRestorePasswordTemplate(forgottenPassword.key, process.env.FE_URL)
+  )
   return
 }
 
