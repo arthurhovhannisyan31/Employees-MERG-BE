@@ -30,12 +30,12 @@ Cache:
 - add loaded users to IndexedDB as a cache
 
 Security:
-All login events should be recorded including success. (create table and add authentication logging)
+- run localhost on https (http redirects to https)
+- log all login events in db (success, errors, etc). (create table and add authentication logging)
 
 + response with 200 for me query on login
 + add type generation
-- add forgot password resolver
-- send password recovery by link
++ add forgot password resolver
 - add change password resolver
 + add type generation
 + add forgot password resolver
@@ -46,3 +46,4 @@ All login events should be recorded including success. (create table and add aut
 - eslint cycle dependencies
 - types generation
 - lint-staged
+- send password recovery by link
