@@ -1,14 +1,12 @@
 // model
 import { EmployeeTitleModel } from '../../../models'
-import {
-  CreateEmployeeTitleInput,
-  EmployeeTitle,
-} from '../../../models/employeeTitle'
+import { CreateEmployeeTitleInput } from '../../../models/employeeTitle'
 import { AuthRequest } from '../../../models/auth'
 import { QueryContext } from '../../../models/common'
 // helpers
 import { transformEmployeeTitle } from './helpers'
 import { authCheck } from '../../../utils/helpers'
+import { EmployeeTitle } from '../../../models/generated'
 
 export const employeesTitles = async (
   _: never,

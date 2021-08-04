@@ -1,10 +1,7 @@
 // deps
 import mongoose, { Document, Schema } from 'mongoose'
-
-export interface Gender {
-  _id: string
-  name: string
-}
+// model
+import { Gender } from './generated'
 
 const GenderSchema = new Schema({
   name: {
@@ -14,10 +11,6 @@ const GenderSchema = new Schema({
     trim: true,
   },
 })
-
-export interface CreateGenderInput {
-  input: Gender
-}
 
 export const GenderModel = mongoose.model<Gender & Document>(
   'Gender',

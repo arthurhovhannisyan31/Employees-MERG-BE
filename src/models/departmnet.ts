@@ -1,14 +1,7 @@
 // deps
 import mongoose, { Document, Schema } from 'mongoose'
-
-export interface Department {
-  _id: string
-  name: string
-}
-
-export interface CreateDepartmentInput {
-  input: Department
-}
+// model
+import { Department } from './generated'
 
 const DepartmentSchema = new Schema({
   name: {

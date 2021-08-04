@@ -77,6 +77,18 @@ export type Employee = {
   gender: Scalars['ID'];
   department: Scalars['ID'];
   title: Scalars['ID'];
+};
+
+export type EmployeeExtended = {
+  __typename?: 'EmployeeExtended';
+  _id: Scalars['ID'];
+  birth_date: Scalars['String'];
+  first_name: Scalars['String'];
+  last_name: Scalars['String'];
+  hire_date: Scalars['String'];
+  gender: Scalars['ID'];
+  department: Scalars['ID'];
+  title: Scalars['ID'];
   paychecks: Array<Maybe<Paycheck>>;
   titles: Array<Maybe<EmployeeTitle>>;
   employments: Array<Maybe<Employment>>;
@@ -113,6 +125,13 @@ export type FieldError = {
 };
 
 export type ForgotPassword = {
+  __typename?: 'ForgotPassword';
+  key: Scalars['String'];
+  userId: Scalars['String'];
+  expiration: Scalars['String'];
+};
+
+export type ForgotPasswordInput = {
   email: Scalars['String'];
 };
 
@@ -177,7 +196,7 @@ export type RootMutationCreateDepartmentArgs = {
 
 
 export type RootMutationCreateUserArgs = {
-  userInput: UserInput;
+  input: UserInput;
 };
 
 
@@ -238,12 +257,12 @@ export type RootQueryLoginArgs = {
 
 
 export type RootQueryForgotPasswordArgs = {
-  input: ForgotPassword;
+  input: ForgotPasswordInput;
 };
 
 
 export type RootQueryEmployeesArgs = {
-  input: GetEmployeesInput;
+  input?: Maybe<GetEmployeesInput>;
 };
 
 
@@ -258,13 +277,13 @@ export type Title = {
 };
 
 export type UpdateEmployeeInput = {
-  id: Scalars['ID'];
-  birth_date: Scalars['String'];
-  first_name: Scalars['String'];
-  last_name: Scalars['String'];
-  hire_date: Scalars['String'];
-  department: Scalars['ID'];
-  title: Scalars['ID'];
+  id?: Maybe<Scalars['ID']>;
+  birth_date?: Maybe<Scalars['String']>;
+  first_name?: Maybe<Scalars['String']>;
+  last_name?: Maybe<Scalars['String']>;
+  hire_date?: Maybe<Scalars['String']>;
+  department?: Maybe<Scalars['ID']>;
+  title?: Maybe<Scalars['ID']>;
 };
 
 export type User = {

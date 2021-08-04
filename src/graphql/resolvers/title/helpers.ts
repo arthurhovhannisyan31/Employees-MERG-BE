@@ -2,7 +2,7 @@
 import DataLoader from 'dataloader'
 // model
 import { TitleModel } from '../../../models'
-import { Title } from '../../../models/title'
+import { Title } from '../../../models/generated'
 
 export const titleLoader = new DataLoader((ids) => getTitles(ids as string[]))
 

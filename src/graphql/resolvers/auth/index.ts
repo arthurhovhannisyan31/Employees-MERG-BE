@@ -2,13 +2,15 @@
 import { v4 as v4uuid } from 'uuid'
 import addHours from 'date-fns/addHours'
 // model
-import { User, UserModel, CreateUserInput } from '../../../models/user'
-import { ForgetPasswordModel } from '../../../models/forgetPassword'
+import { UserModel } from '../../../models'
+import { ForgotPasswordModel } from '../../../models/forgetPassword'
 import { AuthData, UserCredentials, UserResponse } from '../../../models/auth'
 import { QueryContext } from '../../../models/common'
 import {
+  RootMutationCreateUserArgs,
   RootQueryForgotPasswordArgs,
   RootQueryLoginArgs,
+  User,
 } from '../../../models/generated'
 // helpers
 import { authCheck } from '../../../utils/helpers'
@@ -22,7 +24,7 @@ import { getUserResponseErrors, isEmailValid } from '../../../utils/error'
 import { sendEmail } from '../../../utils/sendEmail'
 
 export const createUser = async (
-  { userInput: { email, password } }: CreateUserInput,
+  { input: { email, password } }: RootMutationCreateUserArgs,
   { req }: QueryContext
 ): Promise<UserResponse<User>> => {
   if (!isEmailValid(email)) {
@@ -57,13 +59,13 @@ export const createUser = async (
 //   if (!isEmailValid) {
 //     return getUserResponseErrors([['email', `Email is not valid`]])
 //   }
-//   const forgottenPasswordToken = await ForgetPasswordModel.findOne({
+//   const forgottenPasswordToken = await ForgotPasswordModel.findOne({
 //     key: `${FORGET_PASSWORD_PREFIX}-${token}`,
 //   })
 //   // if expired
 //   if (
 //     !forgottenPasswordToken ||
-//     !isForgetTokenExpired(forgottenPasswordToken)
+//     !isForgotTokenExpired(forgottenPasswordToken)
 //   ) {
 //     return getUserResponseErrors([['token', 'Token expired']])
 //   }
@@ -76,7 +78,6 @@ export const createUser = async (
 export const forgotPassword = async ({
   input: { email },
 }: RootQueryForgotPasswordArgs): Promise<UserResponse<AuthData> | void> => {
-  console.log(email)
   if (!isEmailValid(email)) {
     return getUserResponseErrors([['email', `Email is not valid`]])
   }
@@ -84,7 +85,7 @@ export const forgotPassword = async ({
   if (!user) {
     return
   }
-  const forgottenPassword = new ForgetPasswordModel({
+  const forgottenPassword = new ForgotPasswordModel({
     key: `${FORGET_PASSWORD_PREFIX}-${v4uuid()}`,
     userId: user._id,
     expiration: addHours(Date.now(), 1).toISOString(),
@@ -101,7 +102,6 @@ export const login = async (
   { input: { email, password } }: RootQueryLoginArgs,
   { req }: QueryContext
 ): Promise<UserResponse<AuthData>> => {
-  console.log(email, password)
   if (!isEmailValid(email)) {
     return getUserResponseErrors([['email', `Email is not valid`]])
   }
@@ -111,7 +111,10 @@ export const login = async (
       ['email', `User with email ${email} does not exist`],
     ])
   }
-  const isPasswordCorrect = await verifyPassword(password, user.password)
+  const isPasswordCorrect = await verifyPassword(
+    password,
+    user?.password as string
+  )
   if (!isPasswordCorrect) {
     return getUserResponseErrors([['password', 'Password is incorrect']])
   }

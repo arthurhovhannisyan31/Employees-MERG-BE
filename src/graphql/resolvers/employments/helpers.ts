@@ -2,8 +2,9 @@
 import DataLoader from 'dataloader'
 // model
 import { EmploymentModel } from '../../../models'
-import { Employment, EmploymentResponse } from '../../../models/employment'
-import { Employee } from '../../../models/employee'
+import { EmploymentResponse } from '../../../models/employment'
+import { Employment } from '../../../models/generated'
+import { Employee } from '../../../models/generated'
 // helpers
 import { getSingleEmployee } from '../employees/helpers'
 import { getSingleDepartment } from '../departments/helpers'

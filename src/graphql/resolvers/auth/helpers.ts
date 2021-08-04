@@ -5,8 +5,7 @@ import { Document } from 'mongoose'
 import dateHours from 'date-fns/addHours'
 // model
 import { UserModel } from '../../../models'
-import { User } from '../../../models/user'
-import { ForgetPassword } from '../../../models/forgetPassword'
+import { User, ForgotPassword } from '../../../models/generated'
 
 export const userLoader = new DataLoader(
   (userIds): Promise<User[]> => getUsers(userIds as string[])
@@ -63,8 +62,8 @@ export const getRestorePasswordTemplate = (
     </html>
   `
 
-export const isForgetTokenExpired = (
-  token: ForgetPassword & Document
+export const isForgotTokenExpired = (
+  token: ForgotPassword & Document
 ): boolean => {
   return new Date(token.expiration) <= dateHours(Date.now(), 1)
 }

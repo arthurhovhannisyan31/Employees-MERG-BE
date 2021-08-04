@@ -1,15 +1,7 @@
 // deps
 import mongoose, { Document, Schema } from 'mongoose'
 // model
-import { Employee } from './employee'
-
-export interface Paycheck {
-  _id: string
-  employee: Employee
-  salary: number
-  start_date: string
-  end_date: string
-}
+import { Paycheck } from './generated'
 
 export interface CreatePaycheckInput {
   input: Paycheck

@@ -1,7 +1,10 @@
 // model
 import { DepartmentModel } from '../../../models'
-import { CreateDepartmentInput, Department } from '../../../models/departmnet'
 import { QueryContext } from '../../../models/common'
+import {
+  RootMutationCreateDepartmentArgs,
+  Department,
+} from '../../../models/generated'
 // helpers
 import { transformDepartment } from './helpers'
 import { authCheck } from '../../../utils/helpers'
@@ -16,7 +19,7 @@ export const departments = async (
 }
 
 export const createDepartment = async (
-  { input: { name } }: CreateDepartmentInput,
+  { input: { name } }: RootMutationCreateDepartmentArgs,
   { req }: QueryContext
 ): Promise<Department> => {
   authCheck(req)

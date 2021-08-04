@@ -1,7 +1,7 @@
 // model
-import { Title, TitleModel } from '../../../models/title'
-import { TitleInput } from '../../../models/title'
+import { TitleModel } from '../../../models'
 import { QueryContext } from '../../../models/common'
+import { RootMutationCreateTitleArgs, Title } from '../../../models/generated'
 // helpers
 import { transformTitle } from './helpers'
 import { authCheck } from '../../../utils/helpers'
@@ -16,7 +16,7 @@ export const titles = async (
 }
 
 export const createTitle = async (
-  { input: { name } }: TitleInput,
+  { input: { name } }: RootMutationCreateTitleArgs,
   { req }: QueryContext
 ): Promise<Title> => {
   authCheck(req)

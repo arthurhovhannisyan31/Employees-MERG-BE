@@ -27,6 +27,11 @@ export const type = `
     errors: [FieldError!]
     data: User
   }
+  type ForgotPassword {
+    key: String!
+    userId: String!
+    expiration: String!
+  }
 `
 export const input = `
   input LoginInput {
@@ -37,7 +42,7 @@ export const input = `
     email: String!
     password: String!
   }
-  input ForgotPassword{
+  input ForgotPasswordInput {
     email: String!
   }
 `
@@ -46,9 +51,9 @@ export const query = `
   login(input: LoginInput!): LoginResponse!
   logout: Boolean
   me: MeResponse!
-  forgotPassword(input: ForgotPassword!): LoginResponse
+  forgotPassword(input: ForgotPasswordInput!): LoginResponse
 `
 
 export const mutation = `
-  createUser(userInput: UserInput!): CreateUserResponse!
+  createUser(input: UserInput!): CreateUserResponse!
 `

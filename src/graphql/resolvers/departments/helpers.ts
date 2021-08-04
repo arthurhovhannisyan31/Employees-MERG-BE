@@ -2,7 +2,7 @@
 import DataLoader from 'dataloader'
 // models
 import { DepartmentModel } from '../../../models'
-import { Department } from '../../../models/departmnet'
+import { Department } from '../../../models/generated'
 
 export const departmentLoader = new DataLoader((ids) =>
   getDepartments(ids as string[])

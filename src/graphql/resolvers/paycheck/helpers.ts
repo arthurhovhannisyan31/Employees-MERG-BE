@@ -2,8 +2,7 @@
 import DataLoader from 'dataloader'
 // model
 import { PaycheckModel } from '../../../models'
-import { Employee } from '../../../models/employee'
-import { Paycheck } from '../../../models/paycheck'
+import { Employee, Paycheck } from '../../../models/generated'
 // helpers
 import { getSingleEmployee } from '../employees/helpers'
 

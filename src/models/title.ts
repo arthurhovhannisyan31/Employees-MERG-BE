@@ -1,14 +1,7 @@
 // deps
 import mongoose, { Document, Schema } from 'mongoose'
-
-export interface Title {
-  _id: string
-  name: string
-}
-
-export interface TitleInput {
-  input: Title
-}
+// model
+import { Title } from './generated'
 
 const TitleSchema = new Schema({
   name: {

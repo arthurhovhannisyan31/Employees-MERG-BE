@@ -1,20 +1,12 @@
 // deps
 import mongoose, { Document, Schema } from 'mongoose'
 // model
-import { Employee, EmployeeResponse } from './employee'
-import { Department } from './departmnet'
-
-export interface Employment {
-  _id: string
-  employee: Employee
-  department: Department
-  start_date: string
-  end_date: string
-}
+import { EmployeeExtended } from './employee'
+import { Employment, Department } from './generated'
 
 export interface EmploymentResponse {
   _id: string
-  employee: EmployeeResponse
+  employee: EmployeeExtended
   department: Department
   start_date: string
   end_date: string

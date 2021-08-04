@@ -2,7 +2,7 @@
 import { Request } from 'express'
 import { Session } from 'express-session'
 // model
-import { User } from './user'
+import { User } from './generated'
 import { FieldError } from './common'
 
 export type ChangePasswordInput = {

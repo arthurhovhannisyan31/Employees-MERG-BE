@@ -1,7 +1,8 @@
 // model
 import { PaycheckModel } from '../../../models'
-import { CreatePaycheckInput, Paycheck } from '../../../models/paycheck'
+import { CreatePaycheckInput } from '../../../models/paycheck'
 import { QueryContext } from '../../../models/common'
+import { Paycheck } from '../../../models/generated'
 // helpers
 import { transformPaycheck } from './helpers'
 import { authCheck } from '../../../utils/helpers'
