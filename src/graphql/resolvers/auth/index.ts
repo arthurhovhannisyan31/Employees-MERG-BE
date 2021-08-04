@@ -2,12 +2,14 @@
 import { v4 as v4uuid } from 'uuid'
 import addHours from 'date-fns/addHours'
 // model
-import { User, UserModel } from '../../../models/user'
+import { User, UserModel, CreateUserInput } from '../../../models/user'
 import { ForgetPasswordModel } from '../../../models/forgetPassword'
-import { CreateUserInput } from '../../../models/user'
 import { AuthData, UserCredentials, UserResponse } from '../../../models/auth'
 import { QueryContext } from '../../../models/common'
-import { RootQueryForgotPasswordArgs } from '../../../models/generated'
+import {
+  RootQueryForgotPasswordArgs,
+  RootQueryLoginArgs,
+} from '../../../models/generated'
 // helpers
 import { authCheck } from '../../../utils/helpers'
 import {
@@ -74,6 +76,7 @@ export const createUser = async (
 export const forgotPassword = async ({
   input: { email },
 }: RootQueryForgotPasswordArgs): Promise<UserResponse<AuthData> | void> => {
+  console.log(email)
   if (!isEmailValid(email)) {
     return getUserResponseErrors([['email', `Email is not valid`]])
   }
@@ -95,9 +98,10 @@ export const forgotPassword = async ({
 }
 
 export const login = async (
-  { email, password }: Pick<User, 'email' | 'password'>,
+  { input: { email, password } }: RootQueryLoginArgs,
   { req }: QueryContext
 ): Promise<UserResponse<AuthData>> => {
+  console.log(email, password)
   if (!isEmailValid(email)) {
     return getUserResponseErrors([['email', `Email is not valid`]])
   }

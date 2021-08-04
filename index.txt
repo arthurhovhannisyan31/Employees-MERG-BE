@@ -25,6 +25,7 @@ Refactor
 - add me request answer based on req.session
 - add X-CSRF-Token
 - add rolling true to express-session config
+- replace types with generated
 
 Cache:
 - add loaded users to IndexedDB as a cache

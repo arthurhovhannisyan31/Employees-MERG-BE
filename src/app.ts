@@ -1,6 +1,5 @@
 // deps
 import express from 'express'
-import bodyParser from 'body-parser'
 import { graphqlHTTP } from 'express-graphql'
 import mongoose from 'mongoose'
 import session from 'express-session'
@@ -20,7 +19,12 @@ const main = async (): Promise<void> => {
   })
 
   app.use(customCorsCheck)
-  app.use(bodyParser.json())
+  app.use(express.json())
+  app.use(
+    express.urlencoded({
+      extended: true,
+    })
+  )
   app.set('trust proxy', true)
   app.use(session(getSessionMdlOptions(sessionStore)))
   app.use(
@@ -39,7 +43,7 @@ const main = async (): Promise<void> => {
   )
   try {
     await mongoose.connect(CONNECT_CONFIG.DB_CONNECTION_STRING, mongoOptions)
-    await app.listen(CONNECT_CONFIG.PORT)
+    app.listen(CONNECT_CONFIG.PORT)
     console.log(`Server started at http://localhost:${CONNECT_CONFIG.PORT}`)
     console.log(
       `Please see graphql environment at http://localhost:${CONNECT_CONFIG.PORT}/graphql`
