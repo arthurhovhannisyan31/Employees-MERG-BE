@@ -82,9 +82,7 @@ export const forgotPassword = async ({
     return getUserResponseErrors([['email', `Email is not valid`]])
   }
   const user = await UserModel.findOne({ email })
-  if (!user) {
-    return
-  }
+  if (!user) return
   const forgottenPassword = new ForgotPasswordModel({
     key: `${FORGET_PASSWORD_PREFIX}-${v4uuid()}`,
     userId: user._id,
@@ -93,7 +91,10 @@ export const forgotPassword = async ({
   await forgottenPassword.save()
   await sendEmail(
     [email],
-    getRestorePasswordTemplate(forgottenPassword.key, process.env.FE_URL)
+    getRestorePasswordTemplate(
+      forgottenPassword.key,
+      process.env.NODEMAILER_BASE_URL
+    )
   )
   return
 }

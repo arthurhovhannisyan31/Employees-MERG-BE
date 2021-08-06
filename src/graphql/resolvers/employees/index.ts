@@ -20,7 +20,6 @@ export const employees = async (
   authCheck(req)
   const { limit = 100, offset = 0 } = input || {}
   const nodes = await EmployeeModel.find().limit(limit).skip(offset)
-  console.log(nodes)
   return {
     nodes: nodes.map(transformEmployee),
     count: await EmployeeModel.countDocuments(),
@@ -56,7 +55,6 @@ export const createEmployee = async (
   return transformEmployee(result)
 }
 
-// TODO: replace with generated types
 export const updateEmployee = async (
   { input: props }: RootMutationUpdateEmployeeArgs,
   { req }: QueryContext
