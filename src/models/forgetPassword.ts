@@ -1,9 +1,9 @@
 // deps
 import mongoose, { Document, Schema } from 'mongoose'
 // model
-import { ForgotPassword } from './generated'
+import { ForgottenPassword } from './generated'
 
-const forgetPasswordSchema = new Schema({
+const forgottenPasswordSchema = new Schema({
   key: {
     type: String,
     required: true,
@@ -18,8 +18,6 @@ const forgetPasswordSchema = new Schema({
   },
 })
 
-export const ForgotPasswordModel = mongoose.model<ForgotPassword & Document>(
-  'ForgotPassword',
-  forgetPasswordSchema,
-  'forget_passwords'
-)
+export const ForgottenPasswordModel = mongoose.model<
+  ForgottenPassword & Document
+>('ForgottenPassword', forgottenPasswordSchema, 'forgotten_passwords')

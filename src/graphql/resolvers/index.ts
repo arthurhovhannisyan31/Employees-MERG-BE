@@ -1,5 +1,5 @@
 // helpers
-import { createUser, login, me, logout, forgotPassword } from './auth'
+import { createUser, login, me, logout, forgottenPassword } from './auth'
 import { departments, createDepartment } from './departments'
 import {
   employees,
@@ -19,7 +19,7 @@ export const resolvers = {
   login,
   logout,
   me,
-  forgotPassword,
+  forgottenPassword,
   // Department
   departments,
   createDepartment,

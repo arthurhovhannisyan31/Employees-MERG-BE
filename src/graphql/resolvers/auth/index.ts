@@ -3,13 +3,14 @@ import { v4 as v4uuid } from 'uuid'
 import addHours from 'date-fns/addHours'
 // model
 import { UserModel } from '../../../models'
-import { ForgotPasswordModel } from '../../../models/forgetPassword'
+import { ForgottenPasswordModel } from '../../../models/forgetPassword'
 import { AuthData, UserCredentials, UserResponse } from '../../../models/auth'
 import { QueryContext } from '../../../models/common'
 import {
   RootMutationCreateUserArgs,
-  RootQueryForgotPasswordArgs,
+  RootQueryForgottenPasswordArgs,
   RootQueryLoginArgs,
+  // RootQueryUpdatePasswordArgs,
   User,
 } from '../../../models/generated'
 // helpers
@@ -52,38 +53,43 @@ export const createUser = async (
   }
 }
 
-// export const restorePassword = async (
-//   { newPassword, token }: ChangePasswordInput,
-//   { req }: QueryContext
-// ): Promise<UserResponse<AuthData>> => {
-//   if (!isEmailValid) {
-//     return getUserResponseErrors([['email', `Email is not valid`]])
-//   }
-//   const forgottenPasswordToken = await ForgotPasswordModel.findOne({
-//     key: `${FORGET_PASSWORD_PREFIX}-${token}`,
-//   })
-//   // if expired
-//   if (
-//     !forgottenPasswordToken ||
-//     !isForgotTokenExpired(forgottenPasswordToken)
-//   ) {
-//     return getUserResponseErrors([['token', 'Token expired']])
-//   }
-//   const user = UserModel.find({ _id: forgottenPasswordToken.userId })
-//   if (!user) {
-//     return getUserResponseErrors([['token', 'User not found']])
-//   }
+// export const updatePassword = async ({
+//   input: { password, key },
+// }: RootQueryUpdatePasswordArgs): Promise<boolean> => {
+// check if has entry
+// get user id from enty
+// update password
+// remove entry
+// TODO continue here
+// if (!isEmailValid) {
+//   return getUserResponseErrors([['email', `Email is not valid`]])
+// }
+// const forgottenPasswordToken = await ForgottenPasswordModel.findOne({
+//   key: `${FORGET_PASSWORD_PREFIX}-${token}`,
+// })
+// // if expired
+// if (
+//   !forgottenPasswordToken ||
+//   !isForgottenTokenExpired(forgottenPasswordToken)
+// ) {
+//   return getUserResponseErrors([['token', 'Token expired']])
+// }
+// const user = UserModel.find({ _id: forgottenPasswordToken.userId })
+// if (!user) {
+//   return getUserResponseErrors([['token', 'User not found']])
+// }
+// return true
 // }
 
-export const forgotPassword = async ({
+export const forgottenPassword = async ({
   input: { email },
-}: RootQueryForgotPasswordArgs): Promise<UserResponse<AuthData> | void> => {
+}: RootQueryForgottenPasswordArgs): Promise<UserResponse<AuthData> | void> => {
   if (!isEmailValid(email)) {
     return getUserResponseErrors([['email', `Email is not valid`]])
   }
   const user = await UserModel.findOne({ email })
   if (!user) return
-  const forgottenPassword = new ForgotPasswordModel({
+  const forgottenPassword = new ForgottenPasswordModel({
     key: `${FORGET_PASSWORD_PREFIX}-${v4uuid()}`,
     userId: user._id,
     expiration: addHours(Date.now(), 1).toISOString(),

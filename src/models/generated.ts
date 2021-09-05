@@ -124,14 +124,14 @@ export type FieldError = {
   message: Scalars['String'];
 };
 
-export type ForgotPassword = {
-  __typename?: 'ForgotPassword';
+export type ForgottenPassword = {
+  __typename?: 'ForgottenPassword';
   key: Scalars['String'];
   userId: Scalars['String'];
   expiration: Scalars['String'];
 };
 
-export type ForgotPasswordInput = {
+export type ForgottenPasswordInput = {
   email: Scalars['String'];
 };
 
@@ -238,9 +238,10 @@ export type RootQuery = {
   __typename?: 'RootQuery';
   departments: Array<Department>;
   login: LoginResponse;
-  logout?: Maybe<Scalars['Boolean']>;
+  logout: Scalars['Boolean'];
   me: MeResponse;
-  forgotPassword?: Maybe<LoginResponse>;
+  forgottenPassword?: Maybe<LoginResponse>;
+  updatePassword: Scalars['Boolean'];
   genders: Array<Gender>;
   titles: Array<Title>;
   employments: Array<Employment>;
@@ -256,8 +257,13 @@ export type RootQueryLoginArgs = {
 };
 
 
-export type RootQueryForgotPasswordArgs = {
-  input: ForgotPasswordInput;
+export type RootQueryForgottenPasswordArgs = {
+  input: ForgottenPasswordInput;
+};
+
+
+export type RootQueryUpdatePasswordArgs = {
+  input: UpdatePasswordInput;
 };
 
 
@@ -284,6 +290,11 @@ export type UpdateEmployeeInput = {
   hire_date?: Maybe<Scalars['String']>;
   department?: Maybe<Scalars['ID']>;
   title?: Maybe<Scalars['ID']>;
+};
+
+export type UpdatePasswordInput = {
+  key: Scalars['String'];
+  password: Scalars['String'];
 };
 
 export type User = {
