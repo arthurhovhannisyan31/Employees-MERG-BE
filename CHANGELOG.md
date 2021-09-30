@@ -1,3 +1,12 @@
+# v0.1.3
+## Authorization improvements
++ Extract webpack and typescript configs to configs folder
++ Add Eslint groups rules, import cycle dependencies checks
++ Add types generation
++ Add lint-staged to pre-commit
++ Add change password feature and password strength validation
++ Email reset link
+
 # v0.1.2
 ## Authorization improvements
 - Add cookies authorization
