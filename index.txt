@@ -28,5 +28,13 @@ Refactor
 -- add X-CSRF-Token
 -- add rolling true to express-session config
 
-Releases:
 + response with 200 for me query on login
++ add type generation
++ add forgot password resolver
+- add change password resolver
+- send password recovery by link
+- eslint groups rules
+- eslint import, error
+- eslint cycle dependencies
+- types generation
+- lint-staged
