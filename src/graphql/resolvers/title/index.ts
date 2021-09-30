@@ -1,10 +1,8 @@
-// model
 import { TitleModel } from '../../../models'
 import { QueryContext } from '../../../models/common'
 import { RootMutationCreateTitleArgs, Title } from '../../../models/generated'
-// helpers
-import { transformTitle } from './helpers'
 import { authCheck } from '../../../utils/helpers'
+import { transformTitle } from './helpers'
 
 export const titles = async (
   _: never,

@@ -1,9 +1,7 @@
-// deps
 import DataLoader from 'dataloader'
-// model
+
 import { PaycheckModel } from '../../../models'
 import { Employee, Paycheck } from '../../../models/generated'
-// helpers
 import { getSingleEmployee } from '../employees/helpers'
 
 export const paycheckLoader = new DataLoader(

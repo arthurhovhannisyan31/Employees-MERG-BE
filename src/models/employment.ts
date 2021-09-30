@@ -1,6 +1,5 @@
-// deps
 import mongoose, { Document, Schema } from 'mongoose'
-// model
+
 import { EmployeeExtended } from './employee'
 import { Employment, Department } from './generated'
 

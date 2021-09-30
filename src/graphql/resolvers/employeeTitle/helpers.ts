@@ -1,10 +1,7 @@
-// deps
 import DataLoader from 'dataloader'
-// model
-import { EmployeeTitle } from '../../../models/generated'
+
 import { EmployeeTitleModel } from '../../../models'
-import { Employee } from '../../../models/generated'
-// helpers
+import { EmployeeTitle, Employee } from '../../../models/generated'
 import { getSingleEmployee } from '../employees/helpers'
 import { getSingleTitle } from '../title/helpers'
 

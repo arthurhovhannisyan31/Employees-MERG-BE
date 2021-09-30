@@ -1,6 +1,6 @@
-// model
-import { EmployeesExtended } from '../../../models/employee'
+import { EmployeeModel } from '../../../models'
 import { QueryContext } from '../../../models/common'
+import { EmployeesExtended } from '../../../models/employee'
 import {
   Employee,
   RootMutationCreateEmployeeArgs,
@@ -8,10 +8,8 @@ import {
   RootQueryEmployeeArgs,
   RootQueryEmployeesArgs,
 } from '../../../models/generated'
-// helpers
-import { EmployeeModel } from '../../../models'
-import { transformEmployee } from './helpers'
 import { authCheck } from '../../../utils/helpers'
+import { transformEmployee } from './helpers'
 
 export const employees = async (
   { input }: RootQueryEmployeesArgs,

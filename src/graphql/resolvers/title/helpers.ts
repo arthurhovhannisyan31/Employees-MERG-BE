@@ -1,6 +1,5 @@
-// deps
 import DataLoader from 'dataloader'
-// model
+
 import { TitleModel } from '../../../models'
 import { Title } from '../../../models/generated'
 

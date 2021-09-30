@@ -1,13 +1,11 @@
-// model
 import { EmploymentModel } from '../../../models'
+import { QueryContext } from '../../../models/common'
 import {
   CreateEmploymentInput,
   EmploymentResponse,
 } from '../../../models/employment'
-import { QueryContext } from '../../../models/common'
-// helpers
-import { transformEmployment } from './helpers'
 import { authCheck } from '../../../utils/helpers'
+import { transformEmployment } from './helpers'
 
 export const employments = async (
   _: never,

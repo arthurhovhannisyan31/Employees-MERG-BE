@@ -1,11 +1,9 @@
-// model
 import { PaycheckModel } from '../../../models'
-import { CreatePaycheckInput } from '../../../models/paycheck'
 import { QueryContext } from '../../../models/common'
 import { Paycheck } from '../../../models/generated'
-// helpers
-import { transformPaycheck } from './helpers'
+import { CreatePaycheckInput } from '../../../models/paycheck'
 import { authCheck } from '../../../utils/helpers'
+import { transformPaycheck } from './helpers'
 
 export const paycheckHistory = async (
   _: never,

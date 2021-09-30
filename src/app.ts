@@ -1,14 +1,13 @@
-// deps
+import MongoStore from 'connect-mongo'
 import express from 'express'
 import { graphqlHTTP } from 'express-graphql'
-import mongoose from 'mongoose'
 import session from 'express-session'
-import MongoStore from 'connect-mongo'
-// helpers
-import { schema } from './graphql/schema'
-import { resolvers } from './graphql/resolvers'
-import { customCorsCheck, customFormatError } from './utils/helpers'
+import mongoose from 'mongoose'
+
 import { CONNECT_CONFIG, getSessionMdlOptions, mongoOptions } from './constants'
+import { resolvers } from './graphql/resolvers'
+import { schema } from './graphql/schema'
+import { customCorsCheck, customFormatError } from './utils/helpers'
 
 const main = async (): Promise<void> => {
   const app = express()

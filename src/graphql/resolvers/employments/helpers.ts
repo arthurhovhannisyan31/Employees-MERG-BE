@@ -1,13 +1,10 @@
-// deps
 import DataLoader from 'dataloader'
-// model
+
 import { EmploymentModel } from '../../../models'
 import { EmploymentResponse } from '../../../models/employment'
-import { Employment } from '../../../models/generated'
-import { Employee } from '../../../models/generated'
-// helpers
-import { getSingleEmployee } from '../employees/helpers'
+import { Employment, Employee } from '../../../models/generated'
 import { getSingleDepartment } from '../departments/helpers'
+import { getSingleEmployee } from '../employees/helpers'
 
 export const employmentLoader = new DataLoader((ids) =>
   getEmployments(ids as string[])

@@ -1,9 +1,8 @@
-// deps
 import { Request } from 'express'
 import { Session } from 'express-session'
-// model
-import { User } from './generated'
+
 import { FieldError } from './common'
+import { User } from './generated'
 
 export type ChangePasswordInput = {
   token: string

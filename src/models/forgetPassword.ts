@@ -1,6 +1,5 @@
-// deps
 import mongoose, { Document, Schema } from 'mongoose'
-// model
+
 import { ForgottenPassword } from './generated'
 
 const forgottenPasswordSchema = new Schema({

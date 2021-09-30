@@ -1,6 +1,5 @@
-// deps
 import mongoose, { Document, Schema } from 'mongoose'
-// model
+
 import { EmployeeTitle } from './generated'
 
 export interface CreateEmployeeTitleInput {

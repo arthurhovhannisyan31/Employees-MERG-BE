@@ -1,6 +1,5 @@
-// deps
 import { CookieOptions } from 'express'
-// helpers
+
 import { __PROD__, CONNECT_CONFIG } from './config'
 
 export const COOKIE_NAME = process.env.COOKIE_NAME || ''

@@ -1,13 +1,11 @@
-// deps
 import DataLoader from 'dataloader'
-// model
+
 import { EmployeeModel } from '../../../models'
 import { EmployeeExtended } from '../../../models/employee'
 import { Employee } from '../../../models/generated'
-// helpers
-import { getPaycheckByEmployee } from '../paycheck/helpers'
 import { getEmployeeTitlesByEmployee } from '../employeeTitle/helpers'
 import { getEmploymentsByEmployee } from '../employments/helpers'
+import { getPaycheckByEmployee } from '../paycheck/helpers'
 
 export const employeeLoader = new DataLoader(
   (ids): Promise<Promise<EmployeeExtended>[]> => getEmployees(ids as string[])

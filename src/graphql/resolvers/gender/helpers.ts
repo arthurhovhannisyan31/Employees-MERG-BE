@@ -1,8 +1,6 @@
-// deps
 import DataLoader from 'dataloader'
-// local
+
 import { GenderModel } from '../../../models'
-// helpers
 import { Gender } from '../../../models/generated'
 
 export const genderLoader = new DataLoader((ids) => getGenders(ids as string[]))

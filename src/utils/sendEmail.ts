@@ -1,5 +1,5 @@
 import nodemailer from 'nodemailer'
-// nodemailerEmployees
+
 export async function sendEmail(to: string[], html: string): Promise<void> {
   const transporter = nodemailer.createTransport({
     service: 'Yandex',

@@ -1,7 +1,6 @@
-// deps
 import MongoStore from 'connect-mongo'
 import { SessionOptions } from 'express-session'
-// model
+
 import { IConnectConfig } from '../models/config'
 import { COOKIE_NAME, cookieOptions } from './auth'
 

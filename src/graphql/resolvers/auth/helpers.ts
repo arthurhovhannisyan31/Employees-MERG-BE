@@ -1,9 +1,8 @@
-// deps
 import { hash, compare } from 'bcryptjs'
 import DataLoader from 'dataloader'
-import { Document } from 'mongoose'
 import dateHours from 'date-fns/addHours'
-// model
+import { Document } from 'mongoose'
+
 import { UserModel } from '../../../models'
 import { User, ForgottenPassword } from '../../../models/generated'
 
@@ -11,13 +10,9 @@ export const userLoader = new DataLoader(
   (userIds): Promise<User[]> => getUsers(userIds as string[])
 )
 
-export const getUsers = async (userIds: string[]): Promise<User[]> => {
-  try {
-    return await UserModel.find({ _id: { $in: userIds } })
-  } catch (err) {
-    throw err
-  }
-}
+export const getUsers = async (userIds: string[]): Promise<User[]> =>
+  await UserModel.find({ _id: { $in: userIds } })
+
 export const getSingleUser = async (userId: string): Promise<User> => {
   const user = await userLoader.load(userId.toString())
   if (!user) throw new Error('User not found')

@@ -1,9 +1,8 @@
-// deps
-import { GraphQLError } from 'graphql'
 import { NextFunction, Request, Response } from 'express'
-// model
-import { AuthRequest } from '../models/auth'
+import { GraphQLError } from 'graphql'
+
 import { ErrorType, errorResponses } from '../constants'
+import { AuthRequest } from '../models/auth'
 import { ErrorProps } from '../models/common'
 
 export const dateToISOString = (date: string): string =>

@@ -1,6 +1,5 @@
-// deps
 import DataLoader from 'dataloader'
-// models
+
 import { DepartmentModel } from '../../../models'
 import { Department } from '../../../models/generated'
 

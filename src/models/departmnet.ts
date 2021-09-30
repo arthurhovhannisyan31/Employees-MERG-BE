@@ -1,6 +1,5 @@
-// deps
 import mongoose, { Document, Schema } from 'mongoose'
-// model
+
 import { Department } from './generated'
 
 const DepartmentSchema = new Schema({

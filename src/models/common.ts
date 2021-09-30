@@ -1,6 +1,5 @@
-// deps
 import { Response } from 'express'
-// model
+
 import { AuthRequest } from './auth'
 
 export interface QueryContext {

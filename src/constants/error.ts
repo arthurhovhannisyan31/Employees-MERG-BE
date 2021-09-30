@@ -1,4 +1,3 @@
-// model
 import { ErrorProps } from '../models/common'
 
 export enum ErrorType {

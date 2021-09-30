@@ -1,10 +1,8 @@
-// model
 import { GenderModel } from '../../../models'
 import { QueryContext } from '../../../models/common'
 import { Gender, RootMutationCreateGenderArgs } from '../../../models/generated'
-// helpers
-import { transformGender } from './helpers'
 import { authCheck } from '../../../utils/helpers'
+import { transformGender } from './helpers'
 
 export const genders = async (
   _: never,

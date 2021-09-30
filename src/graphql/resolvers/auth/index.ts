@@ -1,11 +1,11 @@
-// deps
-import { v4 as v4uuid } from 'uuid'
 import addHours from 'date-fns/addHours'
-// model
+import { v4 as v4uuid } from 'uuid'
+
+import { COOKIE_NAME, FORGET_PASSWORD_PREFIX } from '../../../constants'
 import { UserModel } from '../../../models'
-import { ForgottenPasswordModel } from '../../../models/forgetPassword'
 import { AuthData, UserCredentials, UserResponse } from '../../../models/auth'
 import { QueryContext } from '../../../models/common'
+import { ForgottenPasswordModel } from '../../../models/forgetPassword'
 import {
   RootMutationCreateUserArgs,
   RootQueryForgottenPasswordArgs,
@@ -13,16 +13,14 @@ import {
   // RootQueryUpdatePasswordArgs,
   User,
 } from '../../../models/generated'
-// helpers
+import { getUserResponseErrors, isEmailValid } from '../../../utils/error'
 import { authCheck } from '../../../utils/helpers'
+import { sendEmail } from '../../../utils/sendEmail'
 import {
   verifyPassword,
   hashPassword,
   getRestorePasswordTemplate,
 } from './helpers'
-import { COOKIE_NAME, FORGET_PASSWORD_PREFIX } from '../../../constants'
-import { getUserResponseErrors, isEmailValid } from '../../../utils/error'
-import { sendEmail } from '../../../utils/sendEmail'
 
 export const createUser = async (
   { input: { email, password } }: RootMutationCreateUserArgs,

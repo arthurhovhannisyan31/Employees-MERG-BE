@@ -1,13 +1,11 @@
-// model
 import { DepartmentModel } from '../../../models'
 import { QueryContext } from '../../../models/common'
 import {
   RootMutationCreateDepartmentArgs,
   Department,
 } from '../../../models/generated'
-// helpers
-import { transformDepartment } from './helpers'
 import { authCheck } from '../../../utils/helpers'
+import { transformDepartment } from './helpers'
 
 export const departments = async (
   _: never,
