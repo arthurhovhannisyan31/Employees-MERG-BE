@@ -40,3 +40,5 @@ Security:
 + lint-staged
 - add change password resolver
 - send password recovery by link
+
+continue with update password api

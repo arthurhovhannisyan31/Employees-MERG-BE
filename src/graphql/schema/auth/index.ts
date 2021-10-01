@@ -1,4 +1,4 @@
-export const type = `
+const types = `
   type User {
     _id: ID!
     email: String!
@@ -15,7 +15,18 @@ export const type = `
     field: String!
     message: String!
   }
-  type LoginResponse {
+  
+  type ForgottenPassword {
+    key: String!
+    userId: String!
+    expiration: String!
+  }
+`
+const responses = `
+  type VoidResponse {
+    errors: [FieldError!]
+  }
+  type AuthResponse {
     errors: [FieldError!]
     data: AuthData
   }
@@ -27,11 +38,18 @@ export const type = `
     errors: [FieldError!]
     data: User
   }
-  type ForgottenPassword {
-    key: String!
-    userId: String!
-    expiration: String!
+  type UpdatePasswordResponse {
+    errors: [FieldError!]
+    data: Boolean!
   }
+  type ValidateResetPasswordLinkResponse {
+    errors: [FieldError!]
+    data: ForgottenPassword!
+  }
+`
+export const type = `
+  ${types}
+  ${responses}
 `
 export const input = `
   input LoginInput {
@@ -49,14 +67,18 @@ export const input = `
     key: String!
     password: String!
   }
+  input ValidateResetPasswordLinkInput {
+    key: String!
+  }
 `
 
 export const query = `
-  login(input: LoginInput!): LoginResponse!
+  login(input: LoginInput!): AuthResponse!
   logout: Boolean!
   me: MeResponse!
-  forgottenPassword(input: ForgottenPasswordInput!): LoginResponse
-  updatePassword(input: UpdatePasswordInput!): Boolean!
+  forgottenPassword(input: ForgottenPasswordInput!): VoidResponse!
+  updatePassword(input: UpdatePasswordInput!): UpdatePasswordResponse!
+  validateResetPasswordLink(input: ValidateResetPasswordLinkInput!): ValidateResetPasswordLinkResponse
 `
 
 export const mutation = `

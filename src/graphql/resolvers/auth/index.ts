@@ -1,16 +1,19 @@
 import addHours from 'date-fns/addHours'
+import isAfter from 'date-fns/isAfter'
 import { v4 as v4uuid } from 'uuid'
 
-import { COOKIE_NAME, FORGET_PASSWORD_PREFIX } from '../../../constants'
+import { COOKIE_NAME, RESET_PASSWORD_PREFIX } from '../../../constants'
 import { UserModel } from '../../../models'
 import { AuthData, UserCredentials, UserResponse } from '../../../models/auth'
 import { QueryContext } from '../../../models/common'
 import { ForgottenPasswordModel } from '../../../models/forgetPassword'
 import {
+  ForgottenPassword,
   RootMutationCreateUserArgs,
   RootQueryForgottenPasswordArgs,
   RootQueryLoginArgs,
-  // RootQueryUpdatePasswordArgs,
+  RootQueryResetPasswordLinkValidationArgs,
+  RootQueryUpdatePasswordArgs,
   User,
 } from '../../../models/generated'
 import { getUserResponseErrors, isEmailValid } from '../../../utils/error'
@@ -51,33 +54,44 @@ export const createUser = async (
   }
 }
 
-// export const updatePassword = async ({
-//   input: { password, key },
-// }: RootQueryUpdatePasswordArgs): Promise<boolean> => {
-// check if has entry
-// get user id from enty
-// update password
-// remove entry
-// TODO continue here
-// if (!isEmailValid) {
-//   return getUserResponseErrors([['email', `Email is not valid`]])
-// }
-// const forgottenPasswordToken = await ForgottenPasswordModel.findOne({
-//   key: `${FORGET_PASSWORD_PREFIX}-${token}`,
-// })
-// // if expired
-// if (
-//   !forgottenPasswordToken ||
-//   !isForgottenTokenExpired(forgottenPasswordToken)
-// ) {
-//   return getUserResponseErrors([['token', 'Token expired']])
-// }
-// const user = UserModel.find({ _id: forgottenPasswordToken.userId })
-// if (!user) {
-//   return getUserResponseErrors([['token', 'User not found']])
-// }
-// return true
-// }
+export const updatePassword = async ({
+  input: { password, key },
+}: RootQueryUpdatePasswordArgs): Promise<UserResponse<boolean>> => {
+  if (!password)
+    return getUserResponseErrors([['password', `Password is not provided!`]])
+
+  const keyValidation: UserResponse<ForgottenPassword> =
+    await validateResetPasswordLink({
+      input: { key },
+    })
+
+  if (keyValidation.errors?.length) {
+    return {
+      errors: keyValidation.errors,
+    }
+  }
+  if (!keyValidation.data)
+    return getUserResponseErrors([['link', `Unhandled error!`]])
+
+  const user = await UserModel.findOneAndUpdate(
+    {
+      _id: keyValidation.data.userId,
+    },
+    {
+      password,
+    }
+  )
+
+  if (!user) return getUserResponseErrors([['user', 'User not found!']])
+
+  await ForgottenPasswordModel.deleteOne({
+    key: keyValidation.data.key,
+  })
+
+  return {
+    data: true,
+  }
+}
 
 export const forgottenPassword = async ({
   input: { email },
@@ -85,22 +99,44 @@ export const forgottenPassword = async ({
   if (!isEmailValid(email)) {
     return getUserResponseErrors([['email', `Email is not valid`]])
   }
+
   const user = await UserModel.findOne({ email })
   if (!user) return
   const forgottenPassword = new ForgottenPasswordModel({
-    key: `${FORGET_PASSWORD_PREFIX}-${v4uuid()}`,
+    key: `${RESET_PASSWORD_PREFIX}-${v4uuid()}`,
     userId: user._id,
     expiration: addHours(Date.now(), 1).toISOString(),
   })
   await forgottenPassword.save()
-  await sendEmail(
+  sendEmail(
     [email],
     getRestorePasswordTemplate(
       forgottenPassword.key,
       process.env.NODEMAILER_BASE_URL
     )
   )
-  return
+}
+
+export const validateResetPasswordLink = async ({
+  input: { key },
+}: RootQueryResetPasswordLinkValidationArgs): Promise<
+  UserResponse<ForgottenPassword>
+> => {
+  if (!key) {
+    return getUserResponseErrors([['key', `Key is missing!`]])
+  }
+  const resetQuery = await ForgottenPasswordModel.findOne({
+    key: `${RESET_PASSWORD_PREFIX}-${key}`,
+  })
+  if (!resetQuery) {
+    return getUserResponseErrors([['key', `Key is not valid!`]])
+  }
+  if (isAfter(new Date(resetQuery.expiration), Date.now())) {
+    return getUserResponseErrors([['expiration', `Link is expired!`]])
+  }
+  return {
+    data: resetQuery,
+  }
 }
 
 export const login = async (
