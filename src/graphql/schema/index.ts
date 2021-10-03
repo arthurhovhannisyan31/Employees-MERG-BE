@@ -50,22 +50,22 @@ import {
 } from './title'
 
 export const schema: GraphQLSchema = buildSchema(`
+  ${authInput}
+  ${authType}
   ${departmentType}
   ${departmentInput}
-  ${authType}
-  ${authInput}
-  ${genderType}
-  ${genderInput}
-  ${titleType}
-  ${titleInput}
   ${employmentType}
   ${employmentInput}
   ${employeeType}
   ${employeeInput}
   ${employeeTitleType}
   ${employeeTitleInput}
+  ${genderType}
+  ${genderInput}
   ${paycheckType}
   ${paycheckInput}
+  ${titleType}
+  ${titleInput}
   type RootQuery {
     ${departmentQuery}
     ${authQuery}

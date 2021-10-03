@@ -23,9 +23,6 @@ const types = `
   }
 `
 const responses = `
-  type VoidResponse {
-    errors: [FieldError!]
-  }
   type AuthResponse {
     errors: [FieldError!]
     data: AuthData
@@ -39,12 +36,16 @@ const responses = `
     data: User
   }
   type UpdatePasswordResponse {
-    errors: [FieldError!]
-    data: Boolean!
+    errors: String
+    data: UserCredentials
+  }
+  type ForgottenPasswordResponse {
+    errors: String
+    data: Boolean
   }
   type ValidateResetPasswordLinkResponse {
-    errors: [FieldError!]
-    data: ForgottenPassword!
+    errors: String
+    data: ForgottenPassword
   }
 `
 export const type = `
@@ -76,11 +77,11 @@ export const query = `
   login(input: LoginInput!): AuthResponse!
   logout: Boolean!
   me: MeResponse!
-  forgottenPassword(input: ForgottenPasswordInput!): VoidResponse!
-  updatePassword(input: UpdatePasswordInput!): UpdatePasswordResponse!
+  forgottenPassword(input: ForgottenPasswordInput!): ForgottenPasswordResponse!
   validateResetPasswordLink(input: ValidateResetPasswordLinkInput!): ValidateResetPasswordLinkResponse
 `
 
 export const mutation = `
   createUser(input: UserInput!): CreateUserResponse!
+  updatePassword(input: UpdatePasswordInput!): UpdatePasswordResponse!
 `

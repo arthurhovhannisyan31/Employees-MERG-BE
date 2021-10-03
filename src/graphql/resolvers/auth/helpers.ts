@@ -52,7 +52,7 @@ export const getRestorePasswordTemplate = (
         <div id="root" style="text-align: center">
           <p style="font-size: 1.5rem">Hello!</p>
           <p style="font-size: 1.2rem">You are receiving this email because we received a password reset request for your account.</p>
-          <a rel="nofollow" href="${origin}/change-password/${token}"><p style="font-size: 1.2rem; font-weight: bold; margin: 0 auto">Reset Password</p></a>
+          <a rel="nofollow" target="_blank" href="${origin}/change-password/${token}"><p style="font-size: 1.2rem; font-weight: bold; margin: 0 auto">Reset Password</p></a>
           <p style="font-size: 1.2rem">If you did not request a password reset, no further action is required.</p>
           <p >If you're having trouble opening the "Reset Password" link, copy and past the URL below to your web browser</p>
           ${origin}/change-password/${token} 

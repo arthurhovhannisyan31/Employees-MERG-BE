@@ -16,6 +16,12 @@ export type AuthData = {
   userCredentials: UserCredentials;
 };
 
+export type AuthResponse = {
+  __typename?: 'AuthResponse';
+  data?: Maybe<AuthData>;
+  errors?: Maybe<Array<FieldError>>;
+};
+
 export type CreateDepartmentInput = {
   name: Scalars['String'];
 };
@@ -135,6 +141,12 @@ export type ForgottenPasswordInput = {
   email: Scalars['String'];
 };
 
+export type ForgottenPasswordResponse = {
+  __typename?: 'ForgottenPasswordResponse';
+  data?: Maybe<Scalars['Boolean']>;
+  errors?: Maybe<Scalars['String']>;
+};
+
 export type Gender = {
   __typename?: 'Gender';
   _id: Scalars['ID'];
@@ -155,12 +167,6 @@ export type LoginInput = {
   password: Scalars['String'];
 };
 
-export type LoginResponse = {
-  __typename?: 'LoginResponse';
-  data?: Maybe<AuthData>;
-  errors?: Maybe<Array<FieldError>>;
-};
-
 export type MeResponse = {
   __typename?: 'MeResponse';
   data?: Maybe<UserCredentials>;
@@ -176,10 +182,6 @@ export type Paycheck = {
   start_date: Scalars['String'];
 };
 
-export type ResetLinkValidationInput = {
-  key: Scalars['String'];
-};
-
 export type RootMutation = {
   __typename?: 'RootMutation';
   createDepartment: Department;
@@ -191,6 +193,7 @@ export type RootMutation = {
   createTitle: Title;
   createUser: CreateUserResponse;
   updateEmployee: Employee;
+  updatePassword: UpdatePasswordResponse;
 };
 
 
@@ -238,6 +241,11 @@ export type RootMutationUpdateEmployeeArgs = {
   input: UpdateEmployeeInput;
 };
 
+
+export type RootMutationUpdatePasswordArgs = {
+  input: UpdatePasswordInput;
+};
+
 export type RootQuery = {
   __typename?: 'RootQuery';
   departments: Array<Department>;
@@ -245,15 +253,14 @@ export type RootQuery = {
   employees: Employees;
   employeesTitles: Array<EmployeeTitle>;
   employments: Array<Employment>;
-  forgottenPassword?: Maybe<LoginResponse>;
+  forgottenPassword: ForgottenPasswordResponse;
   genders: Array<Gender>;
-  login: LoginResponse;
+  login: AuthResponse;
   logout: Scalars['Boolean'];
   me: MeResponse;
   paychecks: Array<Paycheck>;
-  resetPasswordLinkValidation: Scalars['Boolean'];
   titles: Array<Title>;
-  updatePassword: Scalars['Boolean'];
+  validateResetPasswordLink?: Maybe<ValidateResetPasswordLinkResponse>;
 };
 
 
@@ -277,13 +284,8 @@ export type RootQueryLoginArgs = {
 };
 
 
-export type RootQueryResetPasswordLinkValidationArgs = {
-  input: ResetLinkValidationInput;
-};
-
-
-export type RootQueryUpdatePasswordArgs = {
-  input: UpdatePasswordInput;
+export type RootQueryValidateResetPasswordLinkArgs = {
+  input: ValidateResetPasswordLinkInput;
 };
 
 export type Title = {
@@ -307,6 +309,12 @@ export type UpdatePasswordInput = {
   password: Scalars['String'];
 };
 
+export type UpdatePasswordResponse = {
+  __typename?: 'UpdatePasswordResponse';
+  data?: Maybe<UserCredentials>;
+  errors?: Maybe<Scalars['String']>;
+};
+
 export type User = {
   __typename?: 'User';
   _id: Scalars['ID'];
@@ -323,6 +331,16 @@ export type UserCredentials = {
 export type UserInput = {
   email: Scalars['String'];
   password: Scalars['String'];
+};
+
+export type ValidateResetPasswordLinkInput = {
+  key: Scalars['String'];
+};
+
+export type ValidateResetPasswordLinkResponse = {
+  __typename?: 'ValidateResetPasswordLinkResponse';
+  data?: Maybe<ForgottenPassword>;
+  errors?: Maybe<Scalars['String']>;
 };
 
 export type CreateGenderInput = {
