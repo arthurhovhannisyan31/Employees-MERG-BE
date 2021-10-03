@@ -4,7 +4,11 @@ import { graphqlHTTP } from 'express-graphql'
 import session from 'express-session'
 import mongoose from 'mongoose'
 
-import { CONNECT_CONFIG, getSessionMdlOptions, mongoOptions } from './constants'
+import {
+  CONNECT_CONFIG,
+  getSessionMdlOptions,
+  mongoOptions,
+} from './constants/config'
 import { resolvers } from './graphql/resolvers'
 import { schema } from './graphql/schema'
 import { customCorsCheck, customFormatError } from './utils/helpers'

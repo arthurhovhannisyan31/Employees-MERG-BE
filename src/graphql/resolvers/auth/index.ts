@@ -2,7 +2,7 @@ import addHours from 'date-fns/addHours'
 import isAfter from 'date-fns/isAfter'
 import { v4 as v4uuid } from 'uuid'
 
-import { COOKIE_NAME, RESET_PASSWORD_PREFIX } from '../../../constants'
+import { COOKIE_NAME, RESET_PASSWORD_PREFIX } from '../../../constants/auth'
 import { UserModel } from '../../../models'
 import { UserCredentials, UserResponse } from '../../../models/auth'
 import { QueryContext } from '../../../models/common'
@@ -29,7 +29,7 @@ import {
 } from './helpers'
 
 export const createUser = async (
-  { input: { email, password } }: RootMutationCreateUserArgs,
+  { input: { email, password, name } }: RootMutationCreateUserArgs,
   { req }: QueryContext
 ): Promise<UserResponse<User>> => {
   if (!isEmailValid(email)) {
@@ -45,6 +45,7 @@ export const createUser = async (
   const user = new UserModel({
     email,
     password: hashedPassword,
+    name,
   })
   const result = await user.save()
   req.session.userId = user.id
@@ -53,6 +54,7 @@ export const createUser = async (
       _id: result._id,
       email: result.email,
       password: '',
+      name: result.name,
     },
   }
 }

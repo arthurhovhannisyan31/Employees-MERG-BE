@@ -61,6 +61,12 @@ export type CreateTitleInput = {
   name: Scalars['String'];
 };
 
+export type CreateUserInput = {
+  email: Scalars['String'];
+  name: Scalars['String'];
+  password: Scalars['String'];
+};
+
 export type CreateUserResponse = {
   __typename?: 'CreateUserResponse';
   data?: Maybe<User>;
@@ -233,7 +239,7 @@ export type RootMutationCreateTitleArgs = {
 
 
 export type RootMutationCreateUserArgs = {
-  input: UserInput;
+  input: CreateUserInput;
 };
 
 
@@ -319,6 +325,7 @@ export type User = {
   __typename?: 'User';
   _id: Scalars['ID'];
   email: Scalars['String'];
+  name: Scalars['String'];
   password?: Maybe<Scalars['String']>;
 };
 
@@ -326,11 +333,7 @@ export type UserCredentials = {
   __typename?: 'UserCredentials';
   _id: Scalars['String'];
   email: Scalars['String'];
-};
-
-export type UserInput = {
-  email: Scalars['String'];
-  password: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
 };
 
 export type ValidateResetPasswordLinkInput = {

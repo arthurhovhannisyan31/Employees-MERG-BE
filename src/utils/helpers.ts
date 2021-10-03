@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express'
 import { GraphQLError } from 'graphql'
 
-import { ErrorType, errorResponses } from '../constants'
+import { ErrorType, errorResponses } from '../constants/error'
 import { AuthRequest } from '../models/auth'
 import { ErrorProps } from '../models/common'
 
@@ -20,6 +20,7 @@ export const getErrorCode = (errorName: ErrorType): ErrorProps =>
 export const customFormatError = (
   err: GraphQLError
 ): GraphQLError | ErrorProps => {
+  // todo handle first me query. return 200 instead of 500
   if (err.message in ErrorType) {
     const error = getErrorCode(err.message as ErrorType)
     return {

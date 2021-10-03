@@ -1,12 +1,14 @@
 const types = `
   type User {
     _id: ID!
+    name: String!
     email: String!
     password: String
   }
   type UserCredentials{
     _id: String!
     email: String!
+    name: String
   }
   type AuthData {
     userCredentials: UserCredentials!
@@ -57,7 +59,8 @@ export const input = `
     email: String!
     password: String!
   }
-  input UserInput {
+  input CreateUserInput {
+    name: String!
     email: String!
     password: String!
   }
@@ -82,6 +85,6 @@ export const query = `
 `
 
 export const mutation = `
-  createUser(input: UserInput!): CreateUserResponse!
+  createUser(input: CreateUserInput!): CreateUserResponse!
   updatePassword(input: UpdatePasswordInput!): UpdatePasswordResponse!
 `

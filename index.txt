@@ -1,7 +1,3 @@
-// deps
-// model
-// helpers
-
 Features:
 - registration
 
@@ -16,6 +12,7 @@ ex: User.find({ _id: { $in: userIds } }).lean()
   requireAuth,
   requireAdmin,
 
+add images upload
 // todo create full CRUD functions
 
 Refactor
@@ -31,6 +28,9 @@ Security:
 - run localhost on https (http redirects to https)
 - log all login events in db (success, errors, etc). (create table and add authentication logging)
 
+DevExp:
+- absolute imports
+
 + response with 200 for me query on login
 + add type generation
 + add forgot password resolver
@@ -38,7 +38,7 @@ Security:
 + eslint import, error
 + eslint cycle dependencies
 + lint-staged
-- add change password resolver
-- send password recovery by link
++ add change password resolver
++ send password recovery by link
 
 continue with update password api
