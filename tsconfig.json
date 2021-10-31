@@ -1,7 +1,7 @@
 {
+  "extends": "./configs/ts-config/tsconfig.rules.json",
   "compilerOptions": {
     "esModuleInterop": true,
-    "extends": "./configs/ts-config/tsconfig.rules.json",
     "module": "commonjs",
     "target": "ESNext",
     "outDir": "./dist",

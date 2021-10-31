@@ -1,14 +1,6 @@
-// deps
 import mongoose, { Document, Schema } from 'mongoose'
 
-export interface ITitle {
-  _id: string
-  name: string
-}
-
-export interface ITitleInput {
-  input: ITitle
-}
+import { Title } from './generated'
 
 const TitleSchema = new Schema({
   name: {
@@ -18,7 +10,7 @@ const TitleSchema = new Schema({
   },
 })
 
-export const TitleModel = mongoose.model<ITitle & Document>(
+export const TitleModel = mongoose.model<Title & Document>(
   'Title',
   TitleSchema,
   'titles'

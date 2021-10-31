@@ -1,11 +1,5 @@
-// deps
-// model
-// helpers
-
 Features:
 - registration
-- forgot password + email with link
-- change password
 
 - setup jest and add tests
 - test for all queries and mutations
@@ -17,24 +11,33 @@ ex: User.find({ _id: { $in: userIds } }).lean()
   '/api/inventory/:id',
   requireAuth,
   requireAdmin,
+- response with 200 for me query on login
 
+add images upload
 // todo create full CRUD functions
 
 Refactor
 - move all data loaders to gql context
 
--- add mongoose lazy and select
--- add me request answer based on req.session
--- add X-CSRF-Token
--- add rolling true to express-session config
+- add mongoose lazy and select
+- add me request answer based on req.session
+- add X-CSRF-Token
+- add rolling true to express-session config
+- replace types with generated (create employee)
 
-+ response with 200 for me query on login
+Security:
+- run localhost on https (http redirects to https)
+- log all login events in db (success, errors, etc). (create table and add authentication logging)
+
+DevExp:
+- absolute imports
+
+
 + add type generation
 + add forgot password resolver
-- add change password resolver
-- send password recovery by link
-- eslint groups rules
-- eslint import, error
-- eslint cycle dependencies
-- types generation
-- lint-staged
++ eslint groups rules
++ eslint import, error
++ eslint cycle dependencies
++ lint-staged
++ add change password resolver
++ send password recovery by link
