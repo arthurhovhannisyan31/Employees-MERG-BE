@@ -1,30 +1,28 @@
-// model
-import { Gender } from '../../../models'
-import { ICreateGenderInput, IGender } from '../../../models/gender'
+import { GenderModel } from '../../../models'
 import { QueryContext } from '../../../models/common'
-// helpers
-import { transformGender } from './helpers'
+import { Gender, RootMutationCreateGenderArgs } from '../../../models/generated'
 import { authCheck } from '../../../utils/helpers'
+import { transformGender } from './helpers'
 
 export const genders = async (
   _: never,
   { req }: QueryContext
-): Promise<IGender[]> => {
+): Promise<Gender[]> => {
   authCheck(req)
-  const result = await Gender.find()
+  const result = await GenderModel.find()
   return result.map(transformGender)
 }
 
 export const createGender = async (
-  { input: { name } }: ICreateGenderInput,
+  { input: { name } }: RootMutationCreateGenderArgs,
   { req }: QueryContext
-): Promise<IGender> => {
+): Promise<Gender> => {
   authCheck(req)
-  const duplicate = await Gender.findOne({ name })
+  const duplicate = await GenderModel.findOne({ name })
   if (duplicate) {
     throw new Error(`Gender ${name} already exists`)
   }
-  const gender = new Gender({
+  const gender = new GenderModel({
     name,
   })
   const result = await gender.save()

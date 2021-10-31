@@ -1,23 +1,22 @@
-// deps
 import DataLoader from 'dataloader'
-// model
-import { Employee } from '../../../models'
-import { IEmployee, IEmployeeResponse } from '../../../models/employee'
-// helpers
-import { getPaycheckByEmployee } from '../paycheck/helpers'
+
+import { EmployeeModel } from '../../../models'
+import { EmployeeExtended } from '../../../models/employee'
+import { Employee } from '../../../models/generated'
 import { getEmployeeTitlesByEmployee } from '../employeeTitle/helpers'
 import { getEmploymentsByEmployee } from '../employments/helpers'
+import { getPaycheckByEmployee } from '../paycheck/helpers'
 
 export const employeeLoader = new DataLoader(
-  (ids): Promise<Promise<IEmployeeResponse>[]> => getEmployees(ids as string[])
+  (ids): Promise<Promise<EmployeeExtended>[]> => getEmployees(ids as string[])
 )
 
 export const getEmployees = async (
   ids: string[]
-): Promise<Promise<IEmployeeResponse>[]> => {
-  const employees = await Employee.find({ _id: { $in: ids } })
+): Promise<Promise<EmployeeExtended>[]> => {
+  const employees = await EmployeeModel.find({ _id: { $in: ids } })
   employees.sort(
-    (a: IEmployee, b: IEmployee) =>
+    (a: Employee, b: Employee) =>
       ids.indexOf(a._id.toString()) - ids.indexOf(b._id.toString())
   )
   return employees.map(transformEmployee)
@@ -25,7 +24,7 @@ export const getEmployees = async (
 
 export const getSingleEmployee = async (
   id: string
-): Promise<IEmployeeResponse> => {
+): Promise<EmployeeExtended> => {
   const employee = await employeeLoader.load(id.toString())
   if (!employee) throw new Error('Employee not found')
   return employee
@@ -39,7 +38,7 @@ export const transformEmployee = async ({
   hire_date,
   department,
   title,
-}: IEmployee): Promise<IEmployeeResponse> => ({
+}: Employee): Promise<EmployeeExtended> => ({
   _id,
   birth_date,
   first_name,

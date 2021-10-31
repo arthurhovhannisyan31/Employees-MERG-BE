@@ -1,26 +1,25 @@
-// model
-import { Paycheck } from '../../../models'
-import { ICreatePaycheckInput, IPaycheck } from '../../../models/paycheck'
+import { PaycheckModel } from '../../../models'
 import { QueryContext } from '../../../models/common'
-// helpers
-import { transformPaycheck } from './helpers'
+import { Paycheck } from '../../../models/generated'
+import { CreatePaycheckInput } from '../../../models/paycheck'
 import { authCheck } from '../../../utils/helpers'
+import { transformPaycheck } from './helpers'
 
 export const paycheckHistory = async (
   _: never,
   { req }: QueryContext
-): Promise<Promise<IPaycheck>[]> => {
+): Promise<Promise<Paycheck>[]> => {
   authCheck(req)
-  const result = await Paycheck.find()
+  const result = await PaycheckModel.find()
   return result.map(transformPaycheck)
 }
 
 export const createPaycheck = async (
-  { input: { employee, salary, start_date, end_date } }: ICreatePaycheckInput,
+  { input: { employee, salary, start_date, end_date } }: CreatePaycheckInput,
   { req }: QueryContext
-): Promise<IPaycheck> => {
+): Promise<Paycheck> => {
   authCheck(req)
-  const duplicate = await Paycheck.findOne({
+  const duplicate = await PaycheckModel.findOne({
     employee,
     salary,
     start_date,
@@ -31,7 +30,7 @@ export const createPaycheck = async (
       `Paycheck for period ${start_date}-${end_date} for employee ${employee} for amount ${salary} already exist`
     )
   }
-  const paycheck = new Paycheck({
+  const paycheck = new PaycheckModel({
     employee,
     salary,
     start_date,

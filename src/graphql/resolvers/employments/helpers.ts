@@ -1,12 +1,10 @@
-// deps
 import DataLoader from 'dataloader'
-// model
-import { Employment } from '../../../models'
-import { IEmployment, IEmploymentResponse } from '../../../models/employment'
-import { IEmployee } from '../../../models/employee'
-// helpers
-import { getSingleEmployee } from '../employees/helpers'
+
+import { EmploymentModel } from '../../../models'
+import { EmploymentResponse } from '../../../models/employment'
+import { Employment, Employee } from '../../../models/generated'
 import { getSingleDepartment } from '../departments/helpers'
+import { getSingleEmployee } from '../employees/helpers'
 
 export const employmentLoader = new DataLoader((ids) =>
   getEmployments(ids as string[])
@@ -14,10 +12,10 @@ export const employmentLoader = new DataLoader((ids) =>
 
 export const getEmployments = async (
   ids: string[]
-): Promise<Promise<IEmploymentResponse>[]> => {
-  const employments = await Employment.find({ _id: { $in: ids } })
+): Promise<Promise<EmploymentResponse>[]> => {
+  const employments = await EmploymentModel.find({ _id: { $in: ids } })
   employments.sort(
-    (a: IEmployment, b: IEmployment) =>
+    (a: Employment, b: Employment) =>
       ids.indexOf(a._id.toString()) - ids.indexOf(b._id.toString())
   )
   return employments.map(transformEmployment)
@@ -25,16 +23,16 @@ export const getEmployments = async (
 
 export const getEmploymentsByEmployee = async (
   id: string
-): Promise<Promise<IEmploymentResponse>[]> => {
-  const employments = await Employment.find({
-    employee: id as never as IEmployee,
+): Promise<Promise<EmploymentResponse>[]> => {
+  const employments = await EmploymentModel.find({
+    employee: id as never as Employee,
   })
   return employments.map(transformEmployment)
 }
 
 export const getSingleEmployment = async (
   id: string
-): Promise<IEmploymentResponse> => {
+): Promise<EmploymentResponse> => {
   const employment = await employmentLoader.load(id.toString())
   if (!employment) throw new Error(`Employment record were not found`)
   return employment
@@ -46,7 +44,7 @@ export const transformEmployment = async ({
   department,
   start_date,
   end_date,
-}: IEmployment): Promise<IEmploymentResponse> => ({
+}: Employment): Promise<EmploymentResponse> => ({
   _id,
   employee: await getSingleEmployee(employee as never as string),
   department: await getSingleDepartment(department as never as string),

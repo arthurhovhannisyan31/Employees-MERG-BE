@@ -1,0 +1,15 @@
+{
+  "env": {
+    "PORT": "4002",
+    "DB_NAME": "employees",
+    "SESSION_DB_NAME": "session",
+    "AUTH_SECRET_KEY": "secretKey",
+    "NODE_ENV": "development",
+    "USER_NAME": "employees_owner",
+    "PASSWORD": "iiONAbMaVERF4nOO",
+    "COOKIE_NAME": "SID",
+    "NODEMAILER_USER": "winston51@ethereal.email",
+    "NODEMAILER_PASSWORD": "qQ3ydFjtDJVuwwfenz",
+    "NODEMAILER_BASE_URL": "https://localhost:4002/"
+  }
+}

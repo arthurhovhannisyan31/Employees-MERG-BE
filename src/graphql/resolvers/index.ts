@@ -1,5 +1,12 @@
-// helpers
-import { createUser, login, me, logout } from './auth'
+import {
+  createUser,
+  login,
+  me,
+  logout,
+  forgottenPassword,
+  updatePassword,
+  validateResetPasswordLink,
+} from './auth'
 import { departments, createDepartment } from './departments'
 import {
   employees,
@@ -7,11 +14,11 @@ import {
   employee,
   updateEmployee,
 } from './employees'
-import { titles, createTitle } from './title'
-import { genders, createGender } from './gender'
-import { employments, createEmployment } from './employments'
 import { employeesTitles, createEmployeeTitle } from './employeeTitle'
+import { employments, createEmployment } from './employments'
+import { genders, createGender } from './gender'
 import { createPaycheck, paycheckHistory } from './paycheck'
+import { titles, createTitle } from './title'
 
 export const resolvers = {
   // User
@@ -19,6 +26,9 @@ export const resolvers = {
   login,
   logout,
   me,
+  forgottenPassword,
+  updatePassword,
+  validateResetPasswordLink,
   // Department
   departments,
   createDepartment,
