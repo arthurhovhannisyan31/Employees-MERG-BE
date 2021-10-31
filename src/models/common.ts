@@ -1,10 +1,9 @@
-// deps
 import { Response } from 'express'
-// model
-import { IAuthRequest } from './auth'
+
+import { AuthRequest } from './auth'
 
 export interface QueryContext {
-  req: IAuthRequest
+  req: AuthRequest
   res: Response
 }
 

@@ -1,18 +1,6 @@
-// deps
 import mongoose, { Document, Schema } from 'mongoose'
 
-export interface IUser {
-  _id: string
-  email: string
-  password: string
-}
-
-export interface ICreateUserInput {
-  userInput: {
-    email: string
-    password: string
-  }
-}
+import { User } from './generated'
 
 const userSchema = new Schema({
   email: {
@@ -23,9 +11,13 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
+  name: {
+    type: String,
+    required: true,
+  },
 })
 
-export const UserModel = mongoose.model<IUser & Document>(
+export const UserModel = mongoose.model<User & Document>(
   'User',
   userSchema,
   'users'

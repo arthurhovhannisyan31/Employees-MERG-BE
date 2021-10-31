@@ -1,30 +1,28 @@
-// model
-import { ITitle, TitleModel as Title } from '../../../models/title'
-import { ITitleInput } from '../../../models/title'
+import { TitleModel } from '../../../models'
 import { QueryContext } from '../../../models/common'
-// helpers
-import { transformTitle } from './helpers'
+import { RootMutationCreateTitleArgs, Title } from '../../../models/generated'
 import { authCheck } from '../../../utils/helpers'
+import { transformTitle } from './helpers'
 
 export const titles = async (
   _: never,
   { req }: QueryContext
-): Promise<ITitle[]> => {
+): Promise<Title[]> => {
   authCheck(req)
-  const result = await Title.find()
+  const result = await TitleModel.find()
   return result.map(transformTitle)
 }
 
 export const createTitle = async (
-  { input: { name } }: ITitleInput,
+  { input: { name } }: RootMutationCreateTitleArgs,
   { req }: QueryContext
-): Promise<ITitle> => {
+): Promise<Title> => {
   authCheck(req)
-  const duplicate = await Title.findOne({ name })
+  const duplicate = await TitleModel.findOne({ name })
   if (duplicate) {
     throw new Error(`Title ${name} already exists`)
   }
-  const title = new Title({
+  const title = new TitleModel({
     name,
   })
   const result = await title.save()

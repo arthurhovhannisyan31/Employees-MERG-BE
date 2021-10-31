@@ -1,52 +1,16 @@
-// deps
 import mongoose, { Document, Schema } from 'mongoose'
-// model
-import { IGender } from './gender'
-import { IDepartment } from './departmnet'
-import { ITitle } from './title'
-import { IPaycheck } from './paycheck'
-import { IEmployeeTitle } from './employeeTitle'
-import { IEmployment } from './employment'
 
-export interface IEmployee {
-  _id: string
-  birth_date: string
-  first_name: string
-  last_name: string
-  hire_date: string
-  gender: IGender
-  department: IDepartment
-  title: ITitle
+import { Employee, Employment, Paycheck, EmployeeTitle } from './generated'
+
+export interface EmployeeExtended extends Employee {
+  paychecks: Promise<Paycheck>[]
+  titles: Promise<EmployeeTitle>[]
+  employments: Promise<Employment>[]
 }
 
-export interface IEmployeeResponse extends IEmployee {
-  paychecks: Promise<IPaycheck>[]
-  titles: Promise<IEmployeeTitle>[]
-  employments: Promise<IEmployment>[]
-}
-
-export interface IEmployees {
-  nodes: Promise<IEmployeeResponse>[]
+export interface EmployeesExtended {
+  nodes: Promise<EmployeeExtended>[]
   count: number
-}
-
-export interface ICreateEmployeeInput {
-  input: IEmployee
-}
-export interface IUpdateEmployeeInput {
-  input: Partial<IEmployee> & { id: string }
-}
-export interface IGetEmployeeInput {
-  input: {
-    id: string
-  }
-}
-
-export interface IGetEmployeesInput {
-  input: {
-    limit: number
-    offset: number
-  }
 }
 
 const EmployeeSchema = new Schema({
@@ -84,7 +48,7 @@ const EmployeeSchema = new Schema({
   },
 })
 
-export const EmployeeModel = mongoose.model<IEmployee & Document>(
+export const EmployeeModel = mongoose.model<Employee & Document>(
   'Employee',
   EmployeeSchema,
   'employees'

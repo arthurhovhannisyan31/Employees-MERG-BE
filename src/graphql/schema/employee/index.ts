@@ -8,6 +8,16 @@ export const type = `
     gender: ID!
     department: ID!
     title: ID!
+  }
+  type EmployeeExtended{
+    _id: ID!
+    birth_date: String!
+    first_name: String!
+    last_name: String!
+    hire_date: String!
+    gender: ID!
+    department: ID!
+    title: ID!
     paychecks: [Paycheck]!
     titles: [EmployeeTitle]!
     employments: [Employment]!
@@ -29,13 +39,13 @@ export const input = `
     title: ID!
   }
   input UpdateEmployeeInput {
-    id: ID!
-    birth_date: String!
-    first_name: String!
-    last_name: String!
-    hire_date: String!
-    department: ID!
-    title: ID!
+    id: ID
+    birth_date: String
+    first_name: String
+    last_name: String
+    hire_date: String
+    department: ID
+    title: ID
   }
   input GetEmployeeInput {
     id: ID!
