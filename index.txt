@@ -11,6 +11,7 @@ ex: User.find({ _id: { $in: userIds } }).lean()
   '/api/inventory/:id',
   requireAuth,
   requireAdmin,
+- response with 200 for me query on login
 
 add images upload
 // todo create full CRUD functions
@@ -31,7 +32,7 @@ Security:
 DevExp:
 - absolute imports
 
-+ response with 200 for me query on login
+
 + add type generation
 + add forgot password resolver
 + eslint groups rules
@@ -40,5 +41,3 @@ DevExp:
 + lint-staged
 + add change password resolver
 + send password recovery by link
-
-continue with update password api

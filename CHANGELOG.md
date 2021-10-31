@@ -1,11 +1,17 @@
 # v0.1.3
-## Authorization improvements
-+ Extract webpack and typescript configs to configs folder
-+ Add Eslint groups rules, import cycle dependencies checks
-+ Add types generation
-+ Add lint-staged to pre-commit
-+ Add change password feature and password strength validation
-+ Email reset link
+## Code refactor, Authorization improvements
+- Configs
+- - Extract typescript configs to configs folder
+- Linter
+- - Add Eslint groups, imports validation rules,
+- - Add import cycle dependencies checks
+- DevExp
+- - Add staged files linting on pre-commit
+- - Add types generation
+- Resolvers
+- - Add change password resolver
+- - Add send password recovery link
+- - Add forgotten password resolver
 
 # v0.1.2
 ## Authorization improvements
