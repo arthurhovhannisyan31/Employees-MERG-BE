@@ -1754,7 +1754,7 @@
               "name": null,
               "ofType": {
                 "kind": "OBJECT",
-                "name": "Employee",
+                "name": "EmployeeExtended",
                 "ofType": null
               }
             },
@@ -1985,7 +1985,7 @@
               "name": null,
               "ofType": {
                 "kind": "OBJECT",
-                "name": "Employee",
+                "name": "EmployeeExtended",
                 "ofType": null
               }
             },
@@ -2086,7 +2086,7 @@
               "name": null,
               "ofType": {
                 "kind": "OBJECT",
-                "name": "Employee",
+                "name": "EmployeeExtended",
                 "ofType": null
               }
             },

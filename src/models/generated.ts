@@ -191,14 +191,14 @@ export type Paycheck = {
 export type RootMutation = {
   __typename?: 'RootMutation';
   createDepartment: Department;
-  createEmployee: Employee;
+  createEmployee: EmployeeExtended;
   createEmployeeTitle: EmployeeTitle;
   createEmployment: Employment;
   createGender: Gender;
   createPaycheck: Paycheck;
   createTitle: Title;
   createUser: CreateUserResponse;
-  updateEmployee: Employee;
+  updateEmployee: EmployeeExtended;
   updatePassword: UpdatePasswordResponse;
 };
 
@@ -255,7 +255,7 @@ export type RootMutationUpdatePasswordArgs = {
 export type RootQuery = {
   __typename?: 'RootQuery';
   departments: Array<Department>;
-  employee: Employee;
+  employee: EmployeeExtended;
   employees: Employees;
   employeesTitles: Array<EmployeeTitle>;
   employments: Array<Employment>;
