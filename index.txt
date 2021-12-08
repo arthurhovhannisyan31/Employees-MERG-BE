@@ -28,9 +28,12 @@ Refactor
 Security:
 - run localhost on https (http redirects to https)
 - log all login events in db (success, errors, etc). (create table and add authentication logging)
+- add websocket send message for logout events
 
 DevExp:
 - absolute imports
+
+убрать все взаимодействие с сетевыми вызовами в классы контролов
 
 
 + add type generation
