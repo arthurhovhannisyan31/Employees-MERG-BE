@@ -58,10 +58,10 @@ export const input = `
 
 export const query = `
   employees(input: GetEmployeesInput): Employees!
-  employee(input: GetEmployeeInput!): Employee!
+  employee(input: GetEmployeeInput!): EmployeeExtended!
 `
 
 export const mutation = `
-  createEmployee(input: CreateEmployeeInput!): Employee!
-  updateEmployee(input: UpdateEmployeeInput!): Employee!
+  createEmployee(input: CreateEmployeeInput!): EmployeeExtended!
+  updateEmployee(input: UpdateEmployeeInput!): EmployeeExtended!
 `
