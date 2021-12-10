@@ -44,3 +44,26 @@ export const customCorsCheck = (
   }
   return next()
 }
+
+export const addSecurityHeaders = (
+  _: Request,
+  res: Response,
+  next: NextFunction
+): void => {
+  res.setHeader('X-XSS-Protection', '1;mode=block')
+  res.setHeader('X-Frame-Options', 'SAMEORIGIN')
+  res.setHeader('Content-Security-Policy', "script-src 'self'")
+  return next()
+}
+
+export const redirectToHttps = (req: Request, res: Response): void => {
+  res.redirect(`https://${req.headers.host}${req.path}`)
+}
+
+export const redirectToRoot = (req: Request, res: Response): void => {
+  res.redirect(
+    `http://${req.headers.host}:${process.env.ROOT_PORT || 4002}${
+      req.path
+    }graphql`
+  )
+}

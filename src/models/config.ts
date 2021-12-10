@@ -5,3 +5,8 @@ export interface IConnectConfig {
   DB_CONNECTION_STRING: string
   SESSION_DB_CONNECTION_STRING: string
 }
+
+export interface HttpsOptions {
+  key: Buffer
+  cert: Buffer
+}
