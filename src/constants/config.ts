@@ -1,7 +1,10 @@
+import fs from 'fs'
+import path from 'path'
+
 import MongoStore from 'connect-mongo'
 import { SessionOptions } from 'express-session'
 
-import { IConnectConfig } from '../models/config'
+import { HttpsOptions, IConnectConfig } from '../models/config'
 import { COOKIE_NAME, cookieOptions } from './auth'
 
 export const __PROD__ = process.env.NODE_ENV === 'production'
@@ -33,3 +36,8 @@ export const getSessionMdlOptions = (store: MongoStore): SessionOptions => ({
   cookie: cookieOptions,
   store,
 })
+
+export const httpsOptions: HttpsOptions = {
+  key: fs.readFileSync(path.resolve('configs', 'cert', 'key.pem')),
+  cert: fs.readFileSync(path.resolve('configs', 'cert', 'cert.pem')),
+}
