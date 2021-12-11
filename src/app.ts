@@ -11,7 +11,11 @@ import {
 } from './constants/config'
 import { resolvers } from './graphql/resolvers'
 import { schema } from './graphql/schema'
-import { customCorsCheck, customFormatError } from './utils/helpers'
+import {
+  addSecurityHeaders,
+  customCorsCheck,
+  customFormatError,
+} from './utils/helpers'
 
 const main = async (): Promise<void> => {
   const app = express()
@@ -44,6 +48,7 @@ const main = async (): Promise<void> => {
       },
     }))
   )
+  app.use(addSecurityHeaders)
   try {
     await mongoose.connect(CONNECT_CONFIG.DB_CONNECTION_STRING, mongoOptions)
     app.listen(CONNECT_CONFIG.PORT)

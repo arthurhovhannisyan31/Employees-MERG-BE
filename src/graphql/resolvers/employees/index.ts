@@ -1,6 +1,8 @@
+import { UpdateQuery, Document } from 'mongoose'
+
 import { EmployeeModel } from '../../../models'
 import { QueryContext } from '../../../models/common'
-import { EmployeesExtended } from '../../../models/employee'
+import { EmployeeExtended, EmployeesExtended } from '../../../models/employee'
 import {
   Employee,
   RootMutationCreateEmployeeArgs,
@@ -26,7 +28,7 @@ export const employees = async (
 export const employee = async (
   { input: { id } }: RootQueryEmployeeArgs,
   { req }: QueryContext
-): Promise<Employee> => {
+): Promise<EmployeeExtended> => {
   authCheck(req)
   const result = await EmployeeModel.findOne({ _id: id })
   if (!result) {
@@ -37,7 +39,7 @@ export const employee = async (
 export const createEmployee = async (
   { input }: RootMutationCreateEmployeeArgs,
   { req }: QueryContext
-): Promise<Employee> => {
+): Promise<EmployeeExtended> => {
   authCheck(req)
   const duplicate = await EmployeeModel.findOne({
     first_name: input.first_name,
@@ -61,7 +63,7 @@ export const updateEmployee = async (
   const { id, ...updateProps } = props
   const employee = await EmployeeModel.findOneAndUpdate(
     { _id: id },
-    updateProps as Partial<Employee>,
+    updateProps as UpdateQuery<Employee & Document>,
     {
       new: true,
     }

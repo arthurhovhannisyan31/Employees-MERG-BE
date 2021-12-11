@@ -44,3 +44,14 @@ export const customCorsCheck = (
   }
   return next()
 }
+
+export const addSecurityHeaders = (
+  _: Request,
+  res: Response,
+  next: NextFunction
+): void => {
+  res.setHeader('X-XSS-Protection', '1;mode=block')
+  res.setHeader('X-Frame-Options', 'SAMEORIGIN')
+  res.setHeader('Content-Security-Policy', "script-src 'self'")
+  return next()
+}
