@@ -14,7 +14,6 @@ ex: User.find({ _id: { $in: userIds } }).lean()
 - response with 200 for me query on login
 
 add images upload
-// todo create full CRUD functions
 
 Refactor
 - move all data loaders to gql context
@@ -30,17 +29,4 @@ Security:
 - log all login events in db (success, errors, etc). (create table and add authentication logging)
 - add websocket send message for logout events
 
-DevExp:
-- absolute imports
-
 убрать все взаимодействие с сетевыми вызовами в классы контролов
-
-
-+ add type generation
-+ add forgot password resolver
-+ eslint groups rules
-+ eslint import, error
-+ eslint cycle dependencies
-+ lint-staged
-+ add change password resolver
-+ send password recovery by link
