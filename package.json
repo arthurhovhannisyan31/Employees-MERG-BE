@@ -14,9 +14,7 @@
     "lint": "eslint --ext .ts,.tsx,.js src/",
     "format": "yarn lint --fix",
     "deploy": "git push heroku master",
-    "postinstall": "husky install",
-    "prepublishOnly": "pinst --disable",
-    "postpublish": "pinst --enable"
+    "postinstall": "husky install"
   },
   "lint-staged": {
     "src/*": [
