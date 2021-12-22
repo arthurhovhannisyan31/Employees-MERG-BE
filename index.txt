@@ -18,7 +18,10 @@ add images upload
 Refactor
 - move all data loaders to gql context
 
+- add models validation
+
 - add mongoose lazy and select
+- add createdAt, updatedAt fields to all entities
 - add me request answer based on req.session
 - add X-CSRF-Token
 - add rolling true to express-session config

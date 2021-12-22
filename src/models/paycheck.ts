@@ -1,5 +1,6 @@
 import mongoose, { Document, Schema } from 'mongoose'
 
+import { defaultFields } from '../utils/model'
 import { Paycheck } from './generated'
 
 export interface CreatePaycheckInput {
@@ -33,6 +34,7 @@ const PaycheckSchema = new Schema({
     required: true,
     trim: true,
   },
+  ...defaultFields,
 })
 
 export const PaycheckModel = mongoose.model<Paycheck & Document>(
