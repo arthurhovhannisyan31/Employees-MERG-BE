@@ -1,5 +1,6 @@
 import mongoose, { Document, Schema } from 'mongoose'
 
+import { defaultFields } from '../utils/model'
 import { EmployeeTitle } from './generated'
 
 export interface CreateEmployeeTitleInput {
@@ -25,6 +26,7 @@ const EmployeeTitleSchema = new Schema({
     required: true,
     trim: true,
   },
+  ...defaultFields,
 })
 
 export const EmployeeTitleModel = mongoose.model<EmployeeTitle & Document>(

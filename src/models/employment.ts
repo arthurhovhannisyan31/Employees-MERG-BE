@@ -1,5 +1,6 @@
 import mongoose, { Document, Schema } from 'mongoose'
 
+import { defaultFields } from '../utils/model'
 import { EmployeeExtended } from './employee'
 import { Employment, Department } from './generated'
 
@@ -34,6 +35,7 @@ const EmploymentSchema = new Schema({
     required: true,
     trim: true,
   },
+  ...defaultFields,
 })
 
 export const EmploymentModel = mongoose.model<Employment & Document>(
