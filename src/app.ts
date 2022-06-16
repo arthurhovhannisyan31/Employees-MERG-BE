@@ -52,10 +52,12 @@ const main = async (): Promise<void> => {
   try {
     await mongoose.connect(CONNECT_CONFIG.DB_CONNECTION_STRING, mongoOptions)
     app.listen(CONNECT_CONFIG.PORT)
-    console.log(`Server started at http://localhost:${CONNECT_CONFIG.PORT}`)
-    console.log(
-      `Please see graphql environment at http://localhost:${CONNECT_CONFIG.PORT}/graphql`
-    )
+    if (CONNECT_CONFIG.IS_DEV) {
+      console.log(`Server started at http://localhost:${CONNECT_CONFIG.PORT}`)
+      console.log(
+        `Please see graphql environment at http://localhost:${CONNECT_CONFIG.PORT}/graphql`
+      )
+    }
   } catch (err) {
     console.log(err)
   }
