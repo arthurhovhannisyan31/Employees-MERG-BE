@@ -14,7 +14,7 @@ const getConnectionString = (dbName: string): string =>
     : `mongodb://localhost:27017/${dbName}`
 
 export const CONNECT_CONFIG: IConnectConfig = {
-  PORT: process.env.ROOT_PORT ?? '',
+  PORT: process.env.PORT ?? '',
   AUTH_SECRET_KEY: process.env.AUTH_SECRET_KEY ?? '',
   IS_DEV: !__PROD__,
   DB_CONNECTION_STRING: getConnectionString(process.env.DB_NAME || ''),
