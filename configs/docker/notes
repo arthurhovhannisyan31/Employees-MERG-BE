@@ -1,0 +1,15 @@
+SERVER:
+
+docker build \
+  -t emp-be \
+  -f configs/docker/server.dockerfile \
+  .
+
+docker run \
+  --network local1 \
+  -p 4002:4002 \
+  -d \
+  --env-file configs/env/.env \
+  emp-be
+--------------------------------
+  --rm \
