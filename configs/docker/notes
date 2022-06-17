@@ -1,0 +1,23 @@
+docker build \
+  -t emp-be \
+  -f configs/docker/server.dockerfile \
+  .
+
+docker run \
+  --network local1 \
+  -p 4002:4002 \
+  -d \
+  --env-file configs/env/.env-dev \
+  emp-be
+--------------------------------
+  --rm \
+
+
+docker run \
+  --network local1 \
+  -p 27017:27017 \
+  -d \
+  mongo
+--------------------------------
+  --rm \
+
