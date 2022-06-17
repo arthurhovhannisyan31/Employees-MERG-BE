@@ -7,12 +7,13 @@ COPY configs ./configs
 
 FROM base as build
 
-# RUN yarn install --production
 RUN yarn install --frozen-lockfile
 
 COPY . .
 
 RUN npx tsc
+
+FROM build as serve
 
 COPY ./dist ./dist
 
