@@ -15,6 +15,4 @@ RUN npx tsc
 
 FROM build as serve
 
-COPY ./dist ./dist
-
 CMD yarn start
