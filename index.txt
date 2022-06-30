@@ -33,3 +33,5 @@ Security:
 - add websocket send message for logout events
 
 убрать все взаимодействие с сетевыми вызовами в классы контролов
+
+добавить запрос статистики по websocket
