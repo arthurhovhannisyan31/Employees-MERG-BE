@@ -1,15 +1,15 @@
-SERVER:
-
 docker build \
-  -t emp-be \
+  -t employees-be \
   -f configs/docker/server.dockerfile \
   .
 
 docker run \
+  --name employees-be \
   --network local1 \
   -p 4002:4002 \
   -d \
-  --env-file configs/env/.env \
-  emp-be
+  --env-file configs/env/.env-dev \
+  --add-host=host.docker.internal:host-gateway \
+  employees-be
 --------------------------------
   --rm \
