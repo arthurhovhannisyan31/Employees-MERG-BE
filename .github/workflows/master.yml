@@ -10,12 +10,9 @@ on:
     branches:
       - 'master'
 
-  workflow_dispatch:
-
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
        -
         name: Checkout
@@ -37,3 +34,7 @@ jobs:
           file: ./configs/docker/server.dockerfile
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/employees-be:latest
+       -
+         name: Inspect
+         run: |
+           docker image inspect ${{ secrets.DOCKER_HUB_USERNAME }}/employees-be:latest
