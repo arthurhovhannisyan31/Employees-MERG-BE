@@ -33,6 +33,7 @@ jobs:
           context: .
           file: ./configs/docker/server.dockerfile
           push: true
+          load: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/employees-be:latest
        -
          name: Inspect
