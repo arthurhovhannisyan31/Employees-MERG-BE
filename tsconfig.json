@@ -8,6 +8,6 @@
     "rootDir": "./src",
     "moduleResolution": "node",
   },
-  "include": ["src/**/*", "**/*.config.js"],
+  "include": ["src/**/*", "configs/**/*", "**/*.config.[jt]s"],
   "exclude": ["node_modules", "**/*.spec.ts", "**/*generated.tsx?"]
 }
