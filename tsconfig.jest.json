@@ -1,0 +1,13 @@
+{
+  "extends": "./configs/ts-config/tsconfig.rules.json",
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "module": "commonjs",
+    "target": "ESNext",
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "moduleResolution": "node",
+  },
+  "include": ["src/**/*", "**/*.config.js"],
+  "exclude": ["node_modules", "**/*.spec.ts", "**/*generated.tsx?"]
+}

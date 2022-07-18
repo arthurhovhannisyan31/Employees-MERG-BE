@@ -7,8 +7,9 @@
   "scripts": {
     "start": "node ./dist/app.js",
     "build": "tsc",
-    "start:dev": "nodemon -r dotenv/config ./dist/app.js dotenv_config_path=./configs/env/.env-dev",
-    "start:prod": "nodemon -r dotenv/config ./dist/app.js dotenv_config_path=./configs/env/.env",
+    "start:dev": "sh ./configs/start/start-dev.sh",
+    "nodemon:dev": "nodemon -r dotenv/config ./dist/app.js dotenv_config_path=./configs/env/.env-dev",
+    "nodemon:prod": "nodemon -r dotenv/config ./dist/app.js dotenv_config_path=./configs/env/.env",
     "gentypes": "graphql-codegen --config codegen.yml",
     "watch": "tsc -w",
     "lint": "eslint --ext .ts,.tsx,.js src/",
@@ -52,6 +53,7 @@
     "@types/express-session": "^1.17.4",
     "@types/node": "^16.10.2",
     "@types/nodemailer": "^6.4.4",
+    "@types/sinon": "^10.0.12",
     "@types/uuid": "^8.3.1",
     "@typescript-eslint/eslint-plugin": "^4.32.0",
     "@typescript-eslint/parser": "^4.32.0",
@@ -63,9 +65,11 @@
     "eslint-plugin-import": "^2.24.2",
     "eslint-plugin-prettier": "^4.0.0",
     "husky": "^8.0.1",
+    "jest": "^28.1.3",
     "lint-staged": "^11.1.2",
     "nodemon": "^2.0.13",
     "prettier": "^2.4.1",
+    "sinon": "^14.0.0",
     "typescript": "^4.4.3"
   }
 }
