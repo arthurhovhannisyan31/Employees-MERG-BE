@@ -2,4 +2,4 @@
 . "$(dirname "$0")/_/husky.sh"
 
 yarn tsc -p tsconfig.jest.json --noEmit
-#yarn test:coverage
+yarn test

@@ -4487,6 +4487,13 @@ get-symbol-description@^1.0.0:
     call-bind "^1.0.2"
     get-intrinsic "^1.1.1"
 
+git-conventional-commits@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/git-conventional-commits/-/git-conventional-commits-2.0.1.tgz#769d75b5b9ad1b240297e673dd619cd648533a7a"
+  integrity sha512-EoQVyeucCVsmu3fFlS6whBkFOdqX2jB8n8hVCtRhithhpKqwmZh6MWz5qrwAwmTosgpLbPwNzu1m7S3WYofXUg==
+  dependencies:
+    yargs "^17.3.1"
+
 glob-parent@^5.1.2, glob-parent@~5.1.2:
   version "5.1.2"
   resolved "https://registry.yarnpkg.com/glob-parent/-/glob-parent-5.1.2.tgz#869832c58034fe68a4093c17dc15e8340d8401c4"

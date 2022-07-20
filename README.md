@@ -1,5 +1,9 @@
 # Employees server
 
+## Setup for development
+
+After cloning the project run following command `git config core.hooksPath .git-hooks` to enable git hooks.
+
 ## Description
 - Project implements graphql server for Employees project. 
 - MongoDB is primary data storage. 
