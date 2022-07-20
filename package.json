@@ -6,7 +6,8 @@
   "license": "MIT",
   "scripts": {
     "start": "node ./dist/app.js",
-    "build": "tsc",
+    "clean-up": "rm -rf dist/*",
+    "build": "yarn clean-up && tsc",
     "start:dev": "sh ./configs/start/start-dev.sh",
     "nodemon:dev": "nodemon -r dotenv/config ./dist/app.js dotenv_config_path=./configs/env/.env-dev",
     "nodemon:prod": "nodemon -r dotenv/config ./dist/app.js dotenv_config_path=./configs/env/.env",
