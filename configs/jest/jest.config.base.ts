@@ -13,11 +13,14 @@ module.exports = {
   },
   globals: {
     'ts-jest': {
-      tsConfigFile: 'configs/ts-config/tsconfig.jest.json',
-      enableTsDiagnostics: true,
+      tsconfig: '<rootDir>/tsconfig.jest.json',
+      diagnostics: {
+        warnOnly: true,
+      },
     },
   },
-  moduleFileExtensions: ['ts', 'tsx', 'js'],
+  moduleDirectories: ['node_modules', 'src'],
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'json'],
   moduleNameMapper: {
     '_/(.*)': '<rootDir>/src/$1',
   },
