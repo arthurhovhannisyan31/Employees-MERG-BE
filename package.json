@@ -17,14 +17,10 @@
     "format": "yarn lint --fix",
     "deploy": "git push heroku master",
     "postinstall": "node ./configs/install/install.js",
-    "test": "jest --notify",
+    "jest-base": "node --expose-gc ./node_modules/jest/bin/jest.js",
+    "test": "yarn jest-base --silent --coverage --runInBand --no-cache --logHeapUsage",
+    "test-changed": "yarn jest-base --notify --onlyChanged",
     "typecheck": "tsc -p tsconfig.jest.json --noEmit"
-  },
-  "lint-staged": {
-    "src/*": [
-      "yarn typecheck",
-      "yarn lint"
-    ]
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

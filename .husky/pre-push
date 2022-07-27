@@ -1,6 +1,6 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-yarn typecheck
-yarn lint
+. "$(dirname "$0")/base.sh"
+
 yarn test
