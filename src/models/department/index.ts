@@ -1,6 +1,6 @@
 import mongoose, { Document, Schema } from 'mongoose'
 
-import { Department } from './generated'
+import { Department } from '../generated'
 
 const DepartmentSchema = new Schema({
   name: {

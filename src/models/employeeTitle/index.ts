@@ -1,7 +1,7 @@
 import mongoose, { Document, Schema } from 'mongoose'
 
-import { defaultFields } from '../utils/model'
-import { EmployeeTitle } from './generated'
+import { defaultFields } from '../../utils/model'
+import { EmployeeTitle } from '../generated'
 
 export interface CreateEmployeeTitleInput {
   input: EmployeeTitle

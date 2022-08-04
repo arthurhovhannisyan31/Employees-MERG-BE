@@ -1,7 +1,7 @@
 import mongoose, { Document, Schema } from 'mongoose'
 
-import { defaultFields } from '../utils/model'
-import { ForgottenPassword } from './generated'
+import { defaultFields } from '../../utils/model'
+import { ForgottenPassword } from '../generated'
 
 const forgottenPasswordSchema = new Schema({
   key: {
