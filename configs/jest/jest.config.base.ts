@@ -19,14 +19,19 @@ module.exports = {
       },
     },
   },
-  moduleDirectories: ['node_modules', 'src'],
-  moduleFileExtensions: ['ts', 'tsx', 'js', 'json'],
+  moduleDirectories: ['node_modules', '<rootDir>/src'],
+  moduleFileExtensions: ['ts', 'js', 'json'],
   moduleNameMapper: {
     '_/(.*)': '<rootDir>/src/$1',
   },
   notify: true,
   notifyMode: 'failure-change',
+  preset: 'ts-jest',
   setupFiles: ['<rootDir>/configs/jest/utils/polyfill.ts'],
   testEnvironment: 'node',
-  testMatch: ['**/__tests__/**/*.[jt]s?(x)', '**/?(*.)+(spec|test).[tj]s?(x)'],
+  testMatch: ['**/__tests__/**/*.test.[jt]s?(x)'],
+  transform: {
+    '^.+\\.ts?$': 'ts-jest',
+  },
+  transformIgnorePatterns: ['<rootDir>/node_modules/*'],
 }
