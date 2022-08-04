@@ -17,7 +17,7 @@
     "format": "yarn lint --fix",
     "deploy": "git push heroku master",
     "postinstall": "node ./configs/install/install.js",
-    "jest-base": "node --experimental-vm-modules --experimental-specifier-resolution=node --expose-gc ./node_modules/jest/bin/jest.js",
+    "jest-base": "node --expose-gc ./node_modules/jest/bin/jest.js",
     "test": "yarn jest-base --silent --coverage --runInBand --no-cache --logHeapUsage",
     "test-changed": "yarn jest-base --notify --onlyChanged",
     "typecheck": "tsc -p tsconfig.jest.json --noEmit"
