@@ -1,12 +1,12 @@
 import { mockId, mockDate } from '../../../utils/testHelpers'
+import { departmentStub } from '../../department/__tests__/department.stub'
 import { employeeDataStub } from '../../employee/__tests__/employee.stub'
-import { EmployeeTitle } from '../../generated'
-import { titleStub } from '../../title/__tests__/title.stub'
+import { Employment } from '../../generated'
 
-export const employeeTitleStub: EmployeeTitle = {
+export const employmentDataStub: Employment = {
   _id: mockId,
   end_date: mockDate,
   start_date: mockDate,
-  title: titleStub,
   employee: employeeDataStub,
+  department: departmentStub,
 }

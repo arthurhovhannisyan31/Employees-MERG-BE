@@ -1,6 +1,6 @@
-import { Employee } from '../../../models/generated'
 import * as db from '../../../utils/mongodb.mock'
-import { EmployeeModel } from '../../employee'
+import { Employee } from '../../generated'
+import { EmployeeModel } from '../index'
 import { getEmployeeDataMock } from './employee.mock'
 
 beforeAll(async () => await db.setup())
@@ -8,7 +8,7 @@ afterEach(async () => await db.dropCollection())
 afterAll(async () => await db.dropDatabase())
 
 describe('employee model', () => {
-  it('creates an employee object', async () => {
+  it('creates an employee object', () => {
     const employee = new EmployeeModel(getEmployeeDataMock())
     expect(async () => await employee.validate()).not.toThrow()
   })
@@ -21,11 +21,9 @@ describe('employee model', () => {
   ])(
     '%#) fails employee validation',
     (fieldName: string, data: Partial<Employee>) => {
-      it(`failed field ${fieldName}`, async () => {
+      it(`fails validation for: ${fieldName}`, async () => {
         const employee = new EmployeeModel(getEmployeeDataMock(data))
-        await employee.validate((err) => {
-          expect(err).not.toBeNull()
-        })
+        await employee.validate((err) => expect(err).not.toBeNull())
       })
     }
   )

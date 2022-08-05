@@ -1,9 +1,4 @@
-import { Employee } from '../../generated'
+import { getMergedObject } from '../../../utils/getMergedObject'
 import { employeeDataStub } from './employee.stub'
 
-export const getEmployeeDataMock = (data?: Partial<Employee>): Employee => {
-  return {
-    ...employeeDataStub,
-    ...data,
-  }
-}
+export const getEmployeeDataMock = getMergedObject(employeeDataStub)

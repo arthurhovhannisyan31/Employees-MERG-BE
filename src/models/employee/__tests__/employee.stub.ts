@@ -1,16 +1,13 @@
-import { Types } from 'mongoose'
-
+import { mockId, mockDate } from '../../../utils/testHelpers'
 import { Employee } from '../../generated'
-
-const mockId = new Types.ObjectId().toString()
 
 export const employeeDataStub: Employee = {
   _id: mockId,
-  birth_date: '1959-12-03T21:00:00.000+00:00',
+  birth_date: mockDate,
   department: mockId,
   first_name: 'FirstName',
   gender: mockId,
-  hire_date: '1986-08-28T21:00:00.000+00:00',
+  hire_date: mockDate,
   last_name: 'LastName',
   title: mockId,
 }
