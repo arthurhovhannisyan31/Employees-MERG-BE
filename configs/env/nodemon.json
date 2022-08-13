@@ -9,7 +9,7 @@
     "COOKIE_NAME": "SID",
     "NODEMAILER_USER": "winston51@ethereal.email",
     "NODEMAILER_PASSWORD": "qQ3ydFjtDJVuwwfenz",
-    "NODEMAILER_BASE_URL": "https://localhost:4002/",
+    "NODEMAILER_BASE_URL": "0.0.0.0:4002/",
     "PORT": 4002
   }
 }

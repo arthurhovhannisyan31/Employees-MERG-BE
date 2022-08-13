@@ -23,7 +23,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: ./configs/docker/server.dockerfile
+          file: ./configs/docker/prod.dockerfile
           load: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/employees-be:latest
        -

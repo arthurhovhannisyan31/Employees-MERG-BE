@@ -1,8 +1,8 @@
 import mongoose, { Document, Schema } from 'mongoose'
 
-import { defaultFields } from '../utils/model'
-import { regExps } from '../utils/regExps'
-import { Employee, Employment, Paycheck, EmployeeTitle } from './generated'
+import { defaultFields } from '../../utils/model'
+import { regExps } from '../../utils/regExps'
+import { Employee, Employment, Paycheck, EmployeeTitle } from '../generated'
 
 export interface EmployeeExtended extends Employee {
   paychecks: Promise<Paycheck>[]
@@ -49,16 +49,6 @@ const EmployeeSchema = new Schema({
   title: {
     type: Schema.Types.ObjectId,
     ref: 'Title',
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-    required: true,
-  },
-  updatedAt: {
-    type: Date,
-    default: Date.now,
-    required: true,
   },
   ...defaultFields,
 })

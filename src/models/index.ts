@@ -1,7 +1,7 @@
 export { GenderModel } from './gender'
 export { TitleModel } from './title'
 export { EmployeeModel } from './employee'
-export { DepartmentModel } from './departmnet'
+export { DepartmentModel } from './department'
 export { EmployeeTitleModel } from './employeeTitle'
 export { UserModel } from './user'
 export { EmploymentModel } from './employment'
