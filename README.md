@@ -3,6 +3,8 @@
 ## Setup for development
 
 After cloning the project run following command `git config core.hooksPath .git-hooks` to enable git hooks.
+If you face errors with `watch mode` run following in terminal:
+`sudo chown -R <user> .`
 
 ## Description
 - Project implements graphql server for Employees project. 

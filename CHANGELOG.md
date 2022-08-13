@@ -1,5 +1,5 @@
 # v0.2.0
-## Code refactor, unit tests, controller tests
+## Code refactor, unit tests
 - Configs
 - - Add jest configs
 - - Add conventional commits
