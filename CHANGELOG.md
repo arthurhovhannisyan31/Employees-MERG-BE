@@ -1,5 +1,14 @@
-# v0.1..
-## Code refactor, unit tests
+# v0.2.0
+## Code refactor, unit tests, controller tests
+- Configs
+- - Add jest configs
+- - Add conventional commits
+- - Add precommit and prepush git hooks
+- Test
+- - Add tests for models
+- - Add auth resolver tests
+- DevEpx
+- - Run husky hooks for push and commit
 
 # v0.1.3
 ## Code refactor, Authorization improvements
