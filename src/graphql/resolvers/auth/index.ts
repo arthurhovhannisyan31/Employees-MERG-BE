@@ -19,9 +19,10 @@ import {
   ValidateResetPasswordLinkResponse,
   AuthResponse,
 } from '../../../models/generated'
-import { getUserResponseErrors, isEmailValid } from '../../../utils/error'
+import { getUserResponseErrors } from '../../../utils/error'
 import { authCheck } from '../../../utils/helpers'
 import { sendEmail } from '../../../utils/sendEmail'
+import { isEmailValid, isPasswordValid } from '../../../utils/validation'
 import {
   verifyPassword,
   hashPassword,
@@ -34,6 +35,9 @@ export const createUser = async (
 ): Promise<UserResponse<User>> => {
   if (!isEmailValid(email)) {
     return getUserResponseErrors([['email', `Email is not valid`]])
+  }
+  if (!isPasswordValid(password)) {
+    return getUserResponseErrors([['password', `Password is not valid`]])
   }
   const existingUser = await UserModel.findOne({ email })
   if (existingUser) {
@@ -63,6 +67,13 @@ export const updatePassword = async (
   { input: { password, key } }: RootMutationUpdatePasswordArgs,
   context: QueryContext
 ): Promise<UpdatePasswordResponse> => {
+  authCheck(context.req)
+  if (!isPasswordValid(password)) {
+    return {
+      // TODO replace with getUserResponseErrors
+      errors: 'Password is not valid!',
+    }
+  }
   const keyValidation: ValidateResetPasswordLinkResponse =
     await validateResetPasswordLink({
       input: { key },
@@ -192,6 +203,7 @@ export const logout = (
   _: never,
   { req, res }: QueryContext
 ): Promise<boolean> => {
+  authCheck(req)
   return new Promise((resolve) =>
     req.session.destroy((err) => {
       res.clearCookie(COOKIE_NAME)

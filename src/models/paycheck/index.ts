@@ -1,7 +1,7 @@
 import mongoose, { Document, Schema } from 'mongoose'
 
-import { defaultFields } from '../utils/model'
-import { Paycheck } from './generated'
+import { defaultFields } from '../../utils/model'
+import { Paycheck } from '../generated'
 
 export interface CreatePaycheckInput {
   input: Paycheck

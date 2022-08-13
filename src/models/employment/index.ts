@@ -1,8 +1,8 @@
 import mongoose, { Document, Schema } from 'mongoose'
 
-import { defaultFields } from '../utils/model'
-import { EmployeeExtended } from './employee'
-import { Employment, Department } from './generated'
+import { defaultFields } from '../../utils/model'
+import { EmployeeExtended } from '../employee'
+import { Employment, Department } from '../generated'
 
 export interface EmploymentResponse {
   _id: string

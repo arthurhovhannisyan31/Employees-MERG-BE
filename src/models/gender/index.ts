@@ -1,8 +1,8 @@
 import mongoose, { Document, Schema } from 'mongoose'
 
-import { defaultFields } from '../utils/model'
-import { regExps } from '../utils/regExps'
-import { Gender } from './generated'
+import { defaultFields } from '../../utils/model'
+import { regExps } from '../../utils/regExps'
+import { Gender } from '../generated'
 
 const GenderSchema = new Schema({
   name: {
